@@ -7,7 +7,7 @@ class InfoPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Learn Flutter'),
+        title: const Text('About Us'),
         automaticallyImplyLeading: true,
         actions: [
           IconButton(
