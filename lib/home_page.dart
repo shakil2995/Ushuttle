@@ -89,7 +89,7 @@ class _HomePageState extends State<HomePage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
                     Icon(
-                      Icons.map,
+                      Icons.currency_exchange,
                       size: 50,
                       color: Colors.white,
                     ),

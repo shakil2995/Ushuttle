@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.ushuttlev1">
    <application
-        android:label="ushuttlev1"
+        android:label="ushuttle"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
