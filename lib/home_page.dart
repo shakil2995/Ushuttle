@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ushuttlev1/order_traking_page.dart';
+import 'package:ushuttlev1/live_map_page.dart';
 import 'package:ushuttlev1/subPages/fare_page.dart';
 import 'package:ushuttlev1/subPages/notice_page.dart';
 import 'package:ushuttlev1/subPages/schedule_page.dart';
@@ -43,7 +43,7 @@ class _HomePageState extends State<HomePage> {
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (BuildContext context) {
-                          return const OrderTrackingPage();
+                          return const SchedulePage();
                         },
                       ),
                     );
@@ -178,43 +178,44 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
 
-            // Padding(
-            //   padding: const EdgeInsets.all(8.0),
-            //   child: ElevatedButton(
-            //     style: ElevatedButton.styleFrom(
-            //       backgroundColor: about_color,
-            //       shape: RoundedRectangleBorder(
-            //         borderRadius: BorderRadius.circular(12), // <-- Radius
-            //       ),
-            //     ),
-            //     onPressed: () {
-            //       {
-            //         // Navigator.of(context).push(
-            //         //   MaterialPageRoute(
-            //         //     builder: (BuildContext context) {
-            //         //       return const TestPage();
-            //         //     },
-            //         //   ),
-            //         // );
-            //       }
-            //     },
-            //     child: Column(
-            //       mainAxisAlignment: MainAxisAlignment.center,
-            //       children: const [
-            //         Icon(
-            //           Icons.info,
-            //           size: 50,
-            //           color: Colors.white,
-            //         ),
-            //         Text(
-            //           'About',
-            //           style: TextStyle(color: Colors.white, fontSize: 20),
-            //         )
-            //       ],
-            //     ),
-            //     // child: const Text('Elevated Button'),
-            //   ),
-            // ),
+//  live map
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: aboutColor,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12), // <-- Radius
+                  ),
+                ),
+                onPressed: () {
+                  {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (BuildContext context) {
+                          return const LiveMapPage();
+                        },
+                      ),
+                    );
+                  }
+                },
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Icon(
+                      Icons.map,
+                      size: 50,
+                      color: Colors.white,
+                    ),
+                    Text(
+                      'LiveMaps',
+                      style: TextStyle(color: Colors.white, fontSize: 20),
+                    )
+                  ],
+                ),
+                // child: const Text('Elevated Button'),
+              ),
+            ),
           ],
         ),
       ),

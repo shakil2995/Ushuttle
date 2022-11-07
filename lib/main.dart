@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ushuttlev1/home_page.dart';
 import 'package:ushuttlev1/info_page.dart';
+import 'package:ushuttlev1/live_map_page.dart';
 import 'package:ushuttlev1/map_page.dart';
 import 'package:ushuttlev1/profile_page.dart';
 
