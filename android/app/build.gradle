@@ -74,20 +74,3 @@ android() {
             minSdkVersion 20
           }
    }
-   android {
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-}
-
-allprojects {
-    repositories {
-        ...
-        maven { url 'https://jitpack.io' }
-    }
-}
-
-dependencies {
-    implementation 'com.github.barikoi:BarikoiLocationLibrary:v1.2.2'
-}

@@ -3,14 +3,14 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-class LiveMapPage extends StatefulWidget {
-  const LiveMapPage({Key? key}) : super(key: key);
+class OrderTrackingPage extends StatefulWidget {
+  const OrderTrackingPage({Key? key}) : super(key: key);
 
   @override
-  State<LiveMapPage> createState() => LiveMapPageState();
+  State<OrderTrackingPage> createState() => OrderTrackingPageState();
 }
 
-class LiveMapPageState extends State<LiveMapPage> {
+class OrderTrackingPageState extends State<OrderTrackingPage> {
   // final Completer<GoogleMapController> _controller = Completer();
 
   static const LatLng sourceLocation = LatLng(37.33500926, -122.03272188);
@@ -21,7 +21,7 @@ class LiveMapPageState extends State<LiveMapPage> {
     return Scaffold(
         appBar: AppBar(
           title: const Text(
-            "Live Map",
+            "Track order",
             style: TextStyle(color: Colors.black, fontSize: 16),
           ),
         ),
