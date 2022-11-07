@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ushuttlev1/home_page.dart';
 import 'package:ushuttlev1/info_page.dart';
+import 'package:ushuttlev1/live_map_page.dart';
 import 'package:ushuttlev1/map_page.dart';
 import 'package:ushuttlev1/profile_page.dart';
 
@@ -30,7 +31,7 @@ class RootPage extends StatefulWidget {
 
 class _RootPageState extends State<RootPage> {
   int currentPage = 0;
-  List<Widget> pages = const [HomePage(), MapPage(), ProfilePage()];
+  List<Widget> pages = const [HomePage(), LiveMapPage(), ProfilePage()];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
