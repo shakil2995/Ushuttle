@@ -31,7 +31,7 @@ class RootPage extends StatefulWidget {
 
 class _RootPageState extends State<RootPage> {
   int currentPage = 0;
-  List<Widget> pages = const [HomePage(), MapPage(), ProfilePage()];
+  List<Widget> pages = [HomePage(), LiveMapPage(), ProfilePage()];
   @override
   Widget build(BuildContext context) {
     return Scaffold(

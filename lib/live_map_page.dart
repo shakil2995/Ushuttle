@@ -1,52 +1,63 @@
-import 'dart:async';
-// import 'package:permission/permission.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_polyline_points/flutter_polyline_points.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:ushuttlev1/constants.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:latlong2/latlong.dart';
 
-class LiveMapPage extends StatefulWidget {
-  const LiveMapPage({Key? key}) : super(key: key);
-
-  @override
-  State<LiveMapPage> createState() => LiveMapPageState();
+void main() {
+  runApp(MaterialApp(
+    home: LiveMapPage(),
+  ));
 }
 
-class LiveMapPageState extends State<LiveMapPage> {
-  final Completer<GoogleMapController> _controller = Completer();
+class LiveMapPage extends StatefulWidget {
+  @override
+  State<LiveMapPage> createState() => _LiveMapPageState();
+}
 
-  static const LatLng sourceLocation = LatLng(37.33500926, -122.03272188);
-  static const LatLng destination = LatLng(37.33429383, -122.06600055);
-// connect points
-  // void getPolyPoints() async {
-  //   PolylinePoints polylinePoints = PolylinePoints();
-  //   PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
-  //     google_api_key,
-  //     PointLatLng(sourceLocation.latitude, sourceLocation.longitude),
-  //     PointLatLng(destination.latitude, destination.longitude),
-  //   );
-  // }
-
+class _LiveMapPageState extends State<LiveMapPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: const Text(
-            "Live Map",
-            style: TextStyle(color: Colors.black, fontSize: 16),
-          ),
+    var marker = <Marker>[];
+
+    marker = [
+      Marker(
+        point: LatLng(23.874370, 90.390766),
+        builder: (ctx) => const Icon(
+          Icons.circle_sharp,
+          color: Colors.blue,
+          // size: 28,
         ),
-        body: GoogleMap(
-          initialCameraPosition: const CameraPosition(
-            target: sourceLocation,
-            zoom: 13.5,
-          ),
-          markers: {
-            const Marker(
-                markerId: MarkerId("source"), position: sourceLocation),
-            const Marker(
-                markerId: MarkerId("destination"), position: destination),
-          },
-        ));
+      ),
+      Marker(
+        point: LatLng(23.884370, 90.390766),
+        builder: (ctx) => Icon(Icons.bus_alert),
+      ),
+      // Marker(
+      //   point: LatLng(23.864370, 90.390766),
+      //   builder: (ctx) => Icon(Icons.circle),
+      // ),
+    ];
+
+    return Scaffold(
+      body: Center(
+          child: Container(
+        child: Column(
+          children: [
+            Flexible(
+              child: FlutterMap(
+                options:
+                    MapOptions(center: LatLng(23.874370, 90.390766), zoom: 16),
+                layers: [
+                  TileLayerOptions(
+                    urlTemplate:
+                        'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                  ),
+                  MarkerLayerOptions(markers: marker)
+                ],
+              ),
+            ),
+          ],
+        ),
+      )),
+    );
   }
 }
