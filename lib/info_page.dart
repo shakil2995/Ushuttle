@@ -9,13 +9,13 @@ class InfoPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('About Us'),
         automaticallyImplyLeading: true,
-        actions: [
-          IconButton(
-              onPressed: () {
-                debugPrint('Action');
-              },
-              icon: const Icon(Icons.info_outline))
-        ],
+        // actions: [
+        //   IconButton(
+        //       onPressed: () {
+        //         debugPrint('Action');
+        //       },
+        //       icon: const Icon(Icons.info_outline))
+        // ],
       ),
       body: SingleChildScrollView(
           child: Column(

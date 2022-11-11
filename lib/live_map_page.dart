@@ -28,7 +28,7 @@ class _LiveMapPageState extends State<LiveMapPage> {
         ),
       ),
       Marker(
-        point: LatLng(23.884370, 90.390766),
+        point: LatLng(23.875246, 90.389599),
         builder: (ctx) => Icon(Icons.bus_alert),
       ),
       // Marker(
@@ -44,8 +44,10 @@ class _LiveMapPageState extends State<LiveMapPage> {
           children: [
             Flexible(
               child: FlutterMap(
-                options:
-                    MapOptions(center: LatLng(23.874370, 90.390766), zoom: 16),
+                options: MapOptions(
+                  center: LatLng(23.874370, 90.390766),
+                  zoom: 16,
+                ),
                 layers: [
                   TileLayerOptions(
                     urlTemplate:
