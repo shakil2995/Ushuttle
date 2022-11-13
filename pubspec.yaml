@@ -43,6 +43,7 @@ dependencies:
   # google_maps_flutter_web: ^0.3.2+2
   location: ^4.4.0
   flutter_svg: ^1.1.6
+  firebase_core: ^2.2.0
   # permission: ^0.1.7
 
 dev_dependencies:

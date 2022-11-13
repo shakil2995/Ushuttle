@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1011375431235",
+    "project_id": "ushuttle-backend",
+    "storage_bucket": "ushuttle-backend.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1011375431235:android:f17bb42f3ac0433be2fef6",
+        "android_client_info": {
+          "package_name": "com.example.ushuttlev1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1011375431235-gvekn802an7joljnrc6446c7e0fqv9l1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnjlBt9qfM2vlQt9wRytDOSg67eSjOWfQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1011375431235-gvekn802an7joljnrc6446c7e0fqv9l1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
