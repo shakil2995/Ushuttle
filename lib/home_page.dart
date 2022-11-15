@@ -53,7 +53,7 @@ class _HomePageState extends State<HomePage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
                     Icon(
-                      Icons.calendar_month,
+                      Icons.schedule,
                       size: 50,
                       color: Colors.white,
                     ),
@@ -127,7 +127,7 @@ class _HomePageState extends State<HomePage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
                     Icon(
-                      Icons.person,
+                      Icons.bus_alert,
                       size: 50,
                       color: Colors.white,
                     ),

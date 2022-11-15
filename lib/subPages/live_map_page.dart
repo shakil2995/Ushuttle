@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 // import 'package:flutter_map_example/widgets/drawer.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:location/location.dart';
 import 'package:geolocator/geolocator.dart';
 
@@ -158,10 +159,11 @@ class LiveMapPageState extends State<LiveMapPage> {
             child: FlutterMap(
               mapController: _mapController,
               options: MapOptions(
-                center: LatLng(23.811941, 90.421374),
-                zoom: 12,
+                center: getBusCurretLocation(),
+                zoom: 16,
                 maxZoom: 18,
                 minZoom: 8,
+                keepAlive: true,
               ),
               children: [
                 TileLayer(
