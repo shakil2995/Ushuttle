@@ -77,19 +77,19 @@ class LiveMapPageState extends State<LiveMapPage> {
           ),
         ),
       ),
-      Marker(
-        // width: 80,
-        // height: 80,
-        point: getBusCurretLocation(),
-        builder: (ctx) => Container(
-          key: const Key('blue'),
-          child: const Icon(
-            Icons.bus_alert,
-            color: Colors.black,
-            size: 40,
-          ),
-        ),
-      ),
+      // Marker(
+      //   // width: 80,
+      //   // height: 80,
+      //   point: getBusCurretLocation(),
+      //   builder: (ctx) => Container(
+      //     key: const Key('blue'),
+      //     child: const Icon(
+      //       Icons.bus_alert,
+      //       color: Colors.black,
+      //       size: 40,
+      //     ),
+      //   ),
+      // ),
     ];
     var busMarkers = <Marker>[
       Marker(
@@ -108,81 +108,125 @@ class LiveMapPageState extends State<LiveMapPage> {
     ];
 
     return Scaffold(
-      // appBar: AppBar(title: const Text('MapController')),
-      // drawer: buildDrawer(context, LiveMapPage.route),
-      body: Padding(
-        padding: const EdgeInsets.all(0),
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 0, bottom: 0),
-              child: Row(
-                children: <Widget>[
-                  MaterialButton(
-                    onPressed: () {
-                      // markers.clear();
-                      _mapController.move(getBusCurretLocation(), 16);
-                    },
-                    // child: const Text('Locate Bus'),
-                    child: const Icon(
-                      Icons.bus_alert,
-                      color: Colors.black,
-                      // size: 40,
-                    ),
-                  ),
-                  MaterialButton(
-                    onPressed: () {
-                      markers.clear();
-                      markers.add(
-                        Marker(
-                          // width: 80,
-                          // height: 80,
-                          point: getCurrentUserLocation(),
-                          builder: (ctx) => Container(
-                            key: const Key('blue'),
-                            child: const Icon(
-                              Icons.location_on,
-                              color: Colors.black,
-                              size: 40,
-                            ),
-                          ),
-                        ),
-                      );
-                      _mapController.move(getCurrentUserLocation(), 16);
-                      CurrentLocation(mapController: _mapController);
-                    },
-                    // child: const Text('Locate Bus'),
-                    child: const Icon(
-                      Icons.gps_fixed,
-                      color: Colors.black,
-                      // size: 40,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Flexible(
-              child: FlutterMap(
-                mapController: _mapController,
-                options: MapOptions(
-                  center: LatLng(23.811941, 90.421374),
-                  zoom: 12,
-                  maxZoom: 18,
-                  minZoom: 8,
+      // backgroundColor: Colors.transparent,
+      // // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () {
+      //     // markers.clear();
+      //     _mapController.move(getBusCurretLocation(), 16);
+      //   },
+      //   // child: const Text('Locate Bus'),
+      //   child: const Icon(
+      //     Icons.bus_alert,
+      //     color: Colors.black,
+      //     // size: 40,
+      //   ),
+      // ),
+
+      floatingActionButton: FloatingActionButton(
+        // add padding
+        onPressed: () {
+          markers.clear();
+          markers.add(
+            Marker(
+              // width: 80,
+              // height: 80,
+              point: getCurrentUserLocation(),
+              builder: (ctx) => Container(
+                key: const Key('blue'),
+                child: const Icon(
+                  Icons.location_on,
+                  color: Colors.black,
+                  size: 40,
                 ),
-                children: [
-                  TileLayer(
-                    urlTemplate:
-                        'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                    userAgentPackageName: 'dev.fleaflet.flutter_map.example',
-                  ),
-                  MarkerLayer(markers: markers),
-                  MarkerLayer(markers: busMarkers),
-                ],
               ),
             ),
-          ],
+          );
+          _mapController.move(getCurrentUserLocation(), 16);
+          CurrentLocation(mapController: _mapController);
+        },
+        // child: const Text('Locate Bus'),
+        child: const Icon(
+          Icons.gps_fixed,
+          color: Colors.black,
+          // size: 40,
         ),
+      ),
+      body: Column(
+        children: [
+          Flexible(
+            child: FlutterMap(
+              mapController: _mapController,
+              options: MapOptions(
+                center: LatLng(23.811941, 90.421374),
+                zoom: 12,
+                maxZoom: 18,
+                minZoom: 8,
+              ),
+              children: [
+                TileLayer(
+                  urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                  userAgentPackageName: 'dev.fleaflet.flutter_map.example',
+                ),
+                MarkerLayer(markers: markers),
+                MarkerLayer(markers: busMarkers),
+              ],
+            ),
+          ),
+          // Row(
+          //   //  color: Colors.blue,
+          //   mainAxisAlignment: MainAxisAlignment.end,
+          //   children: <Widget>[
+          //     Padding(
+          //       padding: const EdgeInsets.all(8.0),
+          //       child: FloatingActionButton(
+          //         onPressed: () {
+          //           // markers.clear();
+          //           _mapController.move(getBusCurretLocation(), 16);
+          //         },
+          //         // child: const Text('Locate Bus'),
+          //         child: const Icon(
+          //           Icons.bus_alert,
+          //           color: Colors.black,
+          //           // size: 40,
+          //         ),
+          //       ),
+          //     ),
+          //     Padding(
+          //       padding: const EdgeInsets.all(8.0),
+          //       child: FloatingActionButton(
+          //         // add padding
+          //         onPressed: () {
+          //           markers.clear();
+          //           markers.add(
+          //             Marker(
+          //               // width: 80,
+          //               // height: 80,
+          //               point: getCurrentUserLocation(),
+          //               builder: (ctx) => Container(
+          //                 key: const Key('blue'),
+          //                 child: const Icon(
+          //                   Icons.location_on,
+          //                   color: Colors.black,
+          //                   size: 40,
+          //                 ),
+          //               ),
+          //             ),
+          //           );
+          //           _mapController.move(getCurrentUserLocation(), 16);
+          //           CurrentLocation(mapController: _mapController);
+          //         },
+          //         // child: const Text('Locate Bus'),
+          //         child: const Icon(
+          //           Icons.gps_fixed,
+          //           color: Colors.black,
+          //           // size: 40,
+          //         ),
+          //       ),
+          //     ),
+          //   ],
+          // ),
+        ],
       ),
     );
   }

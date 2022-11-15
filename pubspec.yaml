@@ -46,7 +46,7 @@ dependencies:
   flutter_svg: ^1.1.6
   firebase_core: ^2.2.0
   geolocator: ^8.0.5
-  flutter_osm_plugin: ^0.40.3+2
+  # flutter_osm_plugin: ^0.40.3+2
   # permission: ^0.1.7
 
 dev_dependencies:
