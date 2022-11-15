@@ -11,20 +11,20 @@ import 'package:geolocator/geolocator.dart';
 var lng = 90.381035;
 var lat = 23.874191;
 
-class MapControllerPage extends StatefulWidget {
+class LiveMapPage extends StatefulWidget {
   static const String route = 'map_controller';
 
-  const MapControllerPage({Key? key}) : super(key: key);
+  const LiveMapPage({Key? key}) : super(key: key);
 
   @override
-  MapControllerPageState createState() {
-    return MapControllerPageState();
+  LiveMapPageState createState() {
+    return LiveMapPageState();
   }
 }
 
 final LatLng dhaka = LatLng(23.875246, 90.389599);
 
-class MapControllerPageState extends State<MapControllerPage> {
+class LiveMapPageState extends State<LiveMapPage> {
   late final MapController _mapController;
   double _rotation = 0;
 
@@ -72,7 +72,7 @@ class MapControllerPageState extends State<MapControllerPage> {
           key: const Key('blue'),
           child: const Icon(
             Icons.location_on,
-            color: Colors.blue,
+            // color: Colors.blue,
             size: 40,
           ),
         ),
@@ -91,20 +91,36 @@ class MapControllerPageState extends State<MapControllerPage> {
         ),
       ),
     ];
+    var busMarkers = <Marker>[
+      Marker(
+        // width: 80,
+        // height: 80,
+        point: getBusCurretLocation(),
+        builder: (ctx) => Container(
+          key: const Key('blue'),
+          child: const Icon(
+            Icons.bus_alert,
+            color: Colors.black,
+            size: 40,
+          ),
+        ),
+      ),
+    ];
 
     return Scaffold(
       // appBar: AppBar(title: const Text('MapController')),
-      // drawer: buildDrawer(context, MapControllerPage.route),
+      // drawer: buildDrawer(context, LiveMapPage.route),
       body: Padding(
         padding: const EdgeInsets.all(0),
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 8, bottom: 8),
+              padding: const EdgeInsets.only(top: 0, bottom: 0),
               child: Row(
                 children: <Widget>[
                   MaterialButton(
                     onPressed: () {
+                      // markers.clear();
                       _mapController.move(getBusCurretLocation(), 16);
                     },
                     // child: const Text('Locate Bus'),
@@ -114,7 +130,34 @@ class MapControllerPageState extends State<MapControllerPage> {
                       // size: 40,
                     ),
                   ),
-                  CurrentLocation(mapController: _mapController),
+                  MaterialButton(
+                    onPressed: () {
+                      markers.clear();
+                      markers.add(
+                        Marker(
+                          // width: 80,
+                          // height: 80,
+                          point: getCurrentUserLocation(),
+                          builder: (ctx) => Container(
+                            key: const Key('blue'),
+                            child: const Icon(
+                              Icons.location_on,
+                              color: Colors.black,
+                              size: 40,
+                            ),
+                          ),
+                        ),
+                      );
+                      _mapController.move(getCurrentUserLocation(), 16);
+                      CurrentLocation(mapController: _mapController);
+                    },
+                    // child: const Text('Locate Bus'),
+                    child: const Icon(
+                      Icons.gps_fixed,
+                      color: Colors.black,
+                      // size: 40,
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -134,6 +177,7 @@ class MapControllerPageState extends State<MapControllerPage> {
                     userAgentPackageName: 'dev.fleaflet.flutter_map.example',
                   ),
                   MarkerLayer(markers: markers),
+                  MarkerLayer(markers: busMarkers),
                 ],
               ),
             ),

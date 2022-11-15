@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:ushuttlev1/home_page.dart';
 import 'package:ushuttlev1/info_page.dart';
-import 'package:ushuttlev1/live_map_page.dart';
+import 'package:ushuttlev1/live_map_page_old.dart';
 // import 'package:ushuttlev1/map_page.dart';
 import 'package:ushuttlev1/profile_page.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:ushuttlev1/subPages/live_map_tracking.dart';
+import 'package:ushuttlev1/subPages/live_map_page.dart';
+
 import 'firebase_options.dart';
 
 Future<void> main() async {
@@ -39,7 +40,7 @@ class RootPage extends StatefulWidget {
 
 class _RootPageState extends State<RootPage> {
   int currentPage = 0;
-  List<Widget> pages = [HomePage(), MapControllerPage(), ProfilePage()];
+  List<Widget> pages = [HomePage(), LiveMapPage(), ProfilePage()];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
