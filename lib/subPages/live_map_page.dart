@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 // import 'package:flutter_map_example/widgets/drawer.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
+// import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:location/location.dart';
 import 'package:geolocator/geolocator.dart';
 
@@ -27,7 +27,7 @@ final LatLng dhaka = LatLng(23.875246, 90.389599);
 
 class LiveMapPageState extends State<LiveMapPage> {
   late final MapController _mapController;
-  double _rotation = 0;
+  // final double _rotation = 0;
 
   @override
   void initState() {
@@ -172,6 +172,21 @@ class LiveMapPageState extends State<LiveMapPage> {
                 ),
                 MarkerLayer(markers: markers),
                 MarkerLayer(markers: busMarkers),
+                // Row(
+                // PolylineLayer(
+                //   polylineCulling: false,
+                //   polylines: [
+                //     Polyline(
+                //       points: [
+                //         getCurrentUserLocation(),
+                //         getBusCurretLocation()
+                //       ],
+                //       color: Colors.black,
+                //       isDotted: true,
+                //       strokeWidth: 2,
+                //     ),
+                //   ],
+                // ),
               ],
             ),
           ),
