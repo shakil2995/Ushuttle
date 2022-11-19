@@ -1,7 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.ushuttlev1">
-        <uses-permission android:name="android.permission.INTERNET" />
-   <application
+
+
+    <application
         android:label="ushuttle"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
@@ -32,5 +33,8 @@
             android:name="flutterEmbedding"
             android:value="2" />
     </application>
+            <uses-permission android:name="android.permission.INTERNET" />
+            <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> 
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 </manifest>
 <!-- AIzaSyCBwdQHCAp3zwCbUecTF3RktfP_M774pqA -->

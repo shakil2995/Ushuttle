@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:location/location.dart';
-import 'package:geolocator/geolocator.dart';
+// import 'package:geolocator/geolocator.dart';
 
 class LiveLocationPage extends StatefulWidget {
   static const String route = '/live_location';
@@ -15,13 +15,6 @@ class LiveLocationPage extends StatefulWidget {
 }
 
 class _LiveLocationPageState extends State<LiveLocationPage> {
-  Future<Position> getLocationPermission() async {
-    await Geolocator.requestPermission()
-        .then((value) {})
-        .onError((error, stackTrace) {});
-    return await Geolocator.getCurrentPosition();
-  }
-
   LocationData? _currentLocation;
   late final MapController _mapController;
 
@@ -43,8 +36,7 @@ class _LiveLocationPageState extends State<LiveLocationPage> {
 
   void initLocationService() async {
     await _locationService.changeSettings(
-      // // add location accuracy to high from geolocator package
-      //     accuracy: LocationAccuracy.high,
+      accuracy: LocationAccuracy.high,
       interval: 100,
     );
 
