@@ -3,9 +3,10 @@ import 'package:flutter/services.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:location/location.dart';
+import 'package:geolocator/geolocator.dart';
 
 class LiveLocationPage extends StatefulWidget {
-  // static const String route = '/live_location';
+  static const String route = '/live_location';
 
   const LiveLocationPage({Key? key}) : super(key: key);
 
@@ -14,6 +15,13 @@ class LiveLocationPage extends StatefulWidget {
 }
 
 class _LiveLocationPageState extends State<LiveLocationPage> {
+  Future<Position> getLocationPermission() async {
+    await Geolocator.requestPermission()
+        .then((value) {})
+        .onError((error, stackTrace) {});
+    return await Geolocator.getCurrentPosition();
+  }
+
   LocationData? _currentLocation;
   late final MapController _mapController;
 
@@ -35,8 +43,9 @@ class _LiveLocationPageState extends State<LiveLocationPage> {
 
   void initLocationService() async {
     await _locationService.changeSettings(
-      accuracy: LocationAccuracy.high,
-      interval: 500,
+      // // add location accuracy to high from geolocator package
+      //     accuracy: LocationAccuracy.high,
+      interval: 100,
     );
 
     LocationData? location;
@@ -90,15 +99,15 @@ class _LiveLocationPageState extends State<LiveLocationPage> {
 
   @override
   Widget build(BuildContext context) {
-    LatLng currentLatLng = LatLng(0, 0);
+    LatLng currentLatLng;
 
-    // Until currentLocation is initially updated, Widget can locate to 0, 0
+    // Until currentLocation is initially updated, Widget can locate to 23.809320, 90.397847
     // by default or store previous location value to show.
     if (_currentLocation != null) {
       currentLatLng =
           LatLng(_currentLocation!.latitude!, _currentLocation!.longitude!);
     } else {
-      currentLatLng = LatLng(0, 0);
+      currentLatLng = LatLng(23.809320, 90.397847);
     }
 
     final markers = <Marker>[
@@ -106,17 +115,24 @@ class _LiveLocationPageState extends State<LiveLocationPage> {
         width: 80,
         height: 80,
         point: currentLatLng,
-        builder: (ctx) => const Icon(
-          Icons.location_on,
-        ),
+        builder: (ctx) => Icon(Icons.location_on, size: 50),
       ),
     ];
 
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.all(8),
+        padding: const EdgeInsets.all(0),
         child: Column(
           children: [
+            // Padding(
+            //   padding: const EdgeInsets.only(top: 0, bottom: 0),
+            //   child: _serviceError!.isEmpty
+            //       ? Text('This is a map that is showing '
+            //           '(${currentLatLng.latitude}, ${currentLatLng.longitude}).')
+            //       : Text(
+            //           'Error occured while acquiring location. Error Message : '
+            //           '$_serviceError'),
+            // ),
             Flexible(
               child: FlutterMap(
                 mapController: _mapController,
@@ -124,6 +140,7 @@ class _LiveLocationPageState extends State<LiveLocationPage> {
                   center:
                       LatLng(currentLatLng.latitude, currentLatLng.longitude),
                   zoom: 16,
+                  maxZoom: 18,
                   interactiveFlags: interActiveFlags,
                 ),
                 children: [
@@ -145,18 +162,18 @@ class _LiveLocationPageState extends State<LiveLocationPage> {
             setState(() {
               _liveUpdate = !_liveUpdate;
 
-              // if (_liveUpdate) {
-              //   interActiveFlags = InteractiveFlag.rotate |
-              //       InteractiveFlag.pinchZoom |
-              //       InteractiveFlag.doubleTapZoom;
+              if (_liveUpdate) {
+                interActiveFlags = InteractiveFlag.rotate |
+                    InteractiveFlag.pinchZoom |
+                    InteractiveFlag.doubleTapZoom;
 
-              //   ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-              //     content: Text(
-              //         'In live update mode only zoom and rotation are enable'),
-              //   ));
-              // } else {
-              //   interActiveFlags = InteractiveFlag.all;
-              // }
+                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                  content: Text(
+                      'In live update mode only zoom and rotation are enable'),
+                ));
+              } else {
+                interActiveFlags = InteractiveFlag.all;
+              }
             });
           },
           child: _liveUpdate
