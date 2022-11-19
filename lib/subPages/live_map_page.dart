@@ -49,8 +49,8 @@ class LiveMapPageState extends State<LiveMapPage> {
       (value) {
         lat = value.latitude;
         lng = value.longitude;
-        print('My current location');
-        print(value.latitude.toString() + " " + value.longitude.toString());
+        // print('My current location');
+        // print(value.latitude.toString() + " " + value.longitude.toString());
       },
     );
 

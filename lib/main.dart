@@ -8,6 +8,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:ushuttlev1/subPages/live_map_page.dart';
 
 import 'firebase_options.dart';
+import 'live_location_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -42,6 +43,7 @@ class _RootPageState extends State<RootPage> {
   int currentPage = 0;
   List<Widget> pages = [
     const LiveMapPage(),
+    const LiveLocationPage(),
     const HomePage(),
     const ProfilePage()
   ];
@@ -69,6 +71,7 @@ class _RootPageState extends State<RootPage> {
       bottomNavigationBar: NavigationBar(
         destinations: const [
           NavigationDestination(icon: Icon(Icons.map), label: 'Track'),
+          NavigationDestination(icon: Icon(Icons.pin_drop), label: 'Live'),
           NavigationDestination(icon: Icon(Icons.home), label: 'Home'),
           NavigationDestination(icon: Icon(Icons.person), label: 'Profile'),
         ],
