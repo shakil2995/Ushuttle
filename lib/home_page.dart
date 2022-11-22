@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 // import 'package:ushuttlev1/live_map_page_old.dart';
 import 'package:ushuttlev1/subPages/fare_page.dart';
 import 'package:ushuttlev1/subPages/notice_page.dart';
+import 'package:ushuttlev1/subPages/rest_api_test.dart';
 import 'package:ushuttlev1/subPages/schedule_page.dart';
 import 'package:ushuttlev1/subPages/stoppage_page.dart';
 
@@ -179,43 +180,43 @@ class _HomePageState extends State<HomePage> {
             ),
 
 //  live map
-            // Padding(
-            //   padding: const EdgeInsets.all(8.0),
-            //   child: ElevatedButton(
-            //     style: ElevatedButton.styleFrom(
-            //       backgroundColor: aboutColor,
-            //       shape: RoundedRectangleBorder(
-            //         borderRadius: BorderRadius.circular(12), // <-- Radius
-            //       ),
-            //     ),
-            //     onPressed: () {
-            //       {
-            //         Navigator.of(context).push(
-            //           MaterialPageRoute(
-            //             builder: (BuildContext context) {
-            //               return LiveMapPage();
-            //             },
-            //           ),
-            //         );
-            //       }
-            //     },
-            //     child: Column(
-            //       mainAxisAlignment: MainAxisAlignment.center,
-            //       children: const [
-            //         Icon(
-            //           Icons.map,
-            //           size: 50,
-            //           color: Colors.white,
-            //         ),
-            //         Text(
-            //           'LiveMaps',
-            //           style: TextStyle(color: Colors.white, fontSize: 20),
-            //         )
-            //       ],
-            //     ),
-            //     // child: const Text('Elevated Button'),
-            //   ),
-            // ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: aboutColor,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12), // <-- Radius
+                  ),
+                ),
+                onPressed: () {
+                  {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (BuildContext context) {
+                          return const RestApiTest();
+                        },
+                      ),
+                    );
+                  }
+                },
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Icon(
+                      Icons.map,
+                      size: 50,
+                      color: Colors.white,
+                    ),
+                    Text(
+                      'LiveMaps',
+                      style: TextStyle(color: Colors.white, fontSize: 20),
+                    )
+                  ],
+                ),
+                // child: const Text('Elevated Button'),
+              ),
+            ),
           ],
         ),
       ),

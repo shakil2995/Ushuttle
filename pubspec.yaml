@@ -42,6 +42,7 @@ dependencies:
   firebase_core: ^2.2.0
   geolocator: ^8.0.5
   expandable: ^5.0.1
+  http: ^0.13.5
   loading_animation_widget:
 dev_dependencies:
   flutter_test:

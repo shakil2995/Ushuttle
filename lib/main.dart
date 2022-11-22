@@ -6,7 +6,6 @@ import 'package:ushuttlev1/info_page.dart';
 import 'package:ushuttlev1/profile_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:ushuttlev1/subPages/live_map_page.dart';
-
 import 'firebase_options.dart';
 import 'live_location_page.dart';
 
@@ -15,9 +14,6 @@ Future<void> main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const MyApp());
 }
-// void main() {
-//   runApp(const MyApp());
-// }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -42,9 +38,9 @@ class RootPage extends StatefulWidget {
 class _RootPageState extends State<RootPage> {
   int currentPage = 0;
   List<Widget> pages = [
+    const HomePage(),
     const LiveMapPage(),
     const LiveLocationPage(),
-    const HomePage(),
     const ProfilePage()
   ];
   @override
@@ -70,9 +66,9 @@ class _RootPageState extends State<RootPage> {
       body: pages[currentPage],
       bottomNavigationBar: NavigationBar(
         destinations: const [
+          NavigationDestination(icon: Icon(Icons.home), label: 'Home'),
           NavigationDestination(icon: Icon(Icons.map), label: 'Track'),
           NavigationDestination(icon: Icon(Icons.pin_drop), label: 'Live'),
-          NavigationDestination(icon: Icon(Icons.home), label: 'Home'),
           NavigationDestination(icon: Icon(Icons.person), label: 'Profile'),
         ],
         onDestinationSelected: (int index) {
