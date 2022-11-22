@@ -20,18 +20,12 @@ class FarePage extends StatelessWidget {
 
   Container mirpurTobashundhara() {
     return Container(
-      // margin: const EdgeInsets.all(10),
-      // set border
-
       padding: const EdgeInsets.all(8.0),
       child: Container(
-        //set background color to red
-
         decoration: BoxDecoration(
           color: const Color.fromARGB(255, 215, 215, 215),
           borderRadius: BorderRadius.circular(5),
         ),
-
         child: ExpandablePanel(
 
             // add border
