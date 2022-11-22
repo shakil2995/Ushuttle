@@ -37,8 +37,8 @@ class _RestApiTestState extends State<RestApiTest> {
           latitude = double.parse(latitude);
           longitude = double.parse(longitude);
           return ListTile(
-            title: Text(busNo.toString()),
-            subtitle: (Text('$latitude $longitude')),
+            title: Text('Bus no $busNo'),
+            subtitle: Text('Latitude: $latitude, Longitude: $longitude'),
           );
         },
       ),
