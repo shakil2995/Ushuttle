@@ -1,17 +1,15 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class RestApiTest extends StatefulWidget {
   const RestApiTest({super.key});
-
   @override
   State<RestApiTest> createState() => _RestApiTestState();
 }
 
 class _RestApiTestState extends State<RestApiTest> {
-  List data = [];
+  List<dynamic> items = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,24 +31,32 @@ class _RestApiTestState extends State<RestApiTest> {
               icon: const Icon(Icons.info_outline))
         ],
       ),
-      body: const Center(
-        child: Text('RestApiTest'),
+      body: ListView.builder(
+        itemCount: items.length,
+        itemBuilder: (context, index) {
+          final item = items[index];
+          final busNo = item['busNo'];
+          var latitude = item['location']['coordinates']['latitude'];
+          var longitude = item['location']['coordinates']['longitude'];
+          latitude = double.parse(latitude);
+          longitude = double.parse(longitude);
+          return ListTile(
+            title: Text(busNo.toString()),
+            subtitle: (Text(latitude.toString() + ' ' + longitude.toString())),
+          );
+        },
       ),
     );
   }
 
   void fetchCoordinates() async {
-    // ignore: avoid_print
-    print("coordinates");
-    const url = 'https://ushuttle-backend.herokuapp.com/coords';
+    const url = 'http://127.1.0.0:3000/coords';
     final uri = Uri.parse(url);
     final response = await http.get(uri);
     final body = response.body;
     final json = jsonDecode(body);
-
     setState(() {
-      data = json['data'];
+      items = json['results'];
     });
-    print('fetched data');
   }
 }
