@@ -92,7 +92,8 @@ class _LiveLocationPageState extends State<LiveLocationPage> {
   @override
   Widget build(BuildContext context) {
     LatLng currentLatLng;
-
+// add 2 second delay
+    Future.delayed(const Duration(seconds: 5), () {});
     // Until currentLocation is initially updated, Widget can locate to 23.809320, 90.397847
     // by default or store previous location value to show.
     if (_currentLocation != null) {
