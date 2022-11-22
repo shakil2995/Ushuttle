@@ -204,12 +204,12 @@ class _HomePageState extends State<HomePage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
                     Icon(
-                      Icons.map,
+                      Icons.api,
                       size: 50,
                       color: Colors.white,
                     ),
                     Text(
-                      'LiveMaps',
+                      'Api Location',
                       style: TextStyle(color: Colors.white, fontSize: 20),
                     )
                   ],

@@ -18,17 +18,13 @@ class _RestApiTestState extends State<RestApiTest> {
         onPressed: () {
           fetchCoordinates();
         },
-        child: const Icon(Icons.add),
+        child: const Text('Fetch'),
       ),
       appBar: AppBar(
         title: const Text('Notice'),
         automaticallyImplyLeading: true,
         actions: [
-          IconButton(
-              onPressed: () {
-                debugPrint('Action');
-              },
-              icon: const Icon(Icons.info_outline))
+          IconButton(onPressed: () {}, icon: const Icon(Icons.info_outline))
         ],
       ),
       body: ListView.builder(
@@ -42,7 +38,7 @@ class _RestApiTestState extends State<RestApiTest> {
           longitude = double.parse(longitude);
           return ListTile(
             title: Text(busNo.toString()),
-            subtitle: (Text(latitude.toString() + ' ' + longitude.toString())),
+            subtitle: (Text('$latitude $longitude')),
           );
         },
       ),
