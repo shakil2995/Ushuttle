@@ -46,7 +46,7 @@ class _RestApiTestState extends State<RestApiTest> {
   }
 
   void fetchCoordinates() async {
-    const url = 'http://127.1.0.0:3000/coords';
+    const url = 'https://ushuttle-backend.herokuapp.com/coords';
     final uri = Uri.parse(url);
     final response = await http.get(uri);
     final body = response.body;
