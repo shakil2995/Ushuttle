@@ -138,8 +138,9 @@ class _LiveLocationPageState extends State<LiveLocationPage> {
                 // ),
                 options: MapOptions(
                   center: LatLng(23.819158502556704, 90.3990976172065),
-                  minZoom: 15,
-                  maxZoom: 15,
+                  minZoom: 13,
+                  zoom: 16,
+                  maxZoom: 17,
                   swPanBoundary: LatLng(
                     23.751602244953595,
                     90.347598978984,
@@ -150,7 +151,7 @@ class _LiveLocationPageState extends State<LiveLocationPage> {
                 children: [
                   TileLayer(
                     tileProvider: AssetTileProvider(),
-                    maxZoom: 15,
+                    maxZoom: 17,
                     urlTemplate: 'assets/map/dhaka/{z}/{x}/{y}.png',
                   ),
                   // TileLayer(
