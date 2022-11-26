@@ -155,38 +155,63 @@ class LiveMapPageState extends State<LiveMapPage> {
         children: [
           Flexible(
             child: FlutterMap(
-              mapController: _mapController,
               options: MapOptions(
-                center: getBusCurretLocation(),
-                zoom: 16,
-                maxZoom: 18,
-                minZoom: 8,
-                keepAlive: true,
+                center: LatLng(23.819158502556704, 90.3990976172065),
+                minZoom: 13,
+                maxZoom: 17,
+                swPanBoundary: LatLng(
+                  23.751602244953595,
+                  90.347598978984,
+                ),
+                nePanBoundary: LatLng(23.886714760159808, 90.450596255428991),
               ),
               children: [
                 TileLayer(
-                  urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                  userAgentPackageName: 'dev.fleaflet.flutter_map.example',
+                  tileProvider: AssetTileProvider(),
+                  maxZoom: 17,
+                  urlTemplate: 'assets/map/dhaka/{z}/{x}/{y}.png',
                 ),
+                // TileLayer(
+                //   urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                //   userAgentPackageName: 'dev.fleaflet.flutter_map.example',
+                // ),
                 MarkerLayer(markers: markers),
                 MarkerLayer(markers: busMarkers),
-                // Row(
-                // PolylineLayer(
-                //   polylineCulling: false,
-                //   polylines: [
-                //     Polyline(
-                //       points: [
-                //         getCurrentUserLocation(),
-                //         getBusCurretLocation()
-                //       ],
-                //       color: Colors.black,
-                //       isDotted: true,
-                //       strokeWidth: 2,
-                //     ),
-                //   ],
-                // ),
               ],
             ),
+            // child: FlutterMap(
+            //   mapController: _mapController,
+            //   options: MapOptions(
+            //     center: getBusCurretLocation(),
+            //     zoom: 16,
+            //     maxZoom: 18,
+            //     minZoom: 8,
+            //     keepAlive: true,
+            //   ),
+            //   children: [
+            //     TileLayer(
+            //       urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+            //       userAgentPackageName: 'dev.fleaflet.flutter_map.example',
+            //     ),
+            //     MarkerLayer(markers: markers),
+            //     MarkerLayer(markers: busMarkers),
+            //     // Row(
+            //     // PolylineLayer(
+            //     //   polylineCulling: false,
+            //     //   polylines: [
+            //     //     Polyline(
+            //     //       points: [
+            //     //         getCurrentUserLocation(),
+            //     //         getBusCurretLocation()
+            //     //       ],
+            //     //       color: Colors.black,
+            //     //       isDotted: true,
+            //     //       strokeWidth: 2,
+            //     //     ),
+            //     //   ],
+            //     // ),
+            //   ],
+            // ),
           ),
           // Row(
           //   //  color: Colors.blue,

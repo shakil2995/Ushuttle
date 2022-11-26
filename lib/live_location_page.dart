@@ -129,19 +129,35 @@ class _LiveLocationPageState extends State<LiveLocationPage> {
             Flexible(
               child: FlutterMap(
                 mapController: _mapController,
+                // options: MapOptions(
+                //   center:
+                //       LatLng(currentLatLng.latitude, currentLatLng.longitude),
+                //   zoom: 16,
+                //   maxZoom: 18,
+                //   interactiveFlags: interActiveFlags,
+                // ),
                 options: MapOptions(
-                  center:
-                      LatLng(currentLatLng.latitude, currentLatLng.longitude),
-                  zoom: 16,
-                  maxZoom: 18,
+                  center: LatLng(23.819158502556704, 90.3990976172065),
+                  minZoom: 15,
+                  maxZoom: 15,
+                  swPanBoundary: LatLng(
+                    23.751602244953595,
+                    90.347598978984,
+                  ),
+                  nePanBoundary: LatLng(23.886714760159808, 90.450596255428991),
                   interactiveFlags: interActiveFlags,
                 ),
                 children: [
                   TileLayer(
-                    urlTemplate:
-                        'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-                    userAgentPackageName: 'dev.fleaflet.flutter_map.example',
+                    tileProvider: AssetTileProvider(),
+                    maxZoom: 15,
+                    urlTemplate: 'assets/map/dhaka/{z}/{x}/{y}.png',
                   ),
+                  // TileLayer(
+                  //   urlTemplate:
+                  //       'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                  //   userAgentPackageName: 'dev.fleaflet.flutter_map.example',
+                  // ),
                   MarkerLayer(markers: markers),
                 ],
               ),

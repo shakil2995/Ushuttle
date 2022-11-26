@@ -76,7 +76,32 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   assets:
-    - images/
+    - assets/map/dhaka/13/6151/
+    - assets/map/dhaka/13/6152/
+    - assets/map/dhaka/13/6153/
+    - assets/map/dhaka/13/6154/
+    - assets/map/dhaka/14/12303/
+    - assets/map/dhaka/14/12304/
+    - assets/map/dhaka/14/12305/
+    - assets/map/dhaka/14/12306/
+    - assets/map/dhaka/14/12307/
+    - assets/map/dhaka/14/12308/
+    - assets/map/dhaka/15/24607/
+    - assets/map/dhaka/15/24608/
+    - assets/map/dhaka/15/24609/
+    - assets/map/dhaka/15/24610/
+    - assets/map/dhaka/15/24611/
+    - assets/map/dhaka/15/24612/
+    - assets/map/dhaka/15/24613/
+    - assets/map/dhaka/15/24614/
+    - assets/map/dhaka/15/24615/
+    - assets/map/dhaka/15/24616/
+    - assets/map/dhaka/15/24617/
+
+    - assets/map/dhaka/16/*
+    - assets/map/dhaka/17/*
+
+
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg
