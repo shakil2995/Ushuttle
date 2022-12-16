@@ -236,3 +236,17 @@ class _LiveLocationPageState extends State<LiveLocationPage> {
     );
   }
 }
+
+
+//  void getLocation() async {
+//     final response = await http.get('https://api.example.com/location');
+//     if (response.statusCode == 200) {
+//       final location = response.body;
+//       setState(() {
+//         _currentLocation = LatLng(location['latitude'], location['longitude']);
+//       });
+//       Timer.periodic(Duration(seconds: 10), (timer) async {
+//         getLocation();
+//       });
+//     }
+//   }
