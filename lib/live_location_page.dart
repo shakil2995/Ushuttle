@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:location/location.dart';
-import 'package:geolocator/geolocator.dart';
+// import 'package:geolocator/geolocator.dart';
 
 var lng = 90.381035;
 var lat = 23.874191;
@@ -14,6 +14,7 @@ class LiveLocationPage extends StatefulWidget {
   const LiveLocationPage({Key? key}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _LiveLocationPageState createState() => _LiveLocationPageState();
 }
 
@@ -43,28 +44,28 @@ class _LiveLocationPageState extends State<LiveLocationPage> {
     //   interval: 100,
     // );
 //  load current location permission
-    Future<Position> getLocationPermission() async {
-      await Geolocator.requestPermission()
-          .then((value) {})
-          .onError((error, stackTrace) {});
-      return await Geolocator.getCurrentPosition();
-    }
+    // Future<Position> getLocationPermission() async {
+    //   await Geolocator.requestPermission()
+    //       .then((value) {})
+    //       .onError((error, stackTrace) {});
+    //   return await Geolocator.getCurrentPosition();
+    // }
 
 //  load user current location
-    LatLng getCurrentUserLocation() {
-      getLocationPermission().then(
-        (value) {
-          lat = value.latitude;
-          lng = value.longitude;
-        },
-      );
+    // LatLng getCurrentUserLocation() {
+    //   getLocationPermission().then(
+    //     (value) {
+    //       lat = value.latitude;
+    //       lng = value.longitude;
+    //     },
+    //   );
 
-      return LatLng(lat, lng);
-    }
+    //   return LatLng(lat, lng);
+    // }
 
     LocationData? location;
     bool serviceEnabled;
-    bool serviceRequestResult;
+    // bool serviceRequestResult;
 
     try {
       serviceEnabled = await _locationService.serviceEnabled();
@@ -150,7 +151,7 @@ class _LiveLocationPageState extends State<LiveLocationPage> {
         width: 80,
         height: 80,
         point: currentLatLng,
-        builder: (ctx) => Icon(Icons.location_on, size: 50),
+        builder: (ctx) => const Icon(Icons.location_on, size: 50),
       ),
     ];
 
