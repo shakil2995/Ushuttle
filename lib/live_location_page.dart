@@ -9,7 +9,7 @@ var lng = 90.381035;
 var lat = 23.874191;
 
 class LiveLocationPage extends StatefulWidget {
-  static const String route = '/live_location';
+  // static const String route = '/live_location';
 
   const LiveLocationPage({Key? key}) : super(key: key);
 
@@ -18,7 +18,8 @@ class LiveLocationPage extends StatefulWidget {
   _LiveLocationPageState createState() => _LiveLocationPageState();
 }
 
-class _LiveLocationPageState extends State<LiveLocationPage> {
+class _LiveLocationPageState extends State<LiveLocationPage>
+    with AutomaticKeepAliveClientMixin<LiveLocationPage> {
   LocationData? _currentLocation;
   late final MapController _mapController;
 
@@ -75,6 +76,21 @@ class _LiveLocationPageState extends State<LiveLocationPage> {
         _permission = permission == PermissionStatus.granted;
 
         if (_permission) {
+          _liveUpdate = !_liveUpdate;
+
+          if (_liveUpdate) {
+            interActiveFlags = InteractiveFlag.rotate |
+                InteractiveFlag.pinchZoom |
+                InteractiveFlag.doubleTapZoom;
+
+            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+              content:
+                  Text('In live update mode only zoom and rotation are enable'),
+            ));
+          } else {
+            interActiveFlags = InteractiveFlag.all;
+          }
+
           location = await _locationService.getLocation();
           _currentLocation = location;
           _locationService.onLocationChanged
@@ -154,7 +170,7 @@ class _LiveLocationPageState extends State<LiveLocationPage> {
         builder: (ctx) => const Icon(Icons.location_on, size: 50),
       ),
     ];
-
+    super.build(context);
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(0),
@@ -236,6 +252,10 @@ class _LiveLocationPageState extends State<LiveLocationPage> {
       }),
     );
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }
 
 

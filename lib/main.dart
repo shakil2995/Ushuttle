@@ -5,7 +5,7 @@ import 'package:ushuttlev1/info_page.dart';
 // import 'package:ushuttlev1/map_page.dart';
 import 'package:ushuttlev1/profile_page.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:ushuttlev1/subPages/live_map_page.dart';
+// import 'package:ushuttlev1/subPages/live_map_page.dart';
 import 'firebase_options.dart';
 import 'live_location_page.dart';
 
@@ -43,7 +43,7 @@ class _RootPageState extends State<RootPage> {
   int currentPage = 0;
   List<Widget> pages = [
     const HomePage(),
-    const LiveMapPage(),
+    // const LiveMapPage(),
     const LiveLocationPage(),
     const ProfilePage()
   ];
@@ -71,7 +71,7 @@ class _RootPageState extends State<RootPage> {
       bottomNavigationBar: NavigationBar(
         destinations: const [
           NavigationDestination(icon: Icon(Icons.home), label: 'Home'),
-          NavigationDestination(icon: Icon(Icons.map), label: 'Track'),
+          // NavigationDestination(icon: Icon(Icons.map), label: 'Track'),
           NavigationDestination(icon: Icon(Icons.pin_drop), label: 'Live'),
           NavigationDestination(icon: Icon(Icons.person), label: 'Profile'),
         ],
