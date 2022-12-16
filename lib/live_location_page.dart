@@ -3,10 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:location/location.dart';
-import 'package:geolocator/geolocator.dart';
-
-var lng = 90.381035;
-var lat = 23.874191;
+// import 'package:geolocator/geolocator.dart';
 
 class LiveLocationPage extends StatefulWidget {
   static const String route = '/live_location';
@@ -38,29 +35,10 @@ class _LiveLocationPageState extends State<LiveLocationPage> {
   }
 
   void initLocationService() async {
-    // await _locationService.changeSettings(
-    //   accuracy: geoLocator.LocationAccuracy.high,
-    //   interval: 100,
-    // );
-//  load current location permission
-    Future<Position> getLocationPermission() async {
-      await Geolocator.requestPermission()
-          .then((value) {})
-          .onError((error, stackTrace) {});
-      return await Geolocator.getCurrentPosition();
-    }
-
-//  load user current location
-    LatLng getCurrentUserLocation() {
-      getLocationPermission().then(
-        (value) {
-          lat = value.latitude;
-          lng = value.longitude;
-        },
-      );
-
-      return LatLng(lat, lng);
-    }
+    await _locationService.changeSettings(
+      accuracy: LocationAccuracy.high,
+      interval: 100,
+    );
 
     LocationData? location;
     bool serviceEnabled;
@@ -93,32 +71,12 @@ class _LiveLocationPageState extends State<LiveLocationPage> {
             }
           });
         }
-        // } else {
-        //   serviceRequestResult = await _locationService.requestService();
-        //   if (serviceRequestResult) {
-        //     initLocationService();
-        //     return;
-        //   }
-        // }
       } else {
-        showDialog(
-          context: context,
-          builder: (context) {
-            return AlertDialog(
-              title: const Text('Location Permission Required'),
-              content: const Text(
-                  'Please grant location permission to use this feature.'),
-              actions: <Widget>[
-                TextButton(
-                  child: const Text('OK'),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
-            );
-          },
-        );
+        serviceRequestResult = await _locationService.requestService();
+        if (serviceRequestResult) {
+          initLocationService();
+          return;
+        }
       }
     } on PlatformException catch (e) {
       debugPrint(e.toString());
