@@ -89,7 +89,7 @@ class _LiveLocationPageState extends State<LiveLocationPage>
         _permission = permission == PermissionStatus.granted;
 
         if (_permission) {
-          startFetchingCoordinates();
+          // startFetchingCoordinates();
           _liveUpdate = !_liveUpdate;
 
           if (_liveUpdate) {
@@ -190,7 +190,7 @@ class _LiveLocationPageState extends State<LiveLocationPage>
         width: 80,
         height: 80,
         point: buslocation,
-        builder: (ctx) => const Icon(Icons.bus_alert, size: 50),
+        builder: (ctx) => const Icon(Icons.directions_bus, size: 50),
       ),
     ];
     super.build(context);
@@ -279,7 +279,6 @@ class _LiveLocationPageState extends State<LiveLocationPage>
   }
 
   @override
-  // TODO: implement wantKeepAlive
   bool get wantKeepAlive => true;
 
   void fetchCoordinates() async {
@@ -295,13 +294,13 @@ class _LiveLocationPageState extends State<LiveLocationPage>
   }
 
   void startFetchingCoordinates() {
-    Timer.periodic(Duration(seconds: 1), (timer) {
+    Timer.periodic(const Duration(seconds: 1), (timer) {
       fetchCoordinates();
       final item = items[0];
       busNo = item['busNo'];
       latitude = double.parse(item['location']['coordinates']['latitude']);
       longitude = double.parse(item['location']['coordinates']['longitude']);
-      debugPrint('busNo: $busNo');
+      // debugPrint('busNo: $busNo');
       if (mounted) {
         setState(() {
           buslocation = LatLng(latitude, longitude);
