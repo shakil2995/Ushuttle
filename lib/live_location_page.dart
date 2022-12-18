@@ -3,10 +3,23 @@ import 'package:flutter/services.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:location/location.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+import 'dart:async';
 // import 'package:geolocator/geolocator.dart';
 
-var lng = 90.381035;
 var lat = 23.874191;
+var lng = 90.381035;
+
+List<dynamic> items = [];
+
+final item = items[0];
+var busNo = item['busNo'];
+var latitude = item['location']['coordinates']['latitude'];
+var longitude = item['location']['coordinates']['longitude'];
+LatLng buslocation = LatLng(lat, lng);
+// latitude = double.parse(latitude);
+// longitude = double.parse(longitude);
 
 class LiveLocationPage extends StatefulWidget {
   // static const String route = '/live_location';
@@ -76,6 +89,7 @@ class _LiveLocationPageState extends State<LiveLocationPage>
         _permission = permission == PermissionStatus.granted;
 
         if (_permission) {
+          startFetchingCoordinates();
           _liveUpdate = !_liveUpdate;
 
           if (_liveUpdate) {
@@ -151,6 +165,7 @@ class _LiveLocationPageState extends State<LiveLocationPage>
   @override
   Widget build(BuildContext context) {
     LatLng currentLatLng;
+    // LatLng currentBusLatLng = LatLng(lat, lng);
 // add 2 second delay
     Future.delayed(const Duration(seconds: 5), () {});
     // Until currentLocation is initially updated, Widget can locate to 23.809320, 90.397847
@@ -168,6 +183,14 @@ class _LiveLocationPageState extends State<LiveLocationPage>
         height: 80,
         point: currentLatLng,
         builder: (ctx) => const Icon(Icons.location_on, size: 50),
+      ),
+    ];
+    final busMarkers = <Marker>[
+      Marker(
+        width: 80,
+        height: 80,
+        point: buslocation,
+        builder: (ctx) => const Icon(Icons.bus_alert, size: 50),
       ),
     ];
     super.build(context);
@@ -219,6 +242,7 @@ class _LiveLocationPageState extends State<LiveLocationPage>
                   //   userAgentPackageName: 'dev.fleaflet.flutter_map.example',
                   // ),
                   MarkerLayer(markers: markers),
+                  MarkerLayer(markers: busMarkers),
                 ],
               ),
             ),
@@ -232,6 +256,7 @@ class _LiveLocationPageState extends State<LiveLocationPage>
               _liveUpdate = !_liveUpdate;
 
               if (_liveUpdate) {
+                startFetchingCoordinates();
                 interActiveFlags = InteractiveFlag.rotate |
                     InteractiveFlag.pinchZoom |
                     InteractiveFlag.doubleTapZoom;
@@ -256,6 +281,34 @@ class _LiveLocationPageState extends State<LiveLocationPage>
   @override
   // TODO: implement wantKeepAlive
   bool get wantKeepAlive => true;
+
+  void fetchCoordinates() async {
+    const url = 'http://localhost:3000/coords';
+    final uri = Uri.parse(url);
+    final response = await http.get(uri);
+    final body = response.body;
+    final json = jsonDecode(body);
+    setState(() {
+      items = json["results"];
+      // debugPrint(items[0].results);
+    });
+  }
+
+  void startFetchingCoordinates() {
+    Timer.periodic(Duration(seconds: 1), (timer) {
+      fetchCoordinates();
+      final item = items[0];
+      busNo = item['busNo'];
+      latitude = double.parse(item['location']['coordinates']['latitude']);
+      longitude = double.parse(item['location']['coordinates']['longitude']);
+      debugPrint('busNo: $busNo');
+      if (mounted) {
+        setState(() {
+          buslocation = LatLng(latitude, longitude);
+        });
+      }
+    });
+  }
 }
 
 

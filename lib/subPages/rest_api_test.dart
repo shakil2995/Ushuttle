@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'dart:async';
 
 class RestApiTest extends StatefulWidget {
   const RestApiTest({super.key});
@@ -16,7 +17,7 @@ class _RestApiTestState extends State<RestApiTest> {
       // add floating action button
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          fetchCoordinates();
+          startFetchingCoordinates();
         },
         child: const Text('Fetch'),
       ),
@@ -51,13 +52,20 @@ class _RestApiTestState extends State<RestApiTest> {
   }
 
   void fetchCoordinates() async {
-    const url = 'https://ushuttle-backend.herokuapp.com/coords';
+    const url = 'http://localhost:3000/coords';
     final uri = Uri.parse(url);
     final response = await http.get(uri);
     final body = response.body;
     final json = jsonDecode(body);
     setState(() {
-      items = json['results'];
+      items = json["results"];
+      // debugPrint(items[0].results);
+    });
+  }
+
+  void startFetchingCoordinates() {
+    Timer.periodic(Duration(seconds: 1), (timer) {
+      fetchCoordinates();
     });
   }
 }
