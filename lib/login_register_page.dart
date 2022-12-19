@@ -50,14 +50,18 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget _entryField(String title, TextEditingController controller) {
+  Widget _entryField(
+      String title, TextEditingController controller, bool password) {
     return TextField(
+      obscureText: password,
+      // enableSuggestions: false,
+      autocorrect: false,
       controller: controller,
       decoration: InputDecoration(
         labelText: title,
         fillColor: Colors.white,
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(25.0),
+          borderRadius: BorderRadius.circular(50.0),
           borderSide: const BorderSide(),
         ),
       ),
@@ -101,9 +105,10 @@ class _LoginPageState extends State<LoginPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            _entryField('Email', _controllerEmail),
+            _entryField('Email', _controllerEmail, false),
             const SizedBox(height: 16),
-            _entryField('Password', _controllerPassword),
+            // _entryField('Password', _controllerPassword),
+            _entryField('Password', _controllerPassword, true),
             const SizedBox(height: 16),
             _errorMessage(),
             const SizedBox(height: 16),
