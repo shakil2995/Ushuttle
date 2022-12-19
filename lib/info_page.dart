@@ -26,7 +26,9 @@ class InfoPage extends StatelessWidget {
             color: Colors.blueGrey,
             width: double.infinity,
             child: const Center(
-              child: Text('info', style: TextStyle(color: Colors.white)),
+              child: Text(
+                  'This app aims to automate most of the manual tasks for Ushuttle Team.\nFlutter and express.js was used to create this app.',
+                  style: TextStyle(color: Colors.white)),
             ),
           ),
         ],
