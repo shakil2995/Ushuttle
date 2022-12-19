@@ -12,6 +12,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   String? errorMesssage = '';
   bool isLogin = true;
+  bool isLoading = false;
   final TextEditingController _controllerEmail = TextEditingController();
   final TextEditingController _controllerPassword = TextEditingController();
 
@@ -77,8 +78,22 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _submitButton() {
     return ElevatedButton(
-      onPressed: isLogin ? signIn : signUp,
-      child: Text(isLogin ? 'Sign In' : 'Sign Up'),
+      onPressed: () async {
+        setState(() {
+          isLoading = !isLoading;
+        });
+        if (isLogin) {
+          await signIn();
+        } else {
+          await signUp();
+        }
+        setState(() {
+          isLoading = false;
+        });
+      },
+      child: Text(isLogin
+          ? (isLoading ? 'signing in' : 'Sign In')
+          : (isLoading ? 'signing up' : 'Sign up')),
     );
   }
 
@@ -95,6 +110,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // backgroundColor: Colors.red,
       appBar: AppBar(
         title: _title(),
       ),
@@ -102,6 +118,12 @@ class _LoginPageState extends State<LoginPage> {
         height: double.infinity,
         width: double.infinity,
         padding: const EdgeInsets.all(16),
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/images/2.jpg"),
+            fit: BoxFit.cover,
+          ),
+        ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

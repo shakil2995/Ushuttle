@@ -38,8 +38,10 @@ dependencies:
   flutter_map: ^3.0.0
   latlong2: ^0.8.1
   location: ^4.4.0
-  firebase_core: ^2.2.0
+  flutter_polyline_points: ^1.0.0
+  open_route_service: ^1.2.2
   geolocator: ^8.0.5
+  firebase_core: ^2.2.0
   expandable: ^5.0.1
   http: ^0.13.5
   firebase_auth: ^4.2.1
@@ -155,6 +157,7 @@ flutter:
     - assets/map/dhaka/17/98466/
     - assets/map/dhaka/17/98467/
     - assets/map/dhaka/17/98468/
+    - assets/images/
 
   # To add assets to your application, add an assets section, like this:
   # assets:

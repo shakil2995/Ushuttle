@@ -6,6 +6,8 @@ import 'package:location/location.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'dart:async';
+import 'package:open_route_service/open_route_service.dart';
+import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 // import 'package:geolocator/geolocator.dart';
 
 var lat = 23.874191;
@@ -53,30 +55,6 @@ class _LiveLocationPageState extends State<LiveLocationPage>
   }
 
   void initLocationService() async {
-    // await _locationService.changeSettings(
-    //   accuracy: geoLocator.LocationAccuracy.high,
-    //   interval: 100,
-    // );
-//  load current location permission
-    // Future<Position> getLocationPermission() async {
-    //   await Geolocator.requestPermission()
-    //       .then((value) {})
-    //       .onError((error, stackTrace) {});
-    //   return await Geolocator.getCurrentPosition();
-    // }
-
-//  load user current location
-    // LatLng getCurrentUserLocation() {
-    //   getLocationPermission().then(
-    //     (value) {
-    //       lat = value.latitude;
-    //       lng = value.longitude;
-    //     },
-    //   );
-
-    //   return LatLng(lat, lng);
-    // }
-
     LocationData? location;
     bool serviceEnabled;
     // bool serviceRequestResult;
@@ -96,7 +74,6 @@ class _LiveLocationPageState extends State<LiveLocationPage>
             interActiveFlags = InteractiveFlag.rotate |
                 InteractiveFlag.pinchZoom |
                 InteractiveFlag.doubleTapZoom;
-
             ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
               content:
                   Text('In live update mode only zoom and rotation are enable'),
@@ -124,13 +101,6 @@ class _LiveLocationPageState extends State<LiveLocationPage>
             }
           });
         }
-        // } else {
-        //   serviceRequestResult = await _locationService.requestService();
-        //   if (serviceRequestResult) {
-        //     initLocationService();
-        //     return;
-        //   }
-        // }
       } else {
         showDialog(
           context: context,
@@ -167,7 +137,7 @@ class _LiveLocationPageState extends State<LiveLocationPage>
     LatLng currentLatLng;
     // LatLng currentBusLatLng = LatLng(lat, lng);
 // add 2 second delay
-    Future.delayed(const Duration(seconds: 5), () {});
+    // Future.delayed(const Duration(seconds: 2), () {});
     // Until currentLocation is initially updated, Widget can locate to 23.809320, 90.397847
     // by default or store previous location value to show.
     if (_currentLocation != null) {
@@ -176,6 +146,73 @@ class _LiveLocationPageState extends State<LiveLocationPage>
     } else {
       currentLatLng = LatLng(23.809320, 90.397847);
     }
+
+// Route coordinates
+//     List<ORSCoordinate> routeCoordinates = [];
+//     Polyline routePolyline;
+//     PolylineLayer polylineOptions = PolylineLayer(
+//       polylines: [],
+//     );
+//     Future<void> getRoutes() async {
+//       // Initialize the OpenRouteService with your API key.
+//       final OpenRouteService client = OpenRouteService(
+//           apiKey: 'Api key');
+
+//       // Example coordinates to test between
+//       const double startLat = 23.809320;
+//       const double startLng = 90.397847;
+//       const double endLat = 23.709320;
+//       const double endLng = 90.497847;
+
+//       // Form Route between coordinates
+//       routeCoordinates = await client.directionsRouteCoordsGet(
+//         startCoordinate: ORSCoordinate(latitude: startLat, longitude: startLng),
+//         endCoordinate: ORSCoordinate(latitude: endLat, longitude: endLng),
+//       );
+//       debugPrint('Route coordinates: $routeCoordinates');
+//       final List<LatLng> routePoints = routeCoordinates
+//           .map(
+//               (coordinate) => LatLng(coordinate.latitude, coordinate.longitude))
+//           .toList();
+//       routePolyline = Polyline(
+//         points: routePoints,
+//         strokeWidth: 4,
+//         color: Colors.red,
+//       );
+//       setState(() {
+//         polylineOptions = PolylineLayer(
+//           polylines: [
+//             routePolyline,
+//           ],
+//         );
+//       });
+// // final FlutterMap map = FlutterMap(
+// //   mapController: mapController,
+// //   options: MapOptions(
+// //     center: center,
+// //     zoom: zoom,
+// //   ),
+// //   layers: [
+// //     TileLayer(
+// //       urlTemplate: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+// //       subdomains: ['a', 'b', 'c'],
+// //     ),
+// //     polylineOptions,
+// //   ],
+// // );
+//       // Create Polyline (requires Material UI for Color)
+//       // final Polyline routePolyline = Polyline(
+//       //   polylineId: PolylineId('route'),
+//       //   visible: true,
+//       //   points: routePoints,
+//       //   color: Colors.red,
+//       //   width: 4,
+//       // );
+
+//       // Use Polyline to draw route on map or do anything else with the data :)
+//     }
+
+// end route coordinates
 
     final markers = <Marker>[
       Marker(
@@ -199,25 +236,9 @@ class _LiveLocationPageState extends State<LiveLocationPage>
         padding: const EdgeInsets.all(0),
         child: Column(
           children: [
-            // Padding(
-            //   padding: const EdgeInsets.only(top: 0, bottom: 0),
-            //   child: _serviceError!.isEmpty
-            //       ? Text('This is a map that is showing '
-            //           '(${currentLatLng.latitude}, ${currentLatLng.longitude}).')
-            //       : Text(
-            //           'Error occured while acquiring location. Error Message : '
-            //           '$_serviceError'),
-            // ),
             Flexible(
               child: FlutterMap(
                 mapController: _mapController,
-                // options: MapOptions(
-                //   center:
-                //       LatLng(currentLatLng.latitude, currentLatLng.longitude),
-                //   zoom: 16,
-                //   maxZoom: 18,
-                //   interactiveFlags: interActiveFlags,
-                // ),
                 options: MapOptions(
                   center: LatLng(23.819158502556704, 90.3990976172065),
                   minZoom: 13,
@@ -243,6 +264,7 @@ class _LiveLocationPageState extends State<LiveLocationPage>
                   // ),
                   MarkerLayer(markers: markers),
                   MarkerLayer(markers: busMarkers),
+                  // polylineOptions,
                 ],
               ),
             ),
@@ -256,6 +278,7 @@ class _LiveLocationPageState extends State<LiveLocationPage>
               _liveUpdate = !_liveUpdate;
 
               if (_liveUpdate) {
+                // getRoutes();
                 startFetchingCoordinates();
                 interActiveFlags = InteractiveFlag.rotate |
                     InteractiveFlag.pinchZoom |
@@ -280,7 +303,6 @@ class _LiveLocationPageState extends State<LiveLocationPage>
 
   @override
   bool get wantKeepAlive => true;
-
   void fetchCoordinates() async {
     const url = 'http://localhost:3000/coords';
     final uri = Uri.parse(url);
@@ -289,7 +311,6 @@ class _LiveLocationPageState extends State<LiveLocationPage>
     final json = jsonDecode(body);
     setState(() {
       items = json["results"];
-      // debugPrint(items[0].results);
     });
   }
 
@@ -309,17 +330,3 @@ class _LiveLocationPageState extends State<LiveLocationPage>
     });
   }
 }
-
-
-//  void getLocation() async {
-//     final response = await http.get('https://api.example.com/location');
-//     if (response.statusCode == 200) {
-//       final location = response.body;
-//       setState(() {
-//         _currentLocation = LatLng(location['latitude'], location['longitude']);
-//       });
-//       Timer.periodic(Duration(seconds: 10), (timer) async {
-//         getLocation();
-//       });
-//     }
-//   }
