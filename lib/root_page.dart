@@ -14,9 +14,9 @@ class RootPage extends StatefulWidget {
 class _RootPageState extends State<RootPage> {
   int currentPage = 0;
   List<Widget> pages = [
-    const HomePage(),
     // const LiveMapPage(),
     const LiveLocationPage(),
+    const HomePage(),
     ProfilePage()
   ];
   @override
@@ -42,9 +42,9 @@ class _RootPageState extends State<RootPage> {
       body: pages[currentPage],
       bottomNavigationBar: NavigationBar(
         destinations: const [
-          NavigationDestination(icon: Icon(Icons.home), label: 'Home'),
           // NavigationDestination(icon: Icon(Icons.map), label: 'Track'),
           NavigationDestination(icon: Icon(Icons.pin_drop), label: 'Live'),
+          NavigationDestination(icon: Icon(Icons.home), label: 'Home'),
           NavigationDestination(icon: Icon(Icons.person), label: 'Profile'),
         ],
         onDestinationSelected: (int index) {
