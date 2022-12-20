@@ -106,9 +106,8 @@ class _LiveLocationPageState extends State<LiveLocationPage>
           context: context,
           builder: (context) {
             return AlertDialog(
-              title: const Text('Location Permission Required'),
-              content: const Text(
-                  'Please grant location permission to use this feature.'),
+              title: const Text('GPS Required'),
+              content: const Text('Please turn on GPS to use this feature.'),
               actions: <Widget>[
                 TextButton(
                   child: const Text('OK'),
