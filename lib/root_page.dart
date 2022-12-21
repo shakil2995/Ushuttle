@@ -43,7 +43,10 @@ class _RootPageState extends State<RootPage> {
       bottomNavigationBar: NavigationBar(
         destinations: const [
           // NavigationDestination(icon: Icon(Icons.map), label: 'Track'),
-          NavigationDestination(icon: Icon(Icons.pin_drop), label: 'Live'),
+          NavigationDestination(
+            icon: Icon(Icons.pin_drop),
+            label: 'Live',
+          ),
           NavigationDestination(icon: Icon(Icons.home), label: 'Home'),
           NavigationDestination(icon: Icon(Icons.person), label: 'Profile'),
         ],

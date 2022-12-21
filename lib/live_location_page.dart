@@ -6,8 +6,8 @@ import 'package:location/location.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'dart:async';
-import 'package:open_route_service/open_route_service.dart';
-import 'package:flutter_polyline_points/flutter_polyline_points.dart';
+// import 'package:open_route_service/open_route_service.dart';
+// import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 // import 'package:geolocator/geolocator.dart';
 
 var lat = 23.874191;
@@ -74,10 +74,12 @@ class _LiveLocationPageState extends State<LiveLocationPage>
             interActiveFlags = InteractiveFlag.rotate |
                 InteractiveFlag.pinchZoom |
                 InteractiveFlag.doubleTapZoom;
-            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-              content:
-                  Text('In live update mode only zoom and rotation are enable'),
-            ));
+            if (mounted) {
+              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                content: Text(
+                    'In live update mode only zoom and rotation are enable'),
+              ));
+            }
           } else {
             interActiveFlags = InteractiveFlag.all;
           }

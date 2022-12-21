@@ -44,7 +44,7 @@ class _LoginPageState extends State<LoginPage> {
     return const Text(
       'Ushuttle',
       style: TextStyle(
-        color: Colors.white,
+        // color: Colors.white,
         fontSize: 24,
         fontWeight: FontWeight.bold,
       ),
@@ -62,7 +62,7 @@ class _LoginPageState extends State<LoginPage> {
         labelText: title,
         fillColor: Colors.white,
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(50.0),
+          borderRadius: BorderRadius.circular(12.0),
           borderSide: const BorderSide(),
         ),
       ),
@@ -78,6 +78,13 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _submitButton() {
     return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        minimumSize: const Size(double.infinity, 60),
+        // backgroundColor: Colors.green,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12.0),
+        ),
+      ),
       onPressed: () async {
         setState(() {
           isLoading = !isLoading;
@@ -93,7 +100,7 @@ class _LoginPageState extends State<LoginPage> {
       },
       child: Text(isLogin
           ? (isLoading ? 'signing in' : 'Sign In')
-          : (isLoading ? 'signing up' : 'Sign up')),
+          : (isLoading ? 'Registering' : 'Register')),
     );
   }
 
@@ -104,13 +111,12 @@ class _LoginPageState extends State<LoginPage> {
             isLogin = !isLogin;
           });
         },
-        child: Text(isLogin ? 'Register instead' : 'Login instead'));
+        child: Text(isLogin ? 'Register instead ?' : 'Login instead ?'));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: Colors.red,
       appBar: AppBar(
         title: _title(),
       ),
@@ -131,9 +137,9 @@ class _LoginPageState extends State<LoginPage> {
             const SizedBox(height: 16),
             // _entryField('Password', _controllerPassword),
             _entryField('Password', _controllerPassword, true),
-            const SizedBox(height: 16),
+            const SizedBox(height: 0),
             _errorMessage(),
-            const SizedBox(height: 16),
+            const SizedBox(height: 0),
             _submitButton(),
             const SizedBox(height: 16),
             _loginOrRegistrationButton(),
