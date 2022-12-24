@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ushuttlev1/subPages/forgotPasswordPage.dart';
 import 'auth.dart';
 
 class LoginPage extends StatefulWidget {
@@ -17,11 +19,18 @@ class _LoginPageState extends State<LoginPage> {
   final _controllerEmail = TextEditingController();
   final _controllerPassword = TextEditingController();
   final _controllerConfirmPassword = TextEditingController();
+  final _controllerFirstName = TextEditingController();
+  final _controllerLastName = TextEditingController();
+  final _controllerInstitute = TextEditingController();
 
+  @override
   void dispose() {
     _controllerEmail.dispose();
     _controllerPassword.dispose();
     _controllerConfirmPassword.dispose();
+    _controllerFirstName.dispose();
+    _controllerLastName.dispose();
+    _controllerInstitute.dispose();
     super.dispose();
   }
 
@@ -37,12 +46,51 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
-  Future<void> signUp() async {
+  // Future<String?> signUp(
+  //     {required String email, required String password}) async {
+  //   try {
+  //     await _firebaseAuth.createUserWithEmailAndPassword(
+  //         email: email, password: password);
+  //     return "Signed up";
+  //   } on FirebaseAuthException catch (e) {
+  //     return e.message;
+  //   }
+  // }
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  Future signUp() async {
+    if (passwordConfirmed()) {
+      try {
+        await _firebaseAuth.createUserWithEmailAndPassword(
+          email: _controllerEmail.text.trim(),
+          password: _controllerPassword.text.trim(),
+        );
+        addUserDetails();
+        // Navigator.of(context).pop();
+      } on FirebaseAuthException catch (e) {
+        setState(() {
+          errorMesssage = e.message;
+        });
+      }
+    }
+  }
+
+  bool passwordConfirmed() {
+    return _controllerPassword.text == _controllerConfirmPassword.text
+        ? true
+        : false;
+  }
+
+  Future addUserDetails() async {
     try {
-      await Auth().signUp(
-          email: _controllerEmail.text, password: _controllerPassword.text);
+      await FirebaseFirestore.instance.collection('users').add({
+        'firstName': _controllerFirstName.text,
+        'lastName': _controllerLastName.text,
+        'institute': _controllerInstitute.text,
+        'email': _controllerEmail.text,
+      });
       // Navigator.of(context).pop();
     } on FirebaseAuthException catch (e) {
+      debugPrint(e.message);
       setState(() {
         errorMesssage = e.message;
       });
@@ -123,6 +171,21 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
+  Widget _forgotPassword() {
+    return TextButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) {
+                return const ForgotPasswordPage();
+              },
+            ),
+          );
+        },
+        child: const Text('Forgot Password ?'));
+  }
+
   Widget _submitButton() {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
@@ -185,15 +248,39 @@ class _LoginPageState extends State<LoginPage> {
             _header(),
             const SizedBox(height: 16),
             _subText(),
+
             const SizedBox(height: 16),
+            !isLogin
+                ? _entryField('First Name', _controllerFirstName, false)
+                : const SizedBox(height: 0),
+            const SizedBox(height: 10),
+
+            !isLogin
+                ? _entryField('Last Name', _controllerLastName, false)
+                : const SizedBox(height: 0),
+            const SizedBox(height: 10),
+
+            !isLogin
+                ? _entryField('Institute', _controllerInstitute, false)
+                : const SizedBox(height: 0),
+            const SizedBox(height: 10),
+
             _entryField('Email', _controllerEmail, false),
-            const SizedBox(height: 16),
+            const SizedBox(height: 10),
             // _entryField('Password', _controllerPassword),
             _entryField('Password', _controllerPassword, true),
-            const SizedBox(height: 16),
+            const SizedBox(height: 10),
             !isLogin
                 ? _entryField(
                     'Confirm Password', _controllerConfirmPassword, true)
+                : const SizedBox(height: 0),
+            const SizedBox(height: 10),
+
+            isLogin
+                ? Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [_forgotPassword()],
+                  )
                 : const SizedBox(height: 0),
             const SizedBox(height: 0),
             _errorMessage(),
