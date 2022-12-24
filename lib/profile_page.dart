@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:ushuttlev1/subPages/get_user_details.dart';
 import './auth.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -12,22 +13,12 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   final User? user = Auth().currentUser;
   List<String> docIds = [];
-  // Future getDocIds() async {
-  //   QuerySnapshot result = await FirebaseFirestore.instance
-  //       .collection('users')
-  //       // .where('email', isEqualTo: user?.email)
-  //       .get();
-  //   List<DocumentSnapshot> documents = result.docs;
-  //   documents.forEach((data) {
-  //     print(data.id);
-  //     docIds.add(data.id);
-  //   });
-  // }
   Future getDocIds() async {
     await FirebaseFirestore.instance.collection('users').get().then(
+          // ignore: avoid_function_literals_in_foreach_calls
           (snapshot) => snapshot.docs.forEach(
             (document) {
-              print(document.reference);
+              // print(document.reference);
               docIds.add(document.reference.id);
             },
           ),
@@ -44,7 +35,7 @@ class _ProfilePageState extends State<ProfilePage> {
               itemCount: docIds.length,
               itemBuilder: (context, index) {
                 return ListTile(
-                  title: Text(docIds[index]),
+                  title: GetUserDetails(documentId: docIds[index]),
                 );
               },
             ),
@@ -55,16 +46,6 @@ class _ProfilePageState extends State<ProfilePage> {
       },
     );
   }
-  // Widget _title() {
-  //   return const Text(
-  //     'Firebase Auth',
-  //     style: TextStyle(
-  //       color: Colors.white,
-  //       fontSize: 24,
-  //       fontWeight: FontWeight.bold,
-  //     ),
-  //   );
-  // }
 
   Widget _userUid() {
     return Text(user?.email ?? 'user email');
@@ -76,12 +57,6 @@ class _ProfilePageState extends State<ProfilePage> {
           await Auth().signOut();
         },
         child: const Text('Sign Out'));
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    getDocIds();
   }
 
   @override

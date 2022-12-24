@@ -17,7 +17,7 @@ class _RootPageState extends State<RootPage> {
     // const LiveMapPage(),
     const LiveLocationPage(),
     const HomePage(),
-    ProfilePage()
+    const ProfilePage()
   ];
   @override
   Widget build(BuildContext context) {
@@ -53,7 +53,7 @@ class _RootPageState extends State<RootPage> {
         onDestinationSelected: (int index) {
           setState(() {
             currentPage = index;
-            debugPrint(currentPage.toString());
+            // debugPrint(currentPage.toString());
           });
         },
         selectedIndex: currentPage,
