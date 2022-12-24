@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'auth.dart';
 
 class LoginPage extends StatefulWidget {
@@ -13,8 +14,16 @@ class _LoginPageState extends State<LoginPage> {
   String? errorMesssage = '';
   bool isLogin = true;
   bool isLoading = false;
-  final TextEditingController _controllerEmail = TextEditingController();
-  final TextEditingController _controllerPassword = TextEditingController();
+  final _controllerEmail = TextEditingController();
+  final _controllerPassword = TextEditingController();
+  final _controllerConfirmPassword = TextEditingController();
+
+  void dispose() {
+    _controllerEmail.dispose();
+    _controllerPassword.dispose();
+    _controllerConfirmPassword.dispose();
+    super.dispose();
+  }
 
   Future<void> signIn() async {
     try {
@@ -38,6 +47,44 @@ class _LoginPageState extends State<LoginPage> {
         errorMesssage = e.message;
       });
     }
+  }
+
+  Widget _header() {
+    return Text(
+      isLogin ? 'Welcome back !!' : 'Hello There !!',
+      // style: const TextStyle(
+      //   // color: Colors.white,
+      //   fontSize: 44,
+      //   fontWeight: FontWeight.bold,
+      // ),
+
+      style: GoogleFonts.bebasNeue(
+        // color: Colors.white,
+        fontSize: 44,
+        // fontWeight: FontWeight.bold,
+      ),
+    );
+  }
+
+  Widget _subText() {
+    return Text(
+      isLogin
+          ? 'Please login to your account.'
+          : 'Register below with your details.',
+      style: const TextStyle(
+        fontSize: 22,
+        fontWeight: FontWeight.bold,
+      ),
+    );
+    // 'Welcome back, please login to your account.',
+  }
+
+  Widget _icon() {
+    return const Icon(
+      Icons.directions_bus,
+      size: 100,
+      color: Color.fromARGB(255, 38, 38, 38),
+    );
   }
 
   Widget _title() {
@@ -133,10 +180,21 @@ class _LoginPageState extends State<LoginPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            _icon(),
+            const SizedBox(height: 16),
+            _header(),
+            const SizedBox(height: 16),
+            _subText(),
+            const SizedBox(height: 16),
             _entryField('Email', _controllerEmail, false),
             const SizedBox(height: 16),
             // _entryField('Password', _controllerPassword),
             _entryField('Password', _controllerPassword, true),
+            const SizedBox(height: 16),
+            !isLogin
+                ? _entryField(
+                    'Confirm Password', _controllerConfirmPassword, true)
+                : const SizedBox(height: 0),
             const SizedBox(height: 0),
             _errorMessage(),
             const SizedBox(height: 0),
