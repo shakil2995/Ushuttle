@@ -217,6 +217,7 @@ class _LiveLocationPageState extends State<LiveLocationPage>
 
     final markers = <Marker>[
       Marker(
+        rotate: true,
         width: 80,
         height: 80,
         point: currentLatLng,
@@ -225,6 +226,7 @@ class _LiveLocationPageState extends State<LiveLocationPage>
     ];
     final busMarkers = <Marker>[
       Marker(
+        rotate: true,
         width: 80,
         height: 80,
         point: buslocation,

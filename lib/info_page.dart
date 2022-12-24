@@ -23,11 +23,32 @@ class InfoPage extends StatelessWidget {
           Container(
             margin: const EdgeInsets.all(10.0),
             padding: const EdgeInsets.all(10.0),
+            color: Color.fromARGB(255, 255, 106, 106),
+            width: double.infinity,
+            child: const Center(
+              child: Text(
+                  'This app is still in development and is not ready for production use.',
+                  style: TextStyle(color: Color.fromARGB(255, 53, 53, 53))),
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.all(10.0),
+            padding: const EdgeInsets.all(10.0),
             color: Colors.blueGrey,
             width: double.infinity,
             child: const Center(
               child: Text(
-                  'This app aims to automate most of the manual tasks for Ushuttle Team.\nFlutter and express.js was used to create this app.',
+                  'This app is created by Ushuttle Team.\nFor any queries, please contact us.',
+                  style: TextStyle(color: Colors.white)),
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.all(10.0),
+            padding: const EdgeInsets.all(10.0),
+            color: Colors.blueGrey,
+            width: double.infinity,
+            child: const Center(
+              child: Text('App version : 0.1.6\nBuild number :0.0.9',
                   style: TextStyle(color: Colors.white)),
             ),
           ),

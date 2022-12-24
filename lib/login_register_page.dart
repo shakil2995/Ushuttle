@@ -37,7 +37,8 @@ class _LoginPageState extends State<LoginPage> {
   Future<void> signIn() async {
     try {
       await Auth().signIn(
-          email: _controllerEmail.text, password: _controllerPassword.text);
+          email: _controllerEmail.text.trim(),
+          password: _controllerPassword.text.trim());
       // Navigator.of(context).pop();
     } on FirebaseAuthException catch (e) {
       setState(() {
@@ -75,7 +76,8 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   bool passwordConfirmed() {
-    return _controllerPassword.text == _controllerConfirmPassword.text
+    return _controllerPassword.text.trim() ==
+            _controllerConfirmPassword.text.trim()
         ? true
         : false;
   }
@@ -83,10 +85,10 @@ class _LoginPageState extends State<LoginPage> {
   Future addUserDetails() async {
     try {
       await FirebaseFirestore.instance.collection('users').add({
-        'firstName': _controllerFirstName.text,
-        'lastName': _controllerLastName.text,
-        'institute': _controllerInstitute.text,
-        'email': _controllerEmail.text,
+        'firstName': _controllerFirstName.text.trim(),
+        'lastName': _controllerLastName.text.trim(),
+        'institute': _controllerInstitute.text.trim(),
+        'email': _controllerEmail.text.trim(),
       });
       // Navigator.of(context).pop();
     } on FirebaseAuthException catch (e) {
@@ -108,7 +110,7 @@ class _LoginPageState extends State<LoginPage> {
 
       style: GoogleFonts.bebasNeue(
         // color: Colors.white,
-        fontSize: 44,
+        fontSize: 36,
         // fontWeight: FontWeight.bold,
       ),
     );
@@ -120,7 +122,7 @@ class _LoginPageState extends State<LoginPage> {
           ? 'Please login to your account.'
           : 'Register below with your details.',
       style: const TextStyle(
-        fontSize: 22,
+        fontSize: 20,
         fontWeight: FontWeight.bold,
       ),
     );
@@ -130,7 +132,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget _icon() {
     return const Icon(
       Icons.directions_bus,
-      size: 100,
+      size: 80,
       color: Color.fromARGB(255, 38, 38, 38),
     );
   }
@@ -240,55 +242,57 @@ class _LoginPageState extends State<LoginPage> {
             fit: BoxFit.cover,
           ),
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            _icon(),
-            const SizedBox(height: 16),
-            _header(),
-            const SizedBox(height: 16),
-            _subText(),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              _icon(),
+              const SizedBox(height: 16),
+              _header(),
+              const SizedBox(height: 16),
+              _subText(),
 
-            const SizedBox(height: 16),
-            !isLogin
-                ? _entryField('First Name', _controllerFirstName, false)
-                : const SizedBox(height: 0),
-            const SizedBox(height: 10),
+              const SizedBox(height: 16),
+              !isLogin
+                  ? _entryField('First Name', _controllerFirstName, false)
+                  : const SizedBox(height: 0),
+              const SizedBox(height: 10),
 
-            !isLogin
-                ? _entryField('Last Name', _controllerLastName, false)
-                : const SizedBox(height: 0),
-            const SizedBox(height: 10),
+              !isLogin
+                  ? _entryField('Last Name', _controllerLastName, false)
+                  : const SizedBox(height: 0),
+              const SizedBox(height: 10),
 
-            !isLogin
-                ? _entryField('Institute', _controllerInstitute, false)
-                : const SizedBox(height: 0),
-            const SizedBox(height: 10),
+              !isLogin
+                  ? _entryField('Institute', _controllerInstitute, false)
+                  : const SizedBox(height: 0),
+              const SizedBox(height: 10),
 
-            _entryField('Email', _controllerEmail, false),
-            const SizedBox(height: 10),
-            // _entryField('Password', _controllerPassword),
-            _entryField('Password', _controllerPassword, true),
-            const SizedBox(height: 10),
-            !isLogin
-                ? _entryField(
-                    'Confirm Password', _controllerConfirmPassword, true)
-                : const SizedBox(height: 0),
-            const SizedBox(height: 10),
+              _entryField('Email', _controllerEmail, false),
+              const SizedBox(height: 10),
+              // _entryField('Password', _controllerPassword),
+              _entryField('Password', _controllerPassword, true),
+              const SizedBox(height: 10),
+              !isLogin
+                  ? _entryField(
+                      'Confirm Password', _controllerConfirmPassword, true)
+                  : const SizedBox(height: 0),
+              // const SizedBox(height: 10),
 
-            isLogin
-                ? Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [_forgotPassword()],
-                  )
-                : const SizedBox(height: 0),
-            const SizedBox(height: 0),
-            _errorMessage(),
-            const SizedBox(height: 0),
-            _submitButton(),
-            const SizedBox(height: 16),
-            _loginOrRegistrationButton(),
-          ],
+              isLogin
+                  ? Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [_forgotPassword()],
+                    )
+                  : const SizedBox(height: 0),
+              const SizedBox(height: 0),
+              _errorMessage(),
+              const SizedBox(height: 0),
+              _submitButton(),
+              const SizedBox(height: 10),
+              _loginOrRegistrationButton(),
+            ],
+          ),
         ),
       ),
     );

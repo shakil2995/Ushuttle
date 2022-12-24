@@ -17,7 +17,22 @@ class GetUserDetails extends StatelessWidget {
           if (snapshot.connectionState == ConnectionState.done) {
             Map<String, dynamic> data =
                 snapshot.data!.data() as Map<String, dynamic>;
-            return Text('firstName: ${data['firstName']}');
+            return Container(
+              decoration: BoxDecoration(
+                color: Colors.grey[200],
+                border: Border.all(color: Colors.grey, width: 1),
+                borderRadius: BorderRadius.circular(5),
+              ),
+              padding: const EdgeInsets.all(10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Name: ${data['firstName']} ${data['lastName']}'),
+                  Text('Email: ${data['email']}'),
+                  Text('Institution: ${data['institute']}'),
+                ],
+              ),
+            );
           }
           return const Text('loading');
         }));

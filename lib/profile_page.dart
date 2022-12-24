@@ -14,7 +14,11 @@ class _ProfilePageState extends State<ProfilePage> {
   final User? user = Auth().currentUser;
   List<String> docIds = [];
   Future getDocIds() async {
-    await FirebaseFirestore.instance.collection('users').get().then(
+    await FirebaseFirestore.instance
+        .collection('users')
+        .where('email', isEqualTo: user?.email)
+        .get()
+        .then(
           // ignore: avoid_function_literals_in_foreach_calls
           (snapshot) => snapshot.docs.forEach(
             (document) {
@@ -71,7 +75,7 @@ class _ProfilePageState extends State<ProfilePage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           _listview(),
-          _userUid(),
+          // _userUid(),
           const SizedBox(height: 16),
           _signOutButton(),
         ],
