@@ -71,14 +71,15 @@ class _LiveLocationPageState extends State<LiveLocationPage>
           _liveUpdate = !_liveUpdate;
 
           if (_liveUpdate) {
-            interActiveFlags = InteractiveFlag.rotate |
-                InteractiveFlag.pinchZoom |
-                InteractiveFlag.doubleTapZoom;
+            // interActiveFlags = InteractiveFlag.rotate |
+            //     InteractiveFlag.pinchZoom |
+            //     InteractiveFlag.doubleTapZoom;
             if (mounted) {
-              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                content: Text(
-                    'In live update mode only zoom and rotation are enable'),
-              ));
+              // ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+              //   content: Text(
+              //       // 'In live update mode only zoom and rotation are enabled'),
+              //       'Locating You...'),
+              // ));
             }
           } else {
             interActiveFlags = InteractiveFlag.all;
@@ -221,7 +222,11 @@ class _LiveLocationPageState extends State<LiveLocationPage>
         width: 80,
         height: 80,
         point: currentLatLng,
-        builder: (ctx) => const Icon(Icons.location_on, size: 50),
+        builder: (ctx) => const Icon(
+          Icons.location_on,
+          size: 50,
+          color: Color.fromARGB(255, 4, 4, 4),
+        ),
       ),
     ];
     final busMarkers = <Marker>[
@@ -230,7 +235,11 @@ class _LiveLocationPageState extends State<LiveLocationPage>
         width: 80,
         height: 80,
         point: buslocation,
-        builder: (ctx) => const Icon(Icons.directions_bus, size: 50),
+        builder: (ctx) => const Icon(
+          Icons.directions_bus,
+          size: 50,
+          color: Color.fromARGB(255, 4, 4, 4),
+        ),
       ),
     ];
     super.build(context);
@@ -276,20 +285,26 @@ class _LiveLocationPageState extends State<LiveLocationPage>
       ),
       floatingActionButton: Builder(builder: (BuildContext context) {
         return FloatingActionButton(
+          backgroundColor: Color.fromARGB(255, 13, 13, 13),
           onPressed: () {
             setState(() {
               _liveUpdate = !_liveUpdate;
 
               if (_liveUpdate) {
+                _mapController.move(
+                    LatLng(_currentLocation!.latitude!,
+                        _currentLocation!.longitude!),
+                    _mapController.zoom);
                 // getRoutes();
                 startFetchingCoordinates();
-                interActiveFlags = InteractiveFlag.rotate |
-                    InteractiveFlag.pinchZoom |
-                    InteractiveFlag.doubleTapZoom;
+                // interActiveFlags = InteractiveFlag.rotate |
+                //     InteractiveFlag.pinchZoom |
+                //     InteractiveFlag.doubleTapZoom;
 
                 ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                   content: Text(
-                      'In live update mode only zoom and rotation are enable'),
+                      // 'In live update mode only zoom and rotation are enabled'),
+                      'locating you...'),
                 ));
               } else {
                 interActiveFlags = InteractiveFlag.all;
@@ -297,8 +312,14 @@ class _LiveLocationPageState extends State<LiveLocationPage>
             });
           },
           child: _liveUpdate
-              ? const Icon(Icons.location_on)
-              : const Icon(Icons.location_off),
+              ? const Icon(
+                  Icons.gps_fixed,
+                  color: Color.fromARGB(255, 251, 250, 250),
+                )
+              : const Icon(
+                  Icons.location_searching,
+                  color: Color.fromARGB(255, 254, 251, 251),
+                ),
         );
       }),
     );

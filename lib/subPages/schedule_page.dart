@@ -28,7 +28,7 @@ class SchedulePage extends StatelessWidget {
         //set background color to red
 
         decoration: BoxDecoration(
-          color: const Color.fromARGB(255, 215, 215, 215),
+          color: Color.fromARGB(255, 140, 140, 140),
           borderRadius: BorderRadius.circular(5),
         ),
 
@@ -193,7 +193,7 @@ Container bashundharaToMirpur() {
       //set background color to red
 
       decoration: BoxDecoration(
-        color: const Color.fromARGB(255, 215, 215, 215),
+        color: Color.fromARGB(255, 140, 140, 140),
         borderRadius: BorderRadius.circular(5),
       ),
 

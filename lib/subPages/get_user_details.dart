@@ -19,7 +19,7 @@ class GetUserDetails extends StatelessWidget {
                 snapshot.data!.data() as Map<String, dynamic>;
             return Container(
               decoration: BoxDecoration(
-                color: Colors.grey[200],
+                // color: Colors.grey[200],
                 border: Border.all(color: Colors.grey, width: 1),
                 borderRadius: BorderRadius.circular(5),
               ),

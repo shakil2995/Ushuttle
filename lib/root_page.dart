@@ -47,7 +47,11 @@ class _RootPageState extends State<RootPage> {
             icon: Icon(Icons.pin_drop),
             label: 'Live',
           ),
-          NavigationDestination(icon: Icon(Icons.home), label: 'Home'),
+          NavigationDestination(
+              icon: Icon(
+                Icons.home,
+              ),
+              label: 'Home'),
           NavigationDestination(icon: Icon(Icons.person), label: 'Profile'),
         ],
         onDestinationSelected: (int index) {

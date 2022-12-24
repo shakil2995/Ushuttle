@@ -40,10 +40,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      // theme: ThemeData(
+      //   brightness: Brightness.dark,
+      //   colorScheme: ColorScheme.fromSwatch(primarySwatch: customBlack)
+      //       .copyWith(secondary: Colors.black),
+      // ),
       theme: ThemeData(
-        brightness: Brightness.light,
-        colorScheme: ColorScheme.fromSwatch(primarySwatch: customBlack)
-            .copyWith(secondary: Colors.black),
+        // primarySwatch: Colors.blue,
+        brightness: Brightness.dark,
+        // brightness: Brightness.light,
       ),
       // home: const RootPage(),
       home: const WidgetTree(),
