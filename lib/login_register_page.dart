@@ -35,6 +35,12 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Future<void> signIn() async {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return Center(child: CircularProgressIndicator());
+        });
+
     try {
       await Auth().signIn(
           email: _controllerEmail.text.trim(),
@@ -45,18 +51,9 @@ class _LoginPageState extends State<LoginPage> {
         errorMesssage = e.message;
       });
     }
+    Navigator.of(context).pop();
   }
 
-  // Future<String?> signUp(
-  //     {required String email, required String password}) async {
-  //   try {
-  //     await _firebaseAuth.createUserWithEmailAndPassword(
-  //         email: email, password: password);
-  //     return "Signed up";
-  //   } on FirebaseAuthException catch (e) {
-  //     return e.message;
-  //   }
-  // }
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   Future signUp() async {
     if (passwordConfirmed()) {
