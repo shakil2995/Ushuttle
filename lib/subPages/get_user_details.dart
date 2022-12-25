@@ -30,10 +30,18 @@ class GetUserDetails extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  SizedBox(
+                    height: 120,
+                    width: 120,
+                    child: ClipRRect(
+                        borderRadius: BorderRadius.circular(100),
+                        child: Image.asset('assets/images/splash.jpg')),
+                  ),
+                  const SizedBox(height: 8),
                   Text(
                     '${data['firstName'].toString().toUpperCase()} ${data['lastName'].toString().toUpperCase()}',
                     style: TextStyle(
-                        color: Colors.white,
+                        // color: Colors.white,
                         fontSize: 20,
                         fontWeight: FontWeight.bold),
                   ),
@@ -60,19 +68,19 @@ class GetUserDetails extends StatelessWidget {
                     title: 'Settngs',
                     onPress: () {},
                     icon: Icons.settings,
-                    textColor: Colors.white,
+                    // textColor: Colors.white,
                   ),
                   menuWidget(
                     title: 'Billing Details',
                     onPress: () {},
                     icon: Icons.wallet,
-                    textColor: Colors.white,
+                    // textColor: Colors.white,
                   ),
                   menuWidget(
                     title: 'My Tickets',
                     onPress: () {},
                     icon: Icons.local_movies,
-                    textColor: Colors.white,
+                    // textColor: Colors.white,
                   ),
                   Divider(),
                   menuWidget(
@@ -87,7 +95,7 @@ class GetUserDetails extends StatelessWidget {
                       );
                     },
                     icon: Icons.info,
-                    textColor: Colors.white,
+                    // textColor: Colors.white,
                   ),
                   menuWidget(
                     title: 'Logout',
@@ -126,6 +134,10 @@ class menuWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: ListTile(
+        // tileColor: Colors.grey[200],
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(5),
+        ),
         onTap: onPress,
         leading: Container(
           width: 40,

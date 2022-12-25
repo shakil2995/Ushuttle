@@ -69,22 +69,15 @@ class _ProfilePageState extends State<ProfilePage> {
         body: Container(
       height: double.infinity,
       width: double.infinity,
-      padding: const EdgeInsets.all(16),
+      // padding: const EdgeInsets.all(16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          SizedBox(
-            height: 120,
-            width: 120,
-            child: ClipRRect(
-                borderRadius: BorderRadius.circular(100),
-                child: Image.asset('assets/images/splash.jpg')),
-          ),
           // const SizedBox(height: 16),
           _listview(),
           // _userUid(),
-          const SizedBox(height: 16),
+          // const SizedBox(height: 16),
           // _signOutButton(),
         ],
       ),
