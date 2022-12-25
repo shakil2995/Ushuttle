@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:ushuttlev1/provider/theme_provider.dart';
 import 'package:ushuttlev1/widget_tree.dart';
 import 'firebase_options.dart';
-import 'globals.dart' as globals;
+import 'package:provider/provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -12,24 +13,20 @@ Future<void> main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-  setTheme() {
-    if (globals.isDarkMode) {
-      return ThemeData(
-        brightness: Brightness.dark,
-      );
-    } else {
-      return ThemeData(
-        brightness: Brightness.light,
-      );
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: setTheme(),
-      home: const WidgetTree(),
+    // Provider.of(context);
+    return ChangeNotifierProvider(
+      create: (context) => ThemeProvider(),
+      builder: (context, child) {
+        final themeProvider = Provider.of<ThemeProvider>(context);
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          theme: themeProvider.theme,
+          home: const WidgetTree(),
+        );
+      },
     );
   }
 }

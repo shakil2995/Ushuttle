@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:ushuttlev1/home_page.dart';
 import 'package:ushuttlev1/info_page.dart';
 import 'package:ushuttlev1/profile_page.dart';
+import 'package:ushuttlev1/provider/theme_provider.dart';
 import 'live_location_page.dart';
-import 'globals.dart' as globals;
 
 class RootPage extends StatefulWidget {
   const RootPage({super.key});
@@ -22,6 +23,8 @@ class _RootPageState extends State<RootPage> {
   ];
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+
     return Scaffold(
       appBar: AppBar(
         // automaticallyImplyLeading: true,
@@ -39,10 +42,12 @@ class _RootPageState extends State<RootPage> {
               // },
               onPressed: () {
                 setState(() {
-                  globals.isDarkMode = !globals.isDarkMode;
+                  themeProvider.toggleTheme();
                 });
               },
-              icon: const Icon(Icons.info_outline))
+              icon: Icon(!themeProvider.isDark
+                  ? Icons.sunny
+                  : Icons.nightlight_round_outlined))
         ],
       ),
       body: pages[currentPage],

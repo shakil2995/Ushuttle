@@ -109,7 +109,7 @@ class GetUserDetails extends StatelessWidget {
               ),
             );
           }
-          return const Text('loading');
+          return const Text('');
         }));
   }
 }
