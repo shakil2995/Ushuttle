@@ -48,9 +48,24 @@ dependencies:
   cloud_firestore: ^4.3.0
   loading_animation_widget:
   google_fonts: ^3.0.1
+  flutter_native_splash: ^2.2.16
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+flutter_native_splash:
+  color: "#121212"
+  color_dark: "#121212"
+  image: "assets/images/splashicon.png"
+  image_dark: "assets/images/splashicon.png"
+  android: true
+  ios: true
+  web: false
+  android_12:
+    image: "assets/images/splashicon.png"
+    icon_background_color: "#121212"
+    image_dark: "assets/images/splashicon.png"
+    icon_background_color_dark: "#121212"
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
