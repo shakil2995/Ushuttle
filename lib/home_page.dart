@@ -30,154 +30,228 @@ class _HomePageState extends State<HomePage> {
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2),
           children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: scheduleColor,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12), // <-- Radius
+            buttonWidget(
+              title: 'Schedule',
+              icon: Icons.schedule,
+              onPress: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (BuildContext context) {
+                      return const SchedulePage();
+                    },
                   ),
-                ),
-                onPressed: () {
-                  {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (BuildContext context) {
-                          return const SchedulePage();
-                        },
-                      ),
-                    );
-                  }
-                },
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    Icon(
-                      Icons.schedule,
-                      size: 50,
-                      color: Colors.white,
-                    ),
-                    Text(
-                      'Schedule',
-                      style: TextStyle(color: Colors.white, fontSize: 20),
-                    )
-                  ],
-                ),
-                // child: const Text('Elevated Button'),
-              ),
+                );
+              },
+              backgroundColor: scheduleColor,
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: fareColor,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12), // <-- Radius
+            buttonWidget(
+              title: 'Fare',
+              icon: Icons.currency_exchange,
+              onPress: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (BuildContext context) {
+                      return const FarePage();
+                    },
                   ),
-                ),
-                onPressed: () {
-                  {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (BuildContext context) {
-                          return const FarePage();
-                        },
-                      ),
-                    );
-                  }
-                },
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    Icon(
-                      Icons.currency_exchange,
-                      size: 50,
-                      color: Colors.white,
-                    ),
-                    Text(
-                      'Fare',
-                      style: TextStyle(color: Colors.white, fontSize: 20),
-                    )
-                  ],
-                ),
-                // child: const Text('Elevated Button'),
-              ),
+                );
+              },
+              backgroundColor: fareColor,
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: stoppageColor,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12), // <-- Radius
+            buttonWidget(
+              title: 'Stoppage',
+              icon: Icons.bus_alert,
+              onPress: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (BuildContext context) {
+                      return const StoppagePage();
+                    },
                   ),
-                ),
-                onPressed: () {
-                  {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (BuildContext context) {
-                          return const StoppagePage();
-                        },
-                      ),
-                    );
-                  }
-                },
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    Icon(
-                      Icons.bus_alert,
-                      size: 50,
-                      color: Colors.white,
-                    ),
-                    Text(
-                      'Stoppage',
-                      style: TextStyle(color: Colors.white, fontSize: 20),
-                    )
-                  ],
-                ),
-                // child: const Text('Elevated Button'),
-              ),
+                );
+              },
+              backgroundColor: stoppageColor,
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: noticeColor,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12), // <-- Radius
+            buttonWidget(
+              title: 'Notice',
+              icon: Icons.notifications,
+              onPress: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (BuildContext context) {
+                      return const NoticePage();
+                    },
                   ),
-                ),
-                onPressed: () {
-                  {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (BuildContext context) {
-                          return const NoticePage();
-                        },
-                      ),
-                    );
-                  }
-                },
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    Icon(
-                      Icons.notifications,
-                      size: 50,
-                      color: Colors.white,
-                    ),
-                    Text(
-                      'Notice',
-                      style: TextStyle(color: Colors.white, fontSize: 20),
-                    )
-                  ],
-                ),
-                // child: const Text('Elevated Button'),
-              ),
+                );
+              },
+              backgroundColor: noticeColor,
             ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class buttonWidget extends StatelessWidget {
+  const buttonWidget(
+      {Key? key,
+      required this.title,
+      required this.icon,
+      this.onPress,
+      this.textColor,
+      this.backgroundColor})
+      : super(key: key);
+  final String title;
+  final IconData icon;
+  final VoidCallback? onPress;
+  final Color? textColor;
+  final Color? backgroundColor;
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: backgroundColor,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12), // <-- Radius
+          ),
+        ),
+        onPressed: onPress,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              icon,
+              // Icons.schedule,
+              size: 50,
+              color: Colors.white,
+            ),
+            Text(
+              title,
+              style: TextStyle(color: Colors.white, fontSize: 20),
+            )
+          ],
+        ),
+        // child: const Text('Elevated Button'),
+      ),
+    );
+  }
+}
+
+
+            // Padding(
+            //   padding: const EdgeInsets.all(8.0),
+            //   child: ElevatedButton(
+            //     style: ElevatedButton.styleFrom(
+            //       backgroundColor: fareColor,
+            //       shape: RoundedRectangleBorder(
+            //         borderRadius: BorderRadius.circular(12), // <-- Radius
+            //       ),
+            //     ),
+            //     onPressed: () {
+            //       {
+            //         Navigator.of(context).push(
+            //           MaterialPageRoute(
+            //             builder: (BuildContext context) {
+            //               return const FarePage();
+            //             },
+            //           ),
+            //         );
+            //       }
+            //     },
+            //     child: Column(
+            //       mainAxisAlignment: MainAxisAlignment.center,
+            //       children: const [
+            //         Icon(
+            //           Icons.currency_exchange,
+            //           size: 50,
+            //           color: Colors.white,
+            //         ),
+            //         Text(
+            //           'Fare',
+            //           style: TextStyle(color: Colors.white, fontSize: 20),
+            //         )
+            //       ],
+            //     ),
+            //     // child: const Text('Elevated Button'),
+            //   ),
+            // ),
+            // Padding(
+            //   padding: const EdgeInsets.all(8.0),
+            //   child: ElevatedButton(
+            //     style: ElevatedButton.styleFrom(
+            //       backgroundColor: stoppageColor,
+            //       shape: RoundedRectangleBorder(
+            //         borderRadius: BorderRadius.circular(12), // <-- Radius
+            //       ),
+            //     ),
+            //     onPressed: () {
+            //       {
+            //         Navigator.of(context).push(
+            //           MaterialPageRoute(
+            //             builder: (BuildContext context) {
+            //               return const StoppagePage();
+            //             },
+            //           ),
+            //         );
+            //       }
+            //     },
+            //     child: Column(
+            //       mainAxisAlignment: MainAxisAlignment.center,
+            //       children: const [
+            //         Icon(
+            //           Icons.bus_alert,
+            //           size: 50,
+            //           color: Colors.white,
+            //         ),
+            //         Text(
+            //           'Stoppage',
+            //           style: TextStyle(color: Colors.white, fontSize: 20),
+            //         )
+            //       ],
+            //     ),
+            //     // child: const Text('Elevated Button'),
+            //   ),
+            // ),
+            // Padding(
+            //   padding: const EdgeInsets.all(8.0),
+            //   child: ElevatedButton(
+            //     style: ElevatedButton.styleFrom(
+            //       backgroundColor: noticeColor,
+            //       shape: RoundedRectangleBorder(
+            //         borderRadius: BorderRadius.circular(12), // <-- Radius
+            //       ),
+            //     ),
+            //     onPressed: () {
+            //       {
+            //         Navigator.of(context).push(
+            //           MaterialPageRoute(
+            //             builder: (BuildContext context) {
+            //               return const NoticePage();
+            //             },
+            //           ),
+            //         );
+            //       }
+            //     },
+            //     child: Column(
+            //       mainAxisAlignment: MainAxisAlignment.center,
+            //       children: const [
+            //         Icon(
+            //           Icons.notifications,
+            //           size: 50,
+            //           color: Colors.white,
+            //         ),
+            //         Text(
+            //           'Notice',
+            //           style: TextStyle(color: Colors.white, fontSize: 20),
+            //         )
+            //       ],
+            //     ),
+            //     // child: const Text('Elevated Button'),
+            //   ),
+            // ),
 
 //  live map
             // Padding(
@@ -217,9 +291,3 @@ class _HomePageState extends State<HomePage> {
             //     // child: const Text('Elevated Button'),
             //   ),
             // ),
-          ],
-        ),
-      ),
-    );
-  }
-}
