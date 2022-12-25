@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:ushuttlev1/qrHandler/qrGenerator.dart';
 // import 'package:ushuttlev1/live_map_page_old.dart';
 import 'package:ushuttlev1/subPages/fare_page.dart';
 import 'package:ushuttlev1/subPages/notice_page.dart';
 import 'package:ushuttlev1/subPages/rest_api_test.dart';
 import 'package:ushuttlev1/subPages/schedule_page.dart';
 import 'package:ushuttlev1/subPages/stoppage_page.dart';
+import 'package:provider/provider.dart';
+import 'package:ushuttlev1/provider/theme_provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -13,15 +16,19 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-Color scheduleColor = Colors.red;
-Color fareColor = Colors.blue;
-Color stoppageColor = Colors.green;
-Color noticeColor = Colors.pink;
-Color aboutColor = Colors.purple;
-
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+
+    Color darkTheme = Color.fromARGB(255, 70, 70, 70);
+    Color lightTheme = Colors.white;
+
+    Color scheduleColor = !themeProvider.isDark ? lightTheme : darkTheme;
+    Color fareColor = !themeProvider.isDark ? lightTheme : darkTheme;
+    Color stoppageColor = !themeProvider.isDark ? lightTheme : darkTheme;
+    Color noticeColor = !themeProvider.isDark ? lightTheme : darkTheme;
+    Color ticketColor = !themeProvider.isDark ? lightTheme : darkTheme;
     return Scaffold(
       // appBar: AppBar(title: const Text('Grid')),
       body: Padding(
@@ -43,6 +50,7 @@ class _HomePageState extends State<HomePage> {
                 );
               },
               backgroundColor: scheduleColor,
+              isDark: themeProvider.isDark,
             ),
             buttonWidget(
               title: 'Fare',
@@ -57,6 +65,7 @@ class _HomePageState extends State<HomePage> {
                 );
               },
               backgroundColor: fareColor,
+              isDark: themeProvider.isDark,
             ),
             buttonWidget(
               title: 'Stoppage',
@@ -71,6 +80,7 @@ class _HomePageState extends State<HomePage> {
                 );
               },
               backgroundColor: stoppageColor,
+              isDark: themeProvider.isDark,
             ),
             buttonWidget(
               title: 'Notice',
@@ -85,6 +95,22 @@ class _HomePageState extends State<HomePage> {
                 );
               },
               backgroundColor: noticeColor,
+              isDark: themeProvider.isDark,
+            ),
+            buttonWidget(
+              title: 'Ticket',
+              icon: Icons.local_movies,
+              onPress: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (BuildContext context) {
+                      return QrGenerator();
+                    },
+                  ),
+                );
+              },
+              backgroundColor: ticketColor,
+              isDark: themeProvider.isDark,
             ),
           ],
         ),
@@ -100,10 +126,12 @@ class buttonWidget extends StatelessWidget {
       required this.icon,
       this.onPress,
       this.textColor,
-      this.backgroundColor})
+      this.backgroundColor,
+      required this.isDark})
       : super(key: key);
   final String title;
   final IconData icon;
+  final bool isDark;
   final VoidCallback? onPress;
   final Color? textColor;
   final Color? backgroundColor;
@@ -126,11 +154,15 @@ class buttonWidget extends StatelessWidget {
               icon,
               // Icons.schedule,
               size: 50,
+              // color: isDark ? Colors.white : Colors.black,
               color: Colors.white,
             ),
             Text(
               title,
-              style: TextStyle(color: Colors.white, fontSize: 20),
+              style: TextStyle(
+                  // color: isDark ? Colors.white : Colors.black, fontSize: 20),
+                  color: Colors.white,
+                  fontSize: 20),
             )
           ],
         ),
