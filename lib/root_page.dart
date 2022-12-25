@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:ushuttlev1/provider/theme_provider.dart';
 import 'package:ushuttlev1/home_page.dart';
 import 'package:ushuttlev1/info_page.dart';
 import 'package:ushuttlev1/profile_page.dart';
-import 'package:ushuttlev1/provider/theme_provider.dart';
+
 import 'live_location_page.dart';
 
 class RootPage extends StatefulWidget {
@@ -31,15 +32,6 @@ class _RootPageState extends State<RootPage> {
         title: const Text('Ushuttle'),
         actions: [
           IconButton(
-              // onPressed: () {
-              //   Navigator.of(context).push(
-              //     MaterialPageRoute(
-              //       builder: (BuildContext context) {
-              //         return const InfoPage();
-              //       },
-              //     ),
-              //   );
-              // },
               onPressed: () {
                 setState(() {
                   themeProvider.toggleTheme();

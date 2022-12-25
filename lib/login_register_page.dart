@@ -3,6 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ushuttlev1/subPages/forgotPasswordPage.dart';
+import 'package:provider/provider.dart';
+import 'package:ushuttlev1/provider/theme_provider.dart';
 import 'auth.dart';
 
 class LoginPage extends StatefulWidget {
@@ -96,146 +98,177 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
-  Widget _header() {
-    return Text(
-      isLogin ? 'Welcome back !!' : 'Hello There !!',
-      // style: const TextStyle(
-      //   // color: Colors.white,
-      //   fontSize: 44,
-      //   fontWeight: FontWeight.bold,
-      // ),
-
-      style: GoogleFonts.bebasNeue(
-        // color: Colors.white,
-        fontSize: 36,
-        // fontWeight: FontWeight.bold,
-      ),
-    );
-  }
-
-  Widget _subText() {
-    return Text(
-      isLogin
-          ? 'Please login to your account.'
-          : 'Register below with your details.',
-      style: const TextStyle(
-        fontSize: 20,
-        fontWeight: FontWeight.bold,
-      ),
-    );
-    // 'Welcome back, please login to your account.',
-  }
-
-  Widget _icon() {
-    return const Icon(
-      Icons.directions_bus,
-      size: 80,
-      color: Color.fromARGB(255, 38, 38, 38),
-    );
-  }
-
-  Widget _title() {
-    return const Text(
-      'Ushuttle',
-      style: TextStyle(
-        // color: Colors.white,
-        fontSize: 24,
-        fontWeight: FontWeight.bold,
-      ),
-    );
-  }
-
-  Widget _entryField(
-      String title, TextEditingController controller, bool password) {
-    return TextField(
-      obscureText: password,
-      // enableSuggestions: false,
-      autocorrect: false,
-      controller: controller,
-      decoration: InputDecoration(
-        labelText: title,
-        fillColor: Colors.white,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12.0),
-          borderSide: const BorderSide(),
-        ),
-      ),
-    );
-  }
-
-  Widget _errorMessage() {
-    return Text(
-      errorMesssage ?? '',
-      style: const TextStyle(color: Colors.red),
-    );
-  }
-
-  Widget _forgotPassword() {
-    return TextButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) {
-                return const ForgotPasswordPage();
-              },
-            ),
-          );
-        },
-        child: const Text('Forgot Password ?'));
-  }
-
-  Widget _submitButton() {
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-        minimumSize: const Size(double.infinity, 60),
-        // backgroundColor: Colors.green,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12.0),
-        ),
-      ),
-      onPressed: () async {
-        setState(() {
-          isLoading = !isLoading;
-        });
-        if (isLogin) {
-          await signIn();
-        } else {
-          await signUp();
-        }
-        setState(() {
-          isLoading = false;
-        });
-      },
-      child: Text(isLogin
-          ? (isLoading ? 'signing in' : 'Sign In')
-          : (isLoading ? 'Registering' : 'Register')),
-    );
-  }
-
-  Widget _loginOrRegistrationButton() {
-    return TextButton(
-        onPressed: () {
-          setState(() {
-            isLogin = !isLogin;
-          });
-        },
-        child: Text(isLogin ? 'Register instead ?' : 'Login instead ?'));
-  }
-
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    Widget _header() {
+      return Text(
+        isLogin ? 'Welcome back !!' : 'Hello There !!',
+        // style: const TextStyle(
+        //   // color: Colors.white,
+        //   fontSize: 44,
+        //   fontWeight: FontWeight.bold,
+        // ),
+
+        style: GoogleFonts.bebasNeue(
+          // color: Colors.white,
+          fontSize: 36,
+          // fontWeight: FontWeight.bold,
+        ),
+      );
+    }
+
+    Widget _subText() {
+      return Text(
+        isLogin
+            ? 'Please login to your account.'
+            : 'Register below with your details.',
+        style: const TextStyle(
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+        ),
+      );
+      // 'Welcome back, please login to your account.',
+    }
+
+    Widget _icon() {
+      return const Icon(
+        Icons.directions_bus,
+        size: 80,
+        color: Color.fromARGB(255, 38, 38, 38),
+      );
+    }
+
+    Widget _title() {
+      return const Text(
+        'Ushuttle',
+        style: TextStyle(
+          // color: Colors.white,
+          fontSize: 24,
+          fontWeight: FontWeight.bold,
+        ),
+      );
+    }
+
+    Widget _entryField(
+        String title, TextEditingController controller, bool password) {
+      return TextField(
+        obscureText: password,
+        // enableSuggestions: false,
+        autocorrect: false,
+        controller: controller,
+        decoration: InputDecoration(
+          labelText: title,
+          fillColor: Colors.white,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12.0),
+            borderSide: const BorderSide(),
+          ),
+        ),
+      );
+    }
+
+    Widget _errorMessage() {
+      return Text(
+        errorMesssage ?? '',
+        style: const TextStyle(color: Colors.red),
+      );
+    }
+
+    Widget _forgotPassword() {
+      return TextButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) {
+                  return const ForgotPasswordPage();
+                },
+              ),
+            );
+          },
+          child: const Text('Forgot Password ?',
+              style: TextStyle(fontSize: 14, color: Colors.white)));
+    }
+
+    Widget _submitButton() {
+      return ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          minimumSize: const Size(double.infinity, 60),
+          textStyle: const TextStyle(fontSize: 20),
+          backgroundColor: themeProvider.isDark ? Colors.blue[700] : null,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12.0),
+          ),
+        ),
+        onPressed: () async {
+          setState(() {
+            isLoading = !isLoading;
+          });
+          if (isLogin) {
+            await signIn();
+          } else {
+            await signUp();
+          }
+          setState(() {
+            isLoading = false;
+          });
+        },
+        child: Text(isLogin
+            ? (isLoading ? 'signing in' : 'Sign In')
+            : (isLoading ? 'Registering' : 'Register')),
+      );
+    }
+
+    Widget _loginOrRegistrationButton() {
+      return TextButton(
+          style: TextButton.styleFrom(
+            minimumSize: const Size(double.infinity, 60),
+            // backgroundColor: Colors.green,
+            textStyle: const TextStyle(
+              color: Colors.white,
+              fontSize: 20,
+            ),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12.0),
+            ),
+          ),
+          onPressed: () {
+            setState(() {
+              isLogin = !isLogin;
+            });
+          },
+          child: Text(
+            isLogin ? 'Register instead ?' : 'Login instead ?',
+            style: const TextStyle(color: Colors.white),
+          ));
+    }
+
     return Scaffold(
       appBar: AppBar(
-        title: _title(),
+        // automaticallyImplyLeading: true,
+        title: const Text('Ushuttle'),
+        actions: [
+          IconButton(
+              onPressed: () {
+                setState(() {
+                  themeProvider.toggleTheme();
+                });
+              },
+              icon: Icon(!themeProvider.isDark
+                  ? Icons.sunny
+                  : Icons.nightlight_round_outlined))
+        ],
       ),
       body: Container(
         height: double.infinity,
         width: double.infinity,
         padding: const EdgeInsets.all(16),
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage("assets/images/2.jpg"),
+            image: !themeProvider.isDark
+                ? AssetImage("assets/images/2.jpg")
+                : AssetImage("assets/images/2dd.jpg"),
             fit: BoxFit.cover,
           ),
         ),
