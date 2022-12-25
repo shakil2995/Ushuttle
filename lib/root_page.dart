@@ -3,6 +3,7 @@ import 'package:ushuttlev1/home_page.dart';
 import 'package:ushuttlev1/info_page.dart';
 import 'package:ushuttlev1/profile_page.dart';
 import 'live_location_page.dart';
+import 'globals.dart' as globals;
 
 class RootPage extends StatefulWidget {
   const RootPage({super.key});
@@ -27,14 +28,19 @@ class _RootPageState extends State<RootPage> {
         title: const Text('Ushuttle'),
         actions: [
           IconButton(
+              // onPressed: () {
+              //   Navigator.of(context).push(
+              //     MaterialPageRoute(
+              //       builder: (BuildContext context) {
+              //         return const InfoPage();
+              //       },
+              //     ),
+              //   );
+              // },
               onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (BuildContext context) {
-                      return const InfoPage();
-                    },
-                  ),
-                );
+                setState(() {
+                  globals.isDarkMode = !globals.isDarkMode;
+                });
               },
               icon: const Icon(Icons.info_outline))
         ],
