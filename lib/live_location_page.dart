@@ -26,7 +26,7 @@ var busMarkers = <Marker>[
   //   rotate: true,
   //   width: 80,
   //   height: 80,
-  //   point: buslocation,
+  //   point: LatLng(23.874191, 90.381035),
   //   builder: (ctx) => const Icon(
   //     Icons.directions_bus,
   //     size: 50,
@@ -58,7 +58,7 @@ class _LiveLocationPageState extends State<LiveLocationPage>
   LocationData? _currentLocation;
   late final MapController _mapController;
 
-  bool _liveUpdate = true;
+  bool _liveUpdate = false;
   bool _permission = false;
 
   String? _serviceError = '';
@@ -68,7 +68,17 @@ class _LiveLocationPageState extends State<LiveLocationPage>
   final Location _locationService = Location();
 
   void fetchCoordinates() async {
-    String instituteId = '';
+    getBusLocation(instituteId) async {
+      var url = 'https://busy-jay-earrings.cyclic.app/coords/${instituteId}';
+      final uri = Uri.parse(url);
+      final response = await http.get(uri);
+      final body = response.body;
+      final json = jsonDecode(body);
+      setState(() {
+        items = json["results"];
+      });
+    }
+
     getDocIds() async {
       await FirebaseFirestore.instance
           .collection('users')
@@ -78,34 +88,20 @@ class _LiveLocationPageState extends State<LiveLocationPage>
         snapshot.docs.forEach((document) {
           // Access the data in the document
           var data = document.data();
-          instituteId = data['institute'];
+          String instituteId = data['institute'];
           debugPrint('${instituteId}');
-
+          getBusLocation(instituteId);
           // Do something with the data
         });
       });
     }
 
     getDocIds();
-    final url = 'http://localhost:3000/coords/${instituteId}';
-    final uri = Uri.parse(url);
-    final response = await http.get(uri);
-    final body = response.body;
-    final json = jsonDecode(body);
-    setState(() {
-      items = json["results"];
-    });
   }
 
   void startFetchingCoordinates() {
     Timer.periodic(const Duration(seconds: 1), (timer) {
       fetchCoordinates();
-
-      // final item = items[0];
-      // busNo = item['busNo'];
-      // latitude = double.parse(item['location']['coordinates']['latitude']);
-      // longitude = double.parse(item['location']['coordinates']['longitude']);
-      // debugPrint('busNo: $busNo');
       if (mounted) {
         setState(() {
           busMarkers.clear();
