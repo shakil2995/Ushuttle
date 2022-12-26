@@ -22,7 +22,7 @@ class _HomePageState extends State<HomePage> {
     final themeProvider = Provider.of<ThemeProvider>(context);
 
     Color darkTheme = Color.fromARGB(255, 70, 70, 70);
-    Color lightTheme = Colors.white;
+    Color lightTheme = Colors.blue;
 
     Color scheduleColor = !themeProvider.isDark ? lightTheme : darkTheme;
     Color fareColor = !themeProvider.isDark ? lightTheme : darkTheme;
