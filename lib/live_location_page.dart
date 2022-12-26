@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -6,20 +8,37 @@ import 'package:location/location.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'dart:async';
+
+import 'auth.dart';
+
 // import 'package:open_route_service/open_route_service.dart';
 // import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 // import 'package:geolocator/geolocator.dart';
+List<String> docIds = [];
+final User? user = Auth().currentUser;
 
 var lat = 23.874191;
 var lng = 90.381035;
 
 List<dynamic> items = [];
-
-final item = items[0];
-var busNo = item['busNo'];
-var latitude = item['location']['coordinates']['latitude'];
-var longitude = item['location']['coordinates']['longitude'];
-LatLng buslocation = LatLng(lat, lng);
+var busMarkers = <Marker>[
+  // Marker(
+  //   rotate: true,
+  //   width: 80,
+  //   height: 80,
+  //   point: buslocation,
+  //   builder: (ctx) => const Icon(
+  //     Icons.directions_bus,
+  //     size: 50,
+  //     color: Color.fromARGB(255, 4, 4, 4),
+  //   ),
+  // ),
+];
+// final item = items[0];
+// var busNo = item['busNo'];
+// var latitude = item['location']['coordinates']['latitude'];
+// var longitude = item['location']['coordinates']['longitude'];
+// LatLng buslocation = LatLng(lat, lng);
 // latitude = double.parse(latitude);
 // longitude = double.parse(longitude);
 
@@ -29,6 +48,7 @@ class LiveLocationPage extends StatefulWidget {
   const LiveLocationPage({Key? key}) : super(key: key);
 
   @override
+
   // ignore: library_private_types_in_public_api
   _LiveLocationPageState createState() => _LiveLocationPageState();
 }
@@ -38,7 +58,7 @@ class _LiveLocationPageState extends State<LiveLocationPage>
   LocationData? _currentLocation;
   late final MapController _mapController;
 
-  bool _liveUpdate = false;
+  bool _liveUpdate = true;
   bool _permission = false;
 
   String? _serviceError = '';
@@ -46,6 +66,78 @@ class _LiveLocationPageState extends State<LiveLocationPage>
   int interActiveFlags = InteractiveFlag.all;
 
   final Location _locationService = Location();
+
+  void fetchCoordinates() async {
+    String instituteId = '';
+    Future getDocIds() async {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .where('email', isEqualTo: user?.email)
+          .get()
+          .then((snapshot) {
+        snapshot.docs.forEach((document) {
+          // Access the data in the document
+          var data = document.data();
+          instituteId = data['institute'];
+          debugPrint('${instituteId}');
+
+          // Do something with the data
+        });
+      });
+    }
+
+    getDocIds();
+    final url = 'http://localhost:3000/coords/${instituteId.toLowerCase()}';
+    final uri = Uri.parse(url);
+    final response = await http.get(uri);
+    final body = response.body;
+    final json = jsonDecode(body);
+    setState(() {
+      items = json["results"];
+    });
+  }
+
+  void startFetchingCoordinates() {
+    Timer.periodic(const Duration(seconds: 3), (timer) {
+      fetchCoordinates();
+
+      // final item = items[0];
+      // busNo = item['busNo'];
+      // latitude = double.parse(item['location']['coordinates']['latitude']);
+      // longitude = double.parse(item['location']['coordinates']['longitude']);
+      // debugPrint('busNo: $busNo');
+      if (mounted) {
+        setState(() {
+          busMarkers.clear();
+          if (items.isNotEmpty) {
+            items.forEach((element) {
+              busMarkers.add(
+                Marker(
+                  rotate: true,
+                  width: 80,
+                  height: 80,
+                  point: LatLng(
+                    double.parse(
+                        element['location']['coordinates']['latitude']),
+                    double.parse(
+                        element['location']['coordinates']['longitude']),
+                  ),
+                  builder: (ctx) => const Icon(
+                    Icons.directions_bus,
+                    size: 50,
+                    color: Color.fromARGB(255, 4, 4, 4),
+                  ),
+                ),
+              );
+            });
+          } else {
+            debugPrint('no data');
+          }
+          // buslocation = LatLng(latitude, longitude);
+        });
+      }
+    });
+  }
 
   @override
   void initState() {
@@ -67,7 +159,7 @@ class _LiveLocationPageState extends State<LiveLocationPage>
         _permission = permission == PermissionStatus.granted;
 
         if (_permission) {
-          // startFetchingCoordinates();
+          startFetchingCoordinates();
           _liveUpdate = !_liveUpdate;
 
           if (_liveUpdate) {
@@ -229,19 +321,30 @@ class _LiveLocationPageState extends State<LiveLocationPage>
         ),
       ),
     ];
-    final busMarkers = <Marker>[
-      Marker(
-        rotate: true,
-        width: 80,
-        height: 80,
-        point: buslocation,
-        builder: (ctx) => const Icon(
-          Icons.directions_bus,
-          size: 50,
-          color: Color.fromARGB(255, 4, 4, 4),
-        ),
-      ),
-    ];
+    // var busMarkers = <Marker>[
+    //   Marker(
+    //     rotate: true,
+    //     width: 80,
+    //     height: 80,
+    //     point: buslocation,
+    //     builder: (ctx) => const Icon(
+    //       Icons.directions_bus,
+    //       size: 50,
+    //       color: Color.fromARGB(255, 4, 4, 4),
+    //     ),
+    //   ),
+    //   Marker(
+    //     rotate: true,
+    //     width: 80,
+    //     height: 80,
+    //     point: LatLng(23.819158502556704, 90.3990976172065),
+    //     builder: (ctx) => const Icon(
+    //       Icons.directions_bus,
+    //       size: 50,
+    //       color: Color.fromARGB(255, 4, 4, 4),
+    //     ),
+    //   ),
+    // ];
     super.build(context);
     return Scaffold(
       body: Padding(
@@ -327,30 +430,4 @@ class _LiveLocationPageState extends State<LiveLocationPage>
 
   @override
   bool get wantKeepAlive => true;
-  void fetchCoordinates() async {
-    const url = 'http://localhost:3000/coords';
-    final uri = Uri.parse(url);
-    final response = await http.get(uri);
-    final body = response.body;
-    final json = jsonDecode(body);
-    setState(() {
-      items = json["results"];
-    });
-  }
-
-  void startFetchingCoordinates() {
-    Timer.periodic(const Duration(seconds: 1), (timer) {
-      fetchCoordinates();
-      final item = items[0];
-      busNo = item['busNo'];
-      latitude = double.parse(item['location']['coordinates']['latitude']);
-      longitude = double.parse(item['location']['coordinates']['longitude']);
-      // debugPrint('busNo: $busNo');
-      if (mounted) {
-        setState(() {
-          buslocation = LatLng(latitude, longitude);
-        });
-      }
-    });
-  }
 }

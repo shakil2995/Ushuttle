@@ -65,7 +65,7 @@ class GetUserDetails extends StatelessWidget {
                   Divider(),
                   const SizedBox(height: 20),
                   menuWidget(
-                    title: 'Settngs',
+                    title: 'Settings',
                     onPress: () {},
                     icon: Icons.settings,
                     // textColor: Colors.white,
@@ -84,7 +84,7 @@ class GetUserDetails extends StatelessWidget {
                   ),
                   Divider(),
                   menuWidget(
-                    title: 'Information',
+                    title: 'About Us',
                     onPress: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
