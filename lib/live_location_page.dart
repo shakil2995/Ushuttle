@@ -69,7 +69,7 @@ class _LiveLocationPageState extends State<LiveLocationPage>
 
   void fetchCoordinates() async {
     String instituteId = '';
-    Future getDocIds() async {
+    getDocIds() async {
       await FirebaseFirestore.instance
           .collection('users')
           .where('email', isEqualTo: user?.email)
@@ -87,7 +87,7 @@ class _LiveLocationPageState extends State<LiveLocationPage>
     }
 
     getDocIds();
-    final url = 'http://localhost:3000/coords/${instituteId.toLowerCase()}';
+    final url = 'http://localhost:3000/coords/${instituteId}';
     final uri = Uri.parse(url);
     final response = await http.get(uri);
     final body = response.body;
@@ -98,7 +98,7 @@ class _LiveLocationPageState extends State<LiveLocationPage>
   }
 
   void startFetchingCoordinates() {
-    Timer.periodic(const Duration(seconds: 3), (timer) {
+    Timer.periodic(const Duration(seconds: 1), (timer) {
       fetchCoordinates();
 
       // final item = items[0];
@@ -394,21 +394,26 @@ class _LiveLocationPageState extends State<LiveLocationPage>
               _liveUpdate = !_liveUpdate;
 
               if (_liveUpdate) {
-                _mapController.move(
-                    LatLng(_currentLocation!.latitude!,
-                        _currentLocation!.longitude!),
-                    _mapController.zoom);
-                // getRoutes();
-                startFetchingCoordinates();
-                // interActiveFlags = InteractiveFlag.rotate |
-                //     InteractiveFlag.pinchZoom |
-                //     InteractiveFlag.doubleTapZoom;
+                if (_currentLocation != null) {
+                  _mapController.move(
+                      LatLng(_currentLocation!.latitude!,
+                          _currentLocation!.longitude!),
+                      _mapController.zoom);
+                  // getRoutes();
+                  startFetchingCoordinates();
+                  // interActiveFlags = InteractiveFlag.rotate |
+                  //     InteractiveFlag.pinchZoom |
+                  //     InteractiveFlag.doubleTapZoom;
 
-                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                  content: Text(
-                      // 'In live update mode only zoom and rotation are enabled'),
-                      'locating you...'),
-                ));
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                    content: Text(
+                        // 'In live update mode only zoom and rotation are enabled'),
+                        'locating you...'),
+                  ));
+                } else {
+                  // Handle the case where the location is null
+                  // You can show an error message to the user or try to obtain the location again
+                }
               } else {
                 interActiveFlags = InteractiveFlag.all;
               }
