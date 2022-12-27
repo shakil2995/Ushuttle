@@ -74,9 +74,11 @@ class _LiveLocationPageState extends State<LiveLocationPage>
       final response = await http.get(uri);
       final body = response.body;
       final json = jsonDecode(body);
-      setState(() {
-        items = json["results"];
-      });
+      if (mounted) {
+        setState(() {
+          items = json["results"];
+        });
+      }
     }
 
     getDocIds() async {
@@ -103,6 +105,7 @@ class _LiveLocationPageState extends State<LiveLocationPage>
     Timer.periodic(const Duration(seconds: 1), (timer) {
       fetchCoordinates();
       if (mounted) {
+        debugPrint('timer mounted');
         setState(() {
           busMarkers.clear();
           if (items.isNotEmpty) {
@@ -131,6 +134,9 @@ class _LiveLocationPageState extends State<LiveLocationPage>
           }
           // buslocation = LatLng(latitude, longitude);
         });
+      } else {
+        debugPrint('timer dismounted');
+        timer.cancel();
       }
     });
   }
@@ -430,5 +436,5 @@ class _LiveLocationPageState extends State<LiveLocationPage>
   }
 
   @override
-  bool get wantKeepAlive => true;
+  bool get wantKeepAlive => false;
 }

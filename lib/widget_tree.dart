@@ -19,8 +19,6 @@ class _WidgetTreeState extends State<WidgetTree> {
           if (snapshot.hasData) {
             return const RootPage();
           } else {
-            // return const RootPage();
-            // super.dispose();
             return const LoginPage();
           }
         });
