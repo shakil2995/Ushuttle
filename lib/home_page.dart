@@ -158,12 +158,16 @@ class buttonWidget extends StatelessWidget {
               // color: isDark ? Colors.white : Colors.black,
               color: Colors.white,
             ),
+            const SizedBox(
+              height: 2,
+            ),
             Text(
               title,
               style: TextStyle(
+                  fontFamily: 'Montserrat',
                   // color: isDark ? Colors.white : Colors.black, fontSize: 20),
                   color: Colors.white,
-                  fontSize: 20),
+                  fontSize: 16),
             )
           ],
         ),
