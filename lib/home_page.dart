@@ -3,7 +3,6 @@ import 'package:ushuttlev1/subPages/tickets/qrGenerator.dart';
 // import 'package:ushuttlev1/live_map_page_old.dart';
 import 'package:ushuttlev1/subPages/fare_page.dart';
 import 'package:ushuttlev1/subPages/notice_page.dart';
-import 'package:ushuttlev1/subPages/rest_api_test.dart';
 import 'package:ushuttlev1/subPages/schedule_page.dart';
 import 'package:ushuttlev1/subPages/stoppage_page.dart';
 import 'package:provider/provider.dart';
@@ -23,6 +22,7 @@ class _HomePageState extends State<HomePage> {
     final themeProvider = Provider.of<ThemeProvider>(context);
 
     Color darkTheme = Color.fromARGB(255, 70, 70, 70);
+    // Color darkTheme = Colors.blueGrey.shade800;
     Color lightTheme = Colors.blue;
 
     Color scheduleColor = !themeProvider.isDark ? lightTheme : darkTheme;

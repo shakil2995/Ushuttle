@@ -1,8 +1,20 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:ushuttlev1/auth.dart';
 import 'package:ushuttlev1/subPages/tickets/buy_ticket_page.dart';
 import 'package:ushuttlev1/subPages/tickets/qrGenerator.dart';
 import 'package:provider/provider.dart';
 import 'package:ushuttlev1/provider/theme_provider.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+import 'dart:async';
+
+List<String> docIds = [];
+final User? user = Auth().currentUser;
+List<dynamic> items = [];
+int userTicketCount = 0;
+String instituteId = '';
 
 class TicketPage extends StatefulWidget {
   const TicketPage({super.key});
@@ -12,13 +24,57 @@ class TicketPage extends StatefulWidget {
 }
 
 class _TicketPageState extends State<TicketPage> {
+  void fetchUserData() async {
+    // getBusLocation(instituteId) async {
+    //   var url = 'https://busy-jay-earrings.cyclic.app/coords/${instituteId}';
+    //   final uri = Uri.parse(url);
+    //   final response = await http.get(uri);
+    //   final body = response.body;
+    //   final json = jsonDecode(body);
+    //   if (mounted) {
+    //     setState(() {
+    //       items = json["results"];
+    //     });
+    //   }
+    // }
+    void updateTicketCount(int newValue) {
+      setState(() {
+        userTicketCount = newValue;
+      });
+    }
+
+    getDocIds() async {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .where('email', isEqualTo: user?.email)
+          .get()
+          .then((snapshot) {
+        snapshot.docs.forEach((document) {
+          // Access the data in the document
+          var data = document.data();
+          print(data);
+          instituteId = data['institute'];
+          int ticket = data['ticket'];
+          if (mounted) {
+            setState(() {
+              userTicketCount = ticket;
+            });
+          }
+        });
+      });
+    }
+
+    getDocIds();
+  }
+
   @override
   Widget build(BuildContext context) {
+    fetchUserData();
     final themeProvider = Provider.of<ThemeProvider>(context);
-    Color darkTheme = Color.fromARGB(255, 70, 70, 70);
-    Color lightTheme = Colors.blue;
-    Color scheduleColor = !themeProvider.isDark ? lightTheme : darkTheme;
-    Color fareColor = !themeProvider.isDark ? lightTheme : darkTheme;
+    // Color darkTheme = Color.fromARGB(255, 70, 70, 70);
+    // Color lightTheme = Colors.blue;
+    // Color scheduleColor = !themeProvider.isDark ? lightTheme : darkTheme;
+    // Color fareColor = !themeProvider.isDark ? lightTheme : darkTheme;
     return Scaffold(
       appBar: AppBar(
         // automaticallyImplyLeading: true,
@@ -134,39 +190,44 @@ class MyCardWidget extends StatelessWidget {
               children: <Widget>[
                 Icon(Icons.local_movies,
                     size: 100.0, color: !isDark ? Colors.blue : Colors.white),
-                const ListTile(
+                ListTile(
                   leading: Icon(Icons.local_movies, size: 0),
-                  title: Text('Bus Name',
+                  title: Text('${instituteId} Bus Service',
                       style: TextStyle(
                         fontSize: 30.0,
                       )),
-                  subtitle: Text('You have 6 tickets left.',
+                  subtitle: Text(
+                      userTicketCount > 0
+                          ? 'You have ${userTicketCount} tickets left.'
+                          : 'You have ${userTicketCount} tickets left.Please click Buy More.',
                       style: TextStyle(fontSize: 18.0)),
                 ),
-                TextButton(
-                  style: TextButton.styleFrom(
-                    foregroundColor: Colors.white,
-                    backgroundColor:
-                        isDark ? Color.fromARGB(255, 197, 75, 75) : Colors.red,
-                    disabledForegroundColor: Colors.grey.withOpacity(0.38),
-                  ),
-                  child: const Text('Use Ticket'),
-                  onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (BuildContext context) {
-                          return QrGenerator();
+                userTicketCount > 0
+                    ? TextButton(
+                        style: TextButton.styleFrom(
+                          foregroundColor: Colors.white,
+                          backgroundColor: isDark
+                              ? Color.fromARGB(255, 197, 75, 75)
+                              : Colors.red,
+                          disabledForegroundColor:
+                              Colors.grey.withOpacity(0.38),
+                        ),
+                        child: const Text('Use Ticket'),
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (BuildContext context) {
+                                return QrGenerator();
+                              },
+                            ),
+                          );
                         },
-                      ),
-                    );
-                  },
-                ),
+                      )
+                    : Text(''),
                 TextButton(
                   style: TextButton.styleFrom(
                     foregroundColor: Colors.white,
-                    backgroundColor: isDark
-                        ? Color.fromARGB(255, 67, 151, 75)
-                        : Colors.green,
+                    backgroundColor: isDark ? Colors.blueGrey : Colors.blue,
                     disabledForegroundColor: Colors.grey.withOpacity(0.38),
                   ),
                   child: const Text('Buy More'),

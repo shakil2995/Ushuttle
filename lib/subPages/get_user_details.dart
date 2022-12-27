@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:ushuttlev1/info_page.dart';
+import 'package:ushuttlev1/subPages/tickets/ticket_page.dart';
 
 import '../auth.dart';
 
@@ -78,7 +79,15 @@ class GetUserDetails extends StatelessWidget {
                   ),
                   menuWidget(
                     title: 'My Tickets',
-                    onPress: () {},
+                    onPress: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (BuildContext context) {
+                            return TicketPage();
+                          },
+                        ),
+                      );
+                    },
                     icon: Icons.local_movies,
                     // textColor: Colors.white,
                   ),
