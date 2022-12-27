@@ -102,41 +102,46 @@ class _LiveLocationPageState extends State<LiveLocationPage>
   }
 
   void startFetchingCoordinates() {
-    Timer.periodic(const Duration(seconds: 3), (timer) {
-      fetchCoordinates();
-      if (mounted) {
-        debugPrint('timer mounted');
-        setState(() {
-          busMarkers.clear();
-          if (items.isNotEmpty) {
-            items.forEach((element) {
-              busMarkers.add(
-                Marker(
-                  rotate: true,
-                  width: 80,
-                  height: 80,
-                  point: LatLng(
-                    double.parse(
-                        element['location']['coordinates']['latitude']),
-                    double.parse(
-                        element['location']['coordinates']['longitude']),
+    int timerVal = 0;
+    Timer.periodic(const Duration(seconds: 1), (timer) {
+      timerVal++;
+      if (timerVal == 3) {
+        fetchCoordinates();
+        if (mounted) {
+          // debugPrint('timer mounted');
+          setState(() {
+            busMarkers.clear();
+            if (items.isNotEmpty) {
+              items.forEach((element) {
+                busMarkers.add(
+                  Marker(
+                    rotate: true,
+                    width: 80,
+                    height: 80,
+                    point: LatLng(
+                      double.parse(
+                          element['location']['coordinates']['latitude']),
+                      double.parse(
+                          element['location']['coordinates']['longitude']),
+                    ),
+                    builder: (ctx) => const Icon(
+                      Icons.directions_bus,
+                      size: 50,
+                      color: Color.fromARGB(255, 4, 4, 4),
+                    ),
                   ),
-                  builder: (ctx) => const Icon(
-                    Icons.directions_bus,
-                    size: 50,
-                    color: Color.fromARGB(255, 4, 4, 4),
-                  ),
-                ),
-              );
-            });
-          } else {
-            debugPrint('no data');
-          }
-          // buslocation = LatLng(latitude, longitude);
-        });
-      } else {
-        debugPrint('timer dismounted');
-        timer.cancel();
+                );
+              });
+            } else {
+              debugPrint('no data');
+            }
+            // buslocation = LatLng(latitude, longitude);
+          });
+        } else {
+          // debugPrint('timer dismounted');
+          timer.cancel();
+        }
+        timerVal = 0;
       }
     });
   }
