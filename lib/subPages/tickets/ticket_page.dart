@@ -6,9 +6,6 @@ import 'package:ushuttlev1/subPages/tickets/buy_ticket_page.dart';
 import 'package:ushuttlev1/subPages/tickets/qrGenerator.dart';
 import 'package:provider/provider.dart';
 import 'package:ushuttlev1/provider/theme_provider.dart';
-import 'dart:convert';
-import 'package:http/http.dart' as http;
-import 'dart:async';
 
 List<String> docIds = [];
 final User? user = Auth().currentUser;
@@ -18,31 +15,12 @@ String instituteId = '';
 
 class TicketPage extends StatefulWidget {
   const TicketPage({super.key});
-
   @override
   State<TicketPage> createState() => _TicketPageState();
 }
 
 class _TicketPageState extends State<TicketPage> {
   void fetchUserData() async {
-    // getBusLocation(instituteId) async {
-    //   var url = 'https://busy-jay-earrings.cyclic.app/coords/${instituteId}';
-    //   final uri = Uri.parse(url);
-    //   final response = await http.get(uri);
-    //   final body = response.body;
-    //   final json = jsonDecode(body);
-    //   if (mounted) {
-    //     setState(() {
-    //       items = json["results"];
-    //     });
-    //   }
-    // }
-    void updateTicketCount(int newValue) {
-      setState(() {
-        userTicketCount = newValue;
-      });
-    }
-
     getDocIds() async {
       await FirebaseFirestore.instance
           .collection('users')
@@ -52,7 +30,7 @@ class _TicketPageState extends State<TicketPage> {
         snapshot.docs.forEach((document) {
           // Access the data in the document
           var data = document.data();
-          print(data);
+          // print(data);
           instituteId = data['institute'];
           int ticket = data['ticket'];
           if (mounted) {
@@ -71,10 +49,6 @@ class _TicketPageState extends State<TicketPage> {
   Widget build(BuildContext context) {
     fetchUserData();
     final themeProvider = Provider.of<ThemeProvider>(context);
-    // Color darkTheme = Color.fromARGB(255, 70, 70, 70);
-    // Color lightTheme = Colors.blue;
-    // Color scheduleColor = !themeProvider.isDark ? lightTheme : darkTheme;
-    // Color fareColor = !themeProvider.isDark ? lightTheme : darkTheme;
     return Scaffold(
       appBar: AppBar(
         // automaticallyImplyLeading: true,
@@ -91,7 +65,6 @@ class _TicketPageState extends State<TicketPage> {
                   : Icons.nightlight_round_outlined))
         ],
       ),
-      // appBar: AppBar(title: const Text('Grid')),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
@@ -141,19 +114,14 @@ class buttonWidget extends StatelessWidget {
           children: [
             Icon(
               icon,
-              // Icons.schedule,
               size: 50,
-              // color: isDark ? Colors.white : Colors.black,
               color: Colors.white,
             ),
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Text(
                 title,
-                style: TextStyle(
-                    // color: isDark ? Colors.white : Colors.black, fontSize: 20),
-                    color: Colors.white,
-                    fontSize: 16),
+                style: TextStyle(color: Colors.white, fontSize: 16),
               ),
             )
           ],
@@ -180,13 +148,11 @@ class MyCardWidget extends StatelessWidget {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(15.0),
             ),
-            // color: Colors.red,
+            // color: !isDark ? Colors.white : Colors.blueGrey.shade900,
             elevation: 10,
             child: Column(
-              // mainAxisSize: MainAxisSize.max,
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
-              // mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 Icon(Icons.local_movies,
                     size: 100.0, color: !isDark ? Colors.blue : Colors.white),

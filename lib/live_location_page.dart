@@ -61,6 +61,7 @@ class _LiveLocationPageState extends State<LiveLocationPage>
   bool _liveUpdate = false;
   bool _permission = false;
 
+  // ignore: unused_field
   String? _serviceError = '';
 
   int interActiveFlags = InteractiveFlag.all;

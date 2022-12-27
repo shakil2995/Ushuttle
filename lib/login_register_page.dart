@@ -140,16 +140,16 @@ class _LoginPageState extends State<LoginPage> {
       );
     }
 
-    Widget _title() {
-      return const Text(
-        'Ushuttle',
-        style: TextStyle(
-          // color: Colors.white,
-          fontSize: 24,
-          fontWeight: FontWeight.bold,
-        ),
-      );
-    }
+    // Widget _title() {
+    //   return const Text(
+    //     'Ushuttle',
+    //     style: TextStyle(
+    //       // color: Colors.white,
+    //       fontSize: 24,
+    //       fontWeight: FontWeight.bold,
+    //     ),
+    //   );
+    // }
 
     Widget _entryField(
         String title, TextEditingController controller, bool password) {

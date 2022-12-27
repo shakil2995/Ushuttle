@@ -51,17 +51,17 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  Widget _userUid() {
-    return Text(user?.email ?? 'user email');
-  }
+  // Widget _userUid() {
+  //   return Text(user?.email ?? 'user email');
+  // }
 
-  Widget _signOutButton() {
-    return ElevatedButton(
-        onPressed: () async {
-          await Auth().signOut();
-        },
-        child: const Text('Sign Out'));
-  }
+  // Widget _signOutButton() {
+  //   return ElevatedButton(
+  //       onPressed: () async {
+  //         await Auth().signOut();
+  //       },
+  //       child: const Text('Sign Out'));
+  // }
 
   @override
   Widget build(BuildContext context) {

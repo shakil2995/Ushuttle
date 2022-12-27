@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:ushuttlev1/subPages/tickets/qrGenerator.dart';
 // import 'package:ushuttlev1/live_map_page_old.dart';
 import 'package:ushuttlev1/subPages/fare_page.dart';
 import 'package:ushuttlev1/subPages/notice_page.dart';
