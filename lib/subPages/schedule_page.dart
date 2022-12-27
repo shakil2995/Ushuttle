@@ -1,25 +1,3 @@
-// import 'package:flutter/material.dart';
-// import 'package:expandable/expandable.dart';
-// import 'package:provider/provider.dart';
-// import 'package:ushuttlev1/provider/theme_provider.dart';
-// class SchedulePage extends StatelessWidget {
-//   const SchedulePage({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//         final themeProvider = Provider.of<ThemeProvider>(context);
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: const Text('Schedule'),
-//         automaticallyImplyLeading: true,
-//       ),
-//       body: SingleChildScrollView(
-//           child: Column(
-//         children: [mirpurTobashundhara(), bashundharaToMirpur()],
-//       )),
-//     );
-//   }
-
 import 'package:flutter/material.dart';
 import 'package:expandable/expandable.dart';
 import 'package:provider/provider.dart';

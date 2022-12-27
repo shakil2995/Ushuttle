@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ushuttlev1/qrHandler/qrGenerator.dart';
+import 'package:ushuttlev1/subPages/tickets/qrGenerator.dart';
 // import 'package:ushuttlev1/live_map_page_old.dart';
 import 'package:ushuttlev1/subPages/fare_page.dart';
 import 'package:ushuttlev1/subPages/notice_page.dart';
@@ -8,6 +8,7 @@ import 'package:ushuttlev1/subPages/schedule_page.dart';
 import 'package:ushuttlev1/subPages/stoppage_page.dart';
 import 'package:provider/provider.dart';
 import 'package:ushuttlev1/provider/theme_provider.dart';
+import 'package:ushuttlev1/subPages/tickets/ticket_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -104,7 +105,7 @@ class _HomePageState extends State<HomePage> {
                 Navigator.of(context).push(
                   MaterialPageRoute(
                     builder: (BuildContext context) {
-                      return QrGenerator();
+                      return TicketPage();
                     },
                   ),
                 );
@@ -171,155 +172,3 @@ class buttonWidget extends StatelessWidget {
     );
   }
 }
-
-
-            // Padding(
-            //   padding: const EdgeInsets.all(8.0),
-            //   child: ElevatedButton(
-            //     style: ElevatedButton.styleFrom(
-            //       backgroundColor: fareColor,
-            //       shape: RoundedRectangleBorder(
-            //         borderRadius: BorderRadius.circular(12), // <-- Radius
-            //       ),
-            //     ),
-            //     onPressed: () {
-            //       {
-            //         Navigator.of(context).push(
-            //           MaterialPageRoute(
-            //             builder: (BuildContext context) {
-            //               return const FarePage();
-            //             },
-            //           ),
-            //         );
-            //       }
-            //     },
-            //     child: Column(
-            //       mainAxisAlignment: MainAxisAlignment.center,
-            //       children: const [
-            //         Icon(
-            //           Icons.currency_exchange,
-            //           size: 50,
-            //           color: Colors.white,
-            //         ),
-            //         Text(
-            //           'Fare',
-            //           style: TextStyle(color: Colors.white, fontSize: 20),
-            //         )
-            //       ],
-            //     ),
-            //     // child: const Text('Elevated Button'),
-            //   ),
-            // ),
-            // Padding(
-            //   padding: const EdgeInsets.all(8.0),
-            //   child: ElevatedButton(
-            //     style: ElevatedButton.styleFrom(
-            //       backgroundColor: stoppageColor,
-            //       shape: RoundedRectangleBorder(
-            //         borderRadius: BorderRadius.circular(12), // <-- Radius
-            //       ),
-            //     ),
-            //     onPressed: () {
-            //       {
-            //         Navigator.of(context).push(
-            //           MaterialPageRoute(
-            //             builder: (BuildContext context) {
-            //               return const StoppagePage();
-            //             },
-            //           ),
-            //         );
-            //       }
-            //     },
-            //     child: Column(
-            //       mainAxisAlignment: MainAxisAlignment.center,
-            //       children: const [
-            //         Icon(
-            //           Icons.bus_alert,
-            //           size: 50,
-            //           color: Colors.white,
-            //         ),
-            //         Text(
-            //           'Stoppage',
-            //           style: TextStyle(color: Colors.white, fontSize: 20),
-            //         )
-            //       ],
-            //     ),
-            //     // child: const Text('Elevated Button'),
-            //   ),
-            // ),
-            // Padding(
-            //   padding: const EdgeInsets.all(8.0),
-            //   child: ElevatedButton(
-            //     style: ElevatedButton.styleFrom(
-            //       backgroundColor: noticeColor,
-            //       shape: RoundedRectangleBorder(
-            //         borderRadius: BorderRadius.circular(12), // <-- Radius
-            //       ),
-            //     ),
-            //     onPressed: () {
-            //       {
-            //         Navigator.of(context).push(
-            //           MaterialPageRoute(
-            //             builder: (BuildContext context) {
-            //               return const NoticePage();
-            //             },
-            //           ),
-            //         );
-            //       }
-            //     },
-            //     child: Column(
-            //       mainAxisAlignment: MainAxisAlignment.center,
-            //       children: const [
-            //         Icon(
-            //           Icons.notifications,
-            //           size: 50,
-            //           color: Colors.white,
-            //         ),
-            //         Text(
-            //           'Notice',
-            //           style: TextStyle(color: Colors.white, fontSize: 20),
-            //         )
-            //       ],
-            //     ),
-            //     // child: const Text('Elevated Button'),
-            //   ),
-            // ),
-
-//  live map
-            // Padding(
-            //   padding: const EdgeInsets.all(8.0),
-            //   child: ElevatedButton(
-            //     style: ElevatedButton.styleFrom(
-            //       backgroundColor: aboutColor,
-            //       shape: RoundedRectangleBorder(
-            //         borderRadius: BorderRadius.circular(12), // <-- Radius
-            //       ),
-            //     ),
-            //     onPressed: () {
-            //       {
-            //         Navigator.of(context).push(
-            //           MaterialPageRoute(
-            //             builder: (BuildContext context) {
-            //               return const RestApiTest();
-            //             },
-            //           ),
-            //         );
-            //       }
-            //     },
-            //     child: Column(
-            //       mainAxisAlignment: MainAxisAlignment.center,
-            //       children: const [
-            //         Icon(
-            //           Icons.api,
-            //           size: 50,
-            //           color: Colors.white,
-            //         ),
-            //         Text(
-            //           'Api Location',
-            //           style: TextStyle(color: Colors.white, fontSize: 20),
-            //         )
-            //       ],
-            //     ),
-            //     // child: const Text('Elevated Button'),
-            //   ),
-            // ),
