@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:ushuttlev1/root_page.dart';
-import './auth.dart';
-import './login_register_page.dart';
+import 'package:ushuttlev1/MainMenu/landing_page.dart';
+import 'auth.dart';
+import 'login_register_page.dart';
 
 class WidgetTree extends StatefulWidget {
   const WidgetTree({super.key});

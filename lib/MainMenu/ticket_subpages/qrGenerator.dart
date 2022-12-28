@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:ushuttlev1/auth.dart';
+import 'package:ushuttlev1/authentication_pages/auth.dart';
 import 'package:ushuttlev1/provider/theme_provider.dart';
 
 List<String> docIds = [];

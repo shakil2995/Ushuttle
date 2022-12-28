@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:ushuttlev1/provider/theme_provider.dart';
-import 'package:ushuttlev1/home_page.dart';
-import 'package:ushuttlev1/profile_page.dart';
+import 'package:ushuttlev1/MainMenu/home_page.dart';
+import 'package:ushuttlev1/MainMenu/profile_page.dart';
 
 import 'live_location_page.dart';
 

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 // import 'package:ushuttlev1/live_map_page_old.dart';
-import 'package:ushuttlev1/subPages/fare_page.dart';
-import 'package:ushuttlev1/subPages/notice_page.dart';
-import 'package:ushuttlev1/subPages/schedule_page.dart';
-import 'package:ushuttlev1/subPages/stoppage_page.dart';
+import 'package:ushuttlev1/MainMenu/home_subpages/fare_page.dart';
+import 'package:ushuttlev1/MainMenu/home_subpages/notice_page.dart';
+import 'package:ushuttlev1/MainMenu/home_subpages/schedule_page.dart';
+import 'package:ushuttlev1/MainMenu/home_subpages/stoppage_page.dart';
 import 'package:provider/provider.dart';
 import 'package:ushuttlev1/provider/theme_provider.dart';
-import 'package:ushuttlev1/subPages/tickets/ticket_page.dart';
+import 'package:ushuttlev1/MainMenu/ticket_subpages/ticket_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

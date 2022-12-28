@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:ushuttlev1/info_page.dart';
-import 'package:ushuttlev1/subPages/tickets/ticket_page.dart';
+import 'package:ushuttlev1/MainMenu/shared_subpages/info_page.dart';
+import 'package:ushuttlev1/MainMenu/ticket_subpages/ticket_page.dart';
 
-import '../auth.dart';
+import '../../authentication_pages/auth.dart';
 
 class GetUserDetails extends StatelessWidget {
   // const UserDetails({super.key});
