@@ -72,25 +72,25 @@ class GetAdminDetails extends StatelessWidget {
                     // textColor: Colors.white,
                   ),
                   menuWidget(
-                    title: 'Billing Details',
+                    title: 'Ticket History',
                     onPress: () {},
-                    icon: Icons.wallet,
+                    icon: Icons.history,
                     // textColor: Colors.white,
                   ),
-                  menuWidget(
-                    title: 'My Tickets',
-                    onPress: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (BuildContext context) {
-                            return TicketPage();
-                          },
-                        ),
-                      );
-                    },
-                    icon: Icons.local_movies,
-                    // textColor: Colors.white,
-                  ),
+                  // menuWidget(
+                  //   title: 'My Tickets',
+                  //   onPress: () {
+                  //     Navigator.of(context).push(
+                  //       MaterialPageRoute(
+                  //         builder: (BuildContext context) {
+                  //           return TicketPage();
+                  //         },
+                  //       ),
+                  //     );
+                  //   },
+                  //   icon: Icons.local_movies,
+                  //   // textColor: Colors.white,
+                  // ),
                   Divider(),
                   menuWidget(
                     title: 'About Us',

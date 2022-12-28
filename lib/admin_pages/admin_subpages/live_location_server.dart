@@ -94,7 +94,7 @@ class _LiveLocationServerState extends State<LiveLocationServer>
                 );
               });
             } else {
-              debugPrint('no data');
+              // debugPrint('no data');
             }
             // buslocation = LatLng(latitude, longitude);
           });
