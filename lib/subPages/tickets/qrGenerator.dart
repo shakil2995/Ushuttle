@@ -14,9 +14,14 @@ final User? user = Auth().currentUser;
 List<dynamic> items = [];
 int userTicketCount = 0;
 String userEmail = '';
+String pageName = '';
 
 /// This is the screen that you'll see when the app starts
 class QrGenerator extends StatefulWidget {
+  QrGenerator(String passedString) {
+    pageName = passedString;
+  }
+
   @override
   _QrGeneratorState createState() => _QrGeneratorState();
 }
@@ -167,6 +172,19 @@ class _QrGeneratorState extends State<QrGenerator> {
           child: Container(
             child: Column(
               children: <Widget>[
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40)
+                      .copyWith(bottom: 40),
+                  child: Text(pageName,
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: themeProvider.isDark
+                            ? ui.Color.fromARGB(255, 255, 255, 255)
+                            : ui.Color.fromARGB(255, 14, 14, 14),
+                      )
+                      // style: Theme.of(context).textTheme.bodyText1,
+                      ),
+                ),
                 const SizedBox(height: 10),
                 Expanded(
                   child: Center(

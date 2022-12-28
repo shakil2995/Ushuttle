@@ -12,6 +12,7 @@ final User? user = Auth().currentUser;
 List<dynamic> items = [];
 int userTicketCount = 0;
 String instituteId = '';
+bool isLoaded = false;
 
 class TicketPage extends StatefulWidget {
   const TicketPage({super.key});
@@ -36,6 +37,7 @@ class _TicketPageState extends State<TicketPage> {
           if (mounted) {
             setState(() {
               userTicketCount = ticket;
+              isLoaded = true;
             });
           }
         });
@@ -65,7 +67,13 @@ class _TicketPageState extends State<TicketPage> {
                   : Icons.nightlight_round_outlined))
         ],
       ),
-      body: Padding(
+      body: bodyWidget(themeProvider),
+    );
+  }
+
+  Padding bodyWidget(ThemeProvider themeProvider) {
+    if (isLoaded) {
+      return Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -76,8 +84,13 @@ class _TicketPageState extends State<TicketPage> {
             ),
           ],
         ),
-      ),
-    );
+      );
+    } else {
+      return const Padding(
+        padding: EdgeInsets.all(8.0),
+        child: Center(child: CircularProgressIndicator()),
+      );
+    }
   }
 }
 
@@ -183,7 +196,7 @@ class MyCardWidget extends StatelessWidget {
                           Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (BuildContext context) {
-                                return QrGenerator();
+                                return QrGenerator('Scan to use ticket');
                               },
                             ),
                           );
@@ -201,7 +214,7 @@ class MyCardWidget extends StatelessWidget {
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (BuildContext context) {
-                          return QrGenerator();
+                          return QrGenerator('Scan to buy Ticket');
                         },
                       ),
                     );
