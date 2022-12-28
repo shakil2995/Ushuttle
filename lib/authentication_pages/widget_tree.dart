@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ushuttlev1/MainMenu/landing_page.dart';
+import 'package:ushuttlev1/admin_pages/admin_landing.dart';
 import 'auth.dart';
 import 'login_register_page.dart';
 
@@ -17,7 +18,12 @@ class _WidgetTreeState extends State<WidgetTree> {
         stream: Auth().authStateChanges,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            return const RootPage();
+            if (snapshot.data!.uid == "EMchEVdVEzYTf9OcQpqleJLTxH12") {
+              // debugPrint(snapshot.data!.uid);
+              return const AdminLandingPage();
+            } else {
+              return const RootPage();
+            }
           } else {
             return const LoginPage();
           }

@@ -9,7 +9,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 
-import '../authentication_pages/auth.dart';
+import 'package:ushuttlev1/authentication_pages/auth.dart';
 
 // import 'package:open_route_service/open_route_service.dart';
 // import 'package:flutter_polyline_points/flutter_polyline_points.dart';
@@ -61,7 +61,6 @@ class _LiveLocationPageState extends State<LiveLocationPage>
   bool _liveUpdate = false;
   bool _permission = false;
 
-  // ignore: unused_field
   String? _serviceError = '';
 
   int interActiveFlags = InteractiveFlag.all;
@@ -75,11 +74,9 @@ class _LiveLocationPageState extends State<LiveLocationPage>
       final response = await http.get(uri);
       final body = response.body;
       final json = jsonDecode(body);
-      if (mounted) {
-        setState(() {
-          items = json["results"];
-        });
-      }
+      setState(() {
+        items = json["results"];
+      });
     }
 
     getDocIds() async {
@@ -103,46 +100,37 @@ class _LiveLocationPageState extends State<LiveLocationPage>
   }
 
   void startFetchingCoordinates() {
-    int timerVal = 0;
-    Timer.periodic(const Duration(seconds: 1), (timer) {
-      timerVal++;
-      if (timerVal == 3) {
+    Timer.periodic(const Duration(seconds: 3), (timer) {
+      if (mounted) {
         fetchCoordinates();
-        if (mounted) {
-          // debugPrint('timer mounted');
-          setState(() {
-            busMarkers.clear();
-            if (items.isNotEmpty) {
-              items.forEach((element) {
-                busMarkers.add(
-                  Marker(
-                    rotate: true,
-                    width: 80,
-                    height: 80,
-                    point: LatLng(
-                      double.parse(
-                          element['location']['coordinates']['latitude']),
-                      double.parse(
-                          element['location']['coordinates']['longitude']),
-                    ),
-                    builder: (ctx) => const Icon(
-                      Icons.directions_bus,
-                      size: 50,
-                      color: Color.fromARGB(255, 4, 4, 4),
-                    ),
+        setState(() {
+          busMarkers.clear();
+          if (items.isNotEmpty) {
+            items.forEach((element) {
+              busMarkers.add(
+                Marker(
+                  rotate: true,
+                  width: 80,
+                  height: 80,
+                  point: LatLng(
+                    double.parse(
+                        element['location']['coordinates']['latitude']),
+                    double.parse(
+                        element['location']['coordinates']['longitude']),
                   ),
-                );
-              });
-            } else {
-              debugPrint('no data');
-            }
-            // buslocation = LatLng(latitude, longitude);
-          });
-        } else {
-          // debugPrint('timer dismounted');
-          timer.cancel();
-        }
-        timerVal = 0;
+                  builder: (ctx) => const Icon(
+                    Icons.directions_bus,
+                    size: 50,
+                    color: Color.fromARGB(255, 4, 4, 4),
+                  ),
+                ),
+              );
+            });
+          } else {
+            debugPrint('no data');
+          }
+          // buslocation = LatLng(latitude, longitude);
+        });
       }
     });
   }
