@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:ushuttlev1/provider/theme_provider.dart';
-import 'package:ushuttlev1/subPages/schedule_page.dart';
 
 class BuyTicketPage extends StatefulWidget {
   const BuyTicketPage({super.key});
@@ -41,21 +40,21 @@ class _BuyTicketPageState extends State<BuyTicketPage> {
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2),
           children: [
-            buttonWidget(
-              title: 'Buy Ticket',
-              icon: Icons.schedule,
-              onPress: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (BuildContext context) {
-                      return const SchedulePage();
-                    },
-                  ),
-                );
-              },
-              backgroundColor: scheduleColor,
-              isDark: themeProvider.isDark,
-            ),
+            // buttonWidget(
+            //   title: 'Buy Ticket',
+            //   icon: Icons.schedule,
+            //   onPress: () {
+            //     Navigator.of(context).push(
+            //       MaterialPageRoute(
+            //         builder: (BuildContext context) {
+            //           return const SchedulePage();
+            //         },
+            //       ),
+            //     );
+            //   },
+            //   backgroundColor: scheduleColor,
+            //   isDark: themeProvider.isDark,
+            // ),
           ],
         ),
       ),

@@ -201,7 +201,7 @@ class MyCardWidget extends StatelessWidget {
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (BuildContext context) {
-                          return const BuyTicketPage();
+                          return QrGenerator();
                         },
                       ),
                     );
