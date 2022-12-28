@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ushuttlev1/authentication_pages/auth.dart';
-import 'package:ushuttlev1/MainMenu/ticket_subpages/buy_ticket_page.dart';
 import 'package:ushuttlev1/MainMenu/ticket_subpages/qrGenerator.dart';
 import 'package:provider/provider.dart';
 import 'package:ushuttlev1/provider/theme_provider.dart';

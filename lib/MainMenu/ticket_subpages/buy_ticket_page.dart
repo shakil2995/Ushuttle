@@ -14,10 +14,10 @@ class _BuyTicketPageState extends State<BuyTicketPage> {
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
 
-    Color darkTheme = Color.fromARGB(255, 70, 70, 70);
-    Color lightTheme = Colors.blue;
+    // Color darkTheme = Color.fromARGB(255, 70, 70, 70);
+    // Color lightTheme = Colors.blue;
 
-    Color scheduleColor = !themeProvider.isDark ? lightTheme : darkTheme;
+    // Color scheduleColor = !themeProvider.isDark ? lightTheme : darkTheme;
     return Scaffold(
       appBar: AppBar(
         // automaticallyImplyLeading: true,
