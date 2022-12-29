@@ -131,9 +131,7 @@ class _LiveLocationServerState extends State<LiveLocationServer>
           if (_liveUpdate) {
             if (mounted) {
               setState(() {
-                interActiveFlags = InteractiveFlag.all &
-                    ~InteractiveFlag.rotate &
-                    ~InteractiveFlag.pinchZoom;
+                interActiveFlags = InteractiveFlag.all;
               });
             }
           } else {
@@ -215,6 +213,46 @@ class _LiveLocationServerState extends State<LiveLocationServer>
         padding: const EdgeInsets.all(0),
         child: Column(
           children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  Text(
+                    _currentLocation != null
+                        ? 'Bus Location ${_currentLocation?.latitude!} ${_currentLocation?.longitude!}'
+                        : 'Finding your location...',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  TextButton(
+                      style: ButtonStyle(
+                        textStyle: MaterialStateProperty.all<TextStyle>(
+                          const TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        backgroundColor: MaterialStateProperty.all<Color>(
+                          _currentLocation != null
+                              ? Color.fromARGB(255, 60, 255, 106)
+                              : Color.fromARGB(255, 255, 68, 68),
+                        ),
+                      ),
+                      onPressed: () {},
+                      child: Text(
+                          _currentLocation != null
+                              ? 'Sharing live location'
+                              : 'Starting live location',
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                          ))),
+                ],
+              ),
+            ),
             Flexible(
               child: FlutterMap(
                 mapController: _mapController,
@@ -288,5 +326,5 @@ class _LiveLocationServerState extends State<LiveLocationServer>
   }
 
   @override
-  bool get wantKeepAlive => false;
+  bool get wantKeepAlive => true;
 }
