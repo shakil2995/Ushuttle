@@ -15,6 +15,8 @@ class AdminTicketPage extends StatefulWidget {
 }
 
 class _AdminTicketPageState extends State<AdminTicketPage> {
+  get _currentLocation => null;
+
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
@@ -39,6 +41,46 @@ class _AdminTicketPageState extends State<AdminTicketPage> {
             childAspectRatio: 1.3,
           ),
           children: [
+            // Padding(
+            //   padding: const EdgeInsets.all(8.0),
+            //   child: Column(
+            //     children: [
+            //       Text(
+            //         _currentLocation != null
+            //             ? 'Bus Location ${_currentLocation?.latitude!} ${_currentLocation?.longitude!}'
+            //             : 'Finding your location...',
+            //         style: TextStyle(
+            //           fontSize: 20,
+            //           fontWeight: FontWeight.bold,
+            //         ),
+            //       ),
+            //       TextButton(
+            //           style: ButtonStyle(
+            //             textStyle: MaterialStateProperty.all<TextStyle>(
+            //               const TextStyle(
+            //                 fontSize: 20,
+            //                 fontWeight: FontWeight.bold,
+            //               ),
+            //             ),
+            //             backgroundColor: MaterialStateProperty.all<Color>(
+            //               _currentLocation != null
+            //                   ? Color.fromARGB(255, 60, 255, 106)
+            //                   : Color.fromARGB(255, 255, 68, 68),
+            //             ),
+            //           ),
+            //           onPressed: () {},
+            //           child: Text(
+            //               _currentLocation != null
+            //                   ? 'Sharing live location'
+            //                   : 'Starting live location',
+            //               style: TextStyle(
+            //                 fontSize: 20,
+            //                 color: Colors.black,
+            //                 fontWeight: FontWeight.bold,
+            //               ))),
+            //     ],
+            //   ),
+            // ),
             buttonWidget(
               title: 'Sell Tickets',
               icon: Icons.sell,
