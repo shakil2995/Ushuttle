@@ -1,8 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:ushuttlev1/MainMenu/shared_subpages/info_page.dart';
-import 'package:ushuttlev1/MainMenu/ticket_subpages/ticket_page.dart';
-
 import '../../authentication_pages/auth.dart';
 
 class GetAdminDetails extends StatelessWidget {
@@ -77,20 +75,6 @@ class GetAdminDetails extends StatelessWidget {
                     icon: Icons.history,
                     // textColor: Colors.white,
                   ),
-                  // menuWidget(
-                  //   title: 'My Tickets',
-                  //   onPress: () {
-                  //     Navigator.of(context).push(
-                  //       MaterialPageRoute(
-                  //         builder: (BuildContext context) {
-                  //           return TicketPage();
-                  //         },
-                  //       ),
-                  //     );
-                  //   },
-                  //   icon: Icons.local_movies,
-                  //   // textColor: Colors.white,
-                  // ),
                   Divider(),
                   menuWidget(
                     title: 'About Us',
