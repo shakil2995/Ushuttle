@@ -94,6 +94,7 @@ class GetAdminDetails extends StatelessWidget {
                     title: 'Logout',
                     onPress: () async {
                       await Auth().signOut();
+                      Navigator.pop(context);
                     },
                     icon: Icons.logout,
                     textColor: Colors.red,
