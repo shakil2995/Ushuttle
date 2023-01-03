@@ -39,16 +39,12 @@ class _LiveLocationServerState extends State<LiveLocationServer>
       if (_currentLocation != null) {
         lat = _currentLocation!.latitude!;
         lng = _currentLocation!.longitude!;
-        print('lat: $lat, lng: $lng');
+        // print('lat: $lat, lng: $lng');
       }
       // var url = 'https://busy-jay-earrings.cyclic.app/coords/$instituteId';
       // final uri = Uri.parse(url);
-      var response = await http.post(
-          Uri.parse("https://busy-jay-earrings.cyclic.app/coords/$instituteId"),
-          body: {
-            'lat': "5.5",
-            'lng': "5.5",
-          });
+      var response = await http.post(Uri.parse(
+          "https://busy-jay-earrings.cyclic.app/coords/${instituteId}?lat=${lat}&lng=${lng}"));
       final body = response.body;
       final json = jsonDecode(body);
       setState(() {
@@ -67,7 +63,7 @@ class _LiveLocationServerState extends State<LiveLocationServer>
           // Access the data in the document
           var data = document.data();
           String instituteId = data['institute'];
-          debugPrint('${instituteId}');
+          // debugPrint('${instituteId}');
           getBusLocation(instituteId);
           // Do something with the data
         });
