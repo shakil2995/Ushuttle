@@ -1,5 +1,6 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
-import 'package:expandable/expandable.dart';
 import 'package:provider/provider.dart';
 import 'package:ushuttlev1/provider/theme_provider.dart';
 
@@ -40,6 +41,49 @@ class _AdminNoticePageState extends State<AdminNoticePage> {
       );
     }
 
+    updateNotice() async {
+      try {
+        final response = await http.post(
+          Uri.parse(
+              "https://busy-jay-earrings.cyclic.app/notice?notice=${_controllerNotice.text}"),
+        );
+        final body = response.body;
+        final json = jsonDecode(body);
+        print(json);
+        debugPrint(_controllerNotice.text);
+        showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+                  title: const Text('Success'),
+                  content: Text('Notice Updated'),
+                  actions: [
+                    TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: const Text('OK'),
+                    )
+                  ],
+                ));
+      } catch (e) {
+        showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+                  title: const Text('Error'),
+                  content: Text('Something went wrong,Please try again later'),
+                  actions: [
+                    TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: const Text('OK'),
+                    )
+                  ],
+                ));
+        print(e);
+      }
+    }
+
     Widget _submitButton() {
       return ElevatedButton(
         style: ElevatedButton.styleFrom(
@@ -54,11 +98,7 @@ class _AdminNoticePageState extends State<AdminNoticePage> {
           setState(() {
             isLoading = !isLoading;
           });
-          // if (isLogin) {
-          //   await signIn();
-          // } else {
-          //   await signUp();
-          // }
+          await updateNotice();
           setState(() {
             isLoading = false;
           });
