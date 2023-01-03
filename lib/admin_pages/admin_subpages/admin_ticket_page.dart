@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-
 import 'package:provider/provider.dart';
-
-import 'package:ushuttlev1/admin_pages/admin_subpages/qrScanners/scan_ticker_scanner.dart';
-import 'package:ushuttlev1/admin_pages/admin_subpages/qrScanners/sell_ticker_scanner.dart';
+import 'package:ushuttlev1/admin_pages/admin_subpages/qrScanners/scan_ticket_scanner.dart';
+import 'package:ushuttlev1/admin_pages/admin_subpages/qrScanners/sell_ticket_scanner.dart';
 import 'package:ushuttlev1/provider/theme_provider.dart';
 
 class AdminTicketPage extends StatefulWidget {
@@ -87,7 +85,7 @@ class _AdminTicketPageState extends State<AdminTicketPage> {
                 Navigator.of(context).push(
                   MaterialPageRoute(
                     builder: (BuildContext context) {
-                      return const ScanSellQrScanner();
+                      return SellTicketScanner();
                     },
                   ),
                 );
@@ -102,7 +100,7 @@ class _AdminTicketPageState extends State<AdminTicketPage> {
                 Navigator.of(context).push(
                   MaterialPageRoute(
                     builder: (BuildContext context) {
-                      return ScanQrScanner();
+                      return ScanTicket();
                     },
                   ),
                 );

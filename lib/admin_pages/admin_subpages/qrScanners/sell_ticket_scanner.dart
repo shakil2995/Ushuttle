@@ -1,24 +1,64 @@
 import 'dart:developer';
 import 'dart:io';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:ushuttlev1/authentication_pages/auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
-void main() => runApp(const MaterialApp(home: ScanTickerScanner()));
+List<String> docIds = [];
+final User? user = Auth().currentUser;
+List<dynamic> items = [];
+int userTicketCount = 0;
+String instituteId = '';
+bool isLoaded = false;
+void main() => runApp(const MaterialApp(home: SellQrScanner()));
 
-class ScanTickerScanner extends StatelessWidget {
-  const ScanTickerScanner({Key? key}) : super(key: key);
+class SellQrScanner extends StatefulWidget {
+  const SellQrScanner({Key? key}) : super(key: key);
+
+  @override
+  State<SellQrScanner> createState() => _SellQrScannerState();
+}
+
+class _SellQrScannerState extends State<SellQrScanner> {
+  // void fetchUserData() async {
+  //   getDocIds() async {
+  //     await FirebaseFirestore.instance
+  //         .collection('users')
+  //         .where('email', isEqualTo: user?.email)
+  //         .get()
+  //         .then((snapshot) {
+  //       snapshot.docs.forEach((document) {
+  //         // Access the data in the document
+  //         var data = document.data();
+  //         // print(data);
+  //         instituteId = data['institute'];
+  //         int ticket = data['ticket'];
+  //         if (mounted) {
+  //           setState(() {
+  //             userTicketCount = ticket;
+  //             isLoaded = true;
+  //           });
+  //         }
+  //       });
+  //     });
+  //   }
+
+  //   getDocIds();
+  // }
 
   @override
   Widget build(BuildContext context) {
+    // fetchUserData();
     return Scaffold(
-      appBar: AppBar(title: const Text('Flutter Demo Home Page')),
+      appBar: AppBar(title: const Text('Qr home page')),
       body: Center(
         child: ElevatedButton(
           onPressed: () {
             Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => const ScanQrScanner(),
+              builder: (context) => const SellTicketScanner(),
             ));
           },
           child: const Text('qrView'),
@@ -28,14 +68,14 @@ class ScanTickerScanner extends StatelessWidget {
   }
 }
 
-class ScanQrScanner extends StatefulWidget {
-  const ScanQrScanner({Key? key}) : super(key: key);
+class SellTicketScanner extends StatefulWidget {
+  const SellTicketScanner({Key? key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => _QrScannerState();
 }
 
-class _QrScannerState extends State<ScanQrScanner> {
+class _QrScannerState extends State<SellTicketScanner> {
   Barcode? result;
   QRViewController? controller;
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
@@ -55,7 +95,7 @@ class _QrScannerState extends State<ScanQrScanner> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Scan Tickets'),
+        title: Text('Sell Tickets'),
         automaticallyImplyLeading: true,
       ),
       body: Column(
@@ -95,7 +135,9 @@ class _QrScannerState extends State<ScanQrScanner> {
                         margin: const EdgeInsets.all(8),
                         child: ElevatedButton(
                             onPressed: () async {
-                              await controller?.flipCamera();
+                              // await controller?.flipCamera();
+                              result != null ? fetchUserData() : null;
+                              print('userTicketCount: $userTicketCount');
                               setState(() {});
                             },
                             child: FutureBuilder(
@@ -103,7 +145,8 @@ class _QrScannerState extends State<ScanQrScanner> {
                               builder: (context, snapshot) {
                                 if (snapshot.data != null) {
                                   return Text(
-                                      'Camera facing ${describeEnum(snapshot.data!)}');
+                                      // 'Add tickets to user ${describeEnum(snapshot.data!)}');
+                                      'Add tickets to user');
                                 } else {
                                   return const Text('loading');
                                 }
@@ -192,5 +235,70 @@ class _QrScannerState extends State<ScanQrScanner> {
   void dispose() {
     controller?.dispose();
     super.dispose();
+  }
+
+  void fetchUserData() async {
+    getDocIds() async {
+      try {
+        await FirebaseFirestore.instance
+            .collection('users')
+            .where('email', isEqualTo: result!.code)
+            .get()
+            .then((snapshot) {
+          snapshot.docs.forEach((document) {
+            // Access the data in the document
+            var data = document.data();
+            final docUser =
+                FirebaseFirestore.instance.collection('users').doc(document.id);
+            docUser.update({
+              'ticket': FieldValue.increment(1),
+            });
+
+            print(document);
+            instituteId = data['institute'];
+            int ticket = data['ticket'];
+            if (mounted) {
+              setState(() {
+                userTicketCount = ticket;
+                isLoaded = true;
+              });
+            }
+          });
+        });
+        showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+                  title: const Text('Success'),
+                  content: result!.code != null
+                      ? Text('1 ticket added to user ${result!.code}')
+                      : const Text('No user found'),
+                  actions: [
+                    TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: const Text('OK'),
+                    )
+                  ],
+                ));
+      } catch (e) {
+        showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+                  title: const Text('Error'),
+                  content: Text('Operation failed. Please try again later'),
+                  actions: [
+                    TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: const Text('OK'),
+                    )
+                  ],
+                ));
+      }
+    }
+
+    getDocIds();
   }
 }

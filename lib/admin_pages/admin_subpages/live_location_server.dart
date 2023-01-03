@@ -47,10 +47,12 @@ class _LiveLocationServerState extends State<LiveLocationServer>
           "https://busy-jay-earrings.cyclic.app/coords/${instituteId}?lat=${lat}&lng=${lng}"));
       final body = response.body;
       final json = jsonDecode(body);
-      setState(() {
-        items = json["results"];
-      });
-      debugPrint('${items}');
+      mounted
+          ? setState(() {
+              items = json["results"];
+            })
+          : null;
+      // debugPrint('${items}');
     }
 
     getDocIds() async {
@@ -74,7 +76,7 @@ class _LiveLocationServerState extends State<LiveLocationServer>
   }
 
   void startUploadingCoordinates() {
-    Timer.periodic(const Duration(seconds: 1), (timer) {
+    Timer.periodic(const Duration(seconds: 5), (timer) {
       uploadCoordinates();
     });
   }
