@@ -42,8 +42,9 @@ class _NoticePageState extends State<NoticePage> {
       showDialog(
           context: context,
           builder: (context) => AlertDialog(
-                title: const Text('Error'),
-                content: Text('Something went wrong,Please try again later'),
+                title: const Text('Network Error'),
+                content:
+                    Text('Could not conect to server, Please try again later'),
                 actions: [
                   TextButton(
                     onPressed: () {
@@ -101,6 +102,18 @@ class _NoticePageState extends State<NoticePage> {
     }
 
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          setState(() {
+            isLoading = !isLoading;
+          });
+          await updateNotice();
+          setState(() {
+            isLoading = false;
+          });
+        },
+        child: Icon(isLoading ? Icons.update : Icons.refresh),
+      ),
       appBar: AppBar(
         title: const Text('Notice'),
         automaticallyImplyLeading: true,
@@ -131,7 +144,7 @@ class _NoticePageState extends State<NoticePage> {
                 borderRadius: BorderRadius.circular(12.0),
                 color: themeProvider.isDark
                     ? Color.fromARGB(255, 77, 77, 77)
-                    : Color.fromARGB(255, 234, 234, 234),
+                    : Color.fromARGB(159, 163, 170, 184),
               ),
               margin: const EdgeInsets.all(10.0),
               padding: const EdgeInsets.all(10.0),
@@ -147,9 +160,8 @@ class _NoticePageState extends State<NoticePage> {
                     )),
               ),
             ),
-            const SizedBox(height: 16),
-            _submitButton(),
-            const SizedBox(height: 16),
+
+            // _submitButton(),
           ],
         ),
       )),

@@ -1,29 +1,53 @@
-import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
+import 'package:expandable/expandable.dart';
+import 'package:provider/provider.dart';
+import 'package:ushuttlev1/provider/theme_provider.dart';
 
-class FarePage extends StatelessWidget {
+class FarePage extends StatefulWidget {
   const FarePage({super.key});
 
   @override
+  State<FarePage> createState() => _FarePageState();
+}
+
+class _FarePageState extends State<FarePage> {
+  @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Schedule'),
+        title: const Text('Fare'),
         automaticallyImplyLeading: true,
+        actions: [
+          IconButton(
+              onPressed: () {
+                setState(() {
+                  themeProvider.toggleTheme();
+                });
+              },
+              icon: Icon(!themeProvider.isDark
+                  ? Icons.sunny
+                  : Icons.nightlight_round_outlined))
+        ],
       ),
       body: SingleChildScrollView(
           child: Column(
-        children: [mirpurTobashundhara(), bashundharaToMirpur()],
+        children: [
+          mirpurTobashundhara(themeProvider.isDark),
+          bashundharaToMirpur(themeProvider.isDark)
+        ],
       )),
     );
   }
 
-  Container mirpurTobashundhara() {
+  Container mirpurTobashundhara(bool isDark) {
     return Container(
       padding: const EdgeInsets.all(8.0),
       child: Container(
         decoration: BoxDecoration(
-          color: const Color.fromARGB(255, 215, 215, 215),
+          color: isDark
+              ? Color.fromARGB(255, 87, 87, 87)
+              : Color.fromARGB(255, 207, 207, 207),
           borderRadius: BorderRadius.circular(5),
         ),
         child: ExpandablePanel(
@@ -126,7 +150,7 @@ class FarePage extends StatelessWidget {
     );
   }
 
-  Container bashundharaToMirpur() {
+  Container bashundharaToMirpur(bool isDark) {
     return Container(
       // margin: const EdgeInsets.all(10),
       // set border
@@ -136,7 +160,9 @@ class FarePage extends StatelessWidget {
         //set background color to red
 
         decoration: BoxDecoration(
-          color: const Color.fromARGB(255, 215, 215, 215),
+          color: isDark
+              ? Color.fromARGB(255, 87, 87, 87)
+              : Color.fromARGB(255, 207, 207, 207),
           borderRadius: BorderRadius.circular(5),
         ),
 

@@ -69,8 +69,9 @@ class _AdminNoticePageState extends State<AdminNoticePage> {
         showDialog(
             context: context,
             builder: (context) => AlertDialog(
-                  title: const Text('Error'),
-                  content: Text('Something went wrong,Please try again later'),
+                  title: const Text('Network Error'),
+                  content: Text(
+                      'Could not conect to server, Please try again later'),
                   actions: [
                     TextButton(
                       onPressed: () {
