@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -6,6 +9,7 @@ import 'package:latlong2/latlong.dart';
 import 'package:location/location.dart';
 import 'dart:async';
 import 'package:ushuttlev1/authentication_pages/auth.dart';
+import 'package:http/http.dart' as http;
 
 List<String> docIds = [];
 final User? user = Auth().currentUser;
@@ -29,43 +33,53 @@ class _LiveLocationServerState extends State<LiveLocationServer>
   String? _serviceError = '';
   int interActiveFlags = InteractiveFlag.all;
   final Location _locationService = Location();
-  // void uploadCoordinates() async {
-  //   getBusLocation(instituteId) async {
-  //     var url = 'https://busy-jay-earrings.cyclic.app/coords/${instituteId}';
-  //     final uri = Uri.parse(url);
-  //     final response = await http.get(uri);
-  //     final body = response.body;
-  //     final json = jsonDecode(body);
-  //     if (mounted) {
-  //       setState(() {
-  //         items = json["results"];
-  //       });
-  //     }
-  //   }
-  //   getDocIds() async {
-  //     await FirebaseFirestore.instance
-  //         .collection('users')
-  //         .where('email', isEqualTo: user?.email)
-  //         .get()
-  //         .then((snapshot) {
-  //       snapshot.docs.forEach((document) {
-  //         // Access the data in the document
-  //         var data = document.data();
-  //         String instituteId = data['institute'];
-  //         debugPrint('${instituteId}');
-  //         getBusLocation(instituteId);
-  //         // Do something with the data
-  //       });
-  //     });
-  //   }
 
-  //   getDocIds();
-  // }
+  void uploadCoordinates() async {
+    getBusLocation(instituteId) async {
+      if (_currentLocation != null) {
+        lat = _currentLocation!.latitude!;
+        lng = _currentLocation!.longitude!;
+        print('lat: $lat, lng: $lng');
+      }
+      // var url = 'https://busy-jay-earrings.cyclic.app/coords/$instituteId';
+      // final uri = Uri.parse(url);
+      var response = await http.post(
+          Uri.parse("https://busy-jay-earrings.cyclic.app/coords/$instituteId"),
+          body: {
+            'lat': "5.5",
+            'lng': "5.5",
+          });
+      final body = response.body;
+      final json = jsonDecode(body);
+      setState(() {
+        items = json["results"];
+      });
+      debugPrint('${items}');
+    }
+
+    getDocIds() async {
+      await FirebaseFirestore.instance
+          .collection('admin')
+          .where('email', isEqualTo: user?.email)
+          .get()
+          .then((snapshot) {
+        snapshot.docs.forEach((document) {
+          // Access the data in the document
+          var data = document.data();
+          String instituteId = data['institute'];
+          debugPrint('${instituteId}');
+          getBusLocation(instituteId);
+          // Do something with the data
+        });
+      });
+    }
+
+    getDocIds();
+  }
 
   void startUploadingCoordinates() {
-    int timerVal = 0;
     Timer.periodic(const Duration(seconds: 1), (timer) {
-      // uploadCoordinates();
+      uploadCoordinates();
     });
   }
 
@@ -170,7 +184,7 @@ class _LiveLocationServerState extends State<LiveLocationServer>
       ),
     ];
     super.build(context);
-    debugPrint(_currentLocation.toString());
+    // debugPrint(_currentLocation.toString());
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(0),

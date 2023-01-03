@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:ushuttlev1/MainMenu/home_subpages/fare_page.dart';
-import 'package:ushuttlev1/MainMenu/home_subpages/notice_page.dart';
-import 'package:ushuttlev1/MainMenu/home_subpages/schedule_page.dart';
-import 'package:ushuttlev1/MainMenu/home_subpages/stoppage_page.dart';
+
 import 'package:provider/provider.dart';
-import 'package:ushuttlev1/admin_pages/admin_subpages/admin_profile_page.dart';
+
 import 'package:ushuttlev1/admin_pages/admin_subpages/qrScanners/scan_ticker_scanner.dart';
 import 'package:ushuttlev1/admin_pages/admin_subpages/qrScanners/sell_ticker_scanner.dart';
 import 'package:ushuttlev1/provider/theme_provider.dart';

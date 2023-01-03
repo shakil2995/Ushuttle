@@ -1,10 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:provider/provider.dart';
+
 import 'package:ushuttlev1/admin_pages/admin_subpages/get_admin_details.dart';
 import 'package:ushuttlev1/authentication_pages/auth.dart';
-import 'package:ushuttlev1/provider/theme_provider.dart';
 
 class AdminProfilePage extends StatefulWidget {
   const AdminProfilePage({super.key});
