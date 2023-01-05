@@ -175,7 +175,7 @@ class _LiveLocationServerState extends State<LiveLocationServer>
         height: 80,
         point: currentLatLng,
         builder: (ctx) => const Icon(
-          Icons.location_on,
+          Icons.directions_bus,
           size: 50,
           color: Color.fromARGB(255, 4, 4, 4),
         ),
