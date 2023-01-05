@@ -81,20 +81,20 @@ class _QrGeneratorState extends State<QrGenerator> {
             eyeStyle: QrEyeStyle(
               eyeShape: QrEyeShape.square,
               color: themeProvider.isDark
-                  ? ui.Color.fromARGB(255, 18, 208, 255)
+                  ? ui.Color.fromARGB(255, 255, 255, 255)
                   : ui.Color.fromARGB(255, 14, 14, 14),
             ),
             dataModuleStyle: QrDataModuleStyle(
-              dataModuleShape: QrDataModuleShape.circle,
+              dataModuleShape: QrDataModuleShape.square,
               color: themeProvider.isDark
-                  ? ui.Color.fromARGB(255, 18, 208, 255)
+                  ? ui.Color.fromARGB(255, 254, 255, 255)
                   : ui.Color.fromARGB(255, 14, 14, 14),
             ),
             // size: 320.0,
-            embeddedImage: snapshot.data,
-            embeddedImageStyle: QrEmbeddedImageStyle(
-              size: Size.fromRadius(30),
-            ),
+            // embeddedImage: snapshot.data,
+            // embeddedImageStyle: QrEmbeddedImageStyle(
+            //   size: Size.fromRadius(30),
+            // ),
           ),
         );
       },
