@@ -13,6 +13,7 @@ List<dynamic> items = [];
 int userTicketCount = 0;
 String instituteId = '';
 bool isLoaded = false;
+bool hasTicket = false;
 void main() => runApp(const MaterialApp(home: ScanQrScanner()));
 
 class ScanQrScanner extends StatefulWidget {
@@ -95,7 +96,7 @@ class _QrScannerState extends State<ScanTicket> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Sell Tickets'),
+        title: Text('Scan Tickets'),
         automaticallyImplyLeading: true,
       ),
       body: Column(
@@ -146,7 +147,7 @@ class _QrScannerState extends State<ScanTicket> {
                                 if (snapshot.data != null) {
                                   return Text(
                                       // 'Add tickets to user ${describeEnum(snapshot.data!)}');
-                                      'Add tickets to user');
+                                      'Deduct ticket from user');
                                 } else {
                                   return const Text('loading');
                                 }
@@ -237,7 +238,7 @@ class _QrScannerState extends State<ScanTicket> {
     super.dispose();
   }
 
-  void fetchUserData() async {
+  fetchUserData() async {
     getDocIds() async {
       try {
         await FirebaseFirestore.instance
@@ -248,11 +249,48 @@ class _QrScannerState extends State<ScanTicket> {
           snapshot.docs.forEach((document) {
             // Access the data in the document
             var data = document.data();
-            final docUser =
-                FirebaseFirestore.instance.collection('users').doc(document.id);
-            docUser.update({
-              'ticket': FieldValue.increment(-1),
-            });
+            if (data['ticket'] > 0) {
+              final docUser = FirebaseFirestore.instance
+                  .collection('users')
+                  .doc(document.id);
+              docUser.update({
+                'ticket': FieldValue.increment(-1),
+              });
+              showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                        title: const Text('Success'),
+                        content: result!.code != null
+                            ? Text(
+                                '1 ticket deducted from ${result!.code}. User has ${data['ticket'] - 1} tickets left')
+                            : const Text('No user found'),
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: const Text('OK'),
+                          )
+                        ],
+                      ));
+              // hasTicket = true;
+            } else {
+              showDialog(
+                  context: context,
+                  builder: (context) => AlertDialog(
+                        title: const Text('Not enough tickets'),
+                        content:
+                            Text('Operation failed. User has no tickets left'),
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: const Text('OK'),
+                          )
+                        ],
+                      ));
+            }
 
             print(document);
             instituteId = data['institute'];
@@ -265,22 +303,6 @@ class _QrScannerState extends State<ScanTicket> {
             }
           });
         });
-        showDialog(
-            context: context,
-            builder: (context) => AlertDialog(
-                  title: const Text('Success'),
-                  content: result!.code != null
-                      ? Text('1 ticket deducted from user ${result!.code}')
-                      : const Text('No user found'),
-                  actions: [
-                    TextButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      child: const Text('OK'),
-                    )
-                  ],
-                ));
       } catch (e) {
         showDialog(
             context: context,

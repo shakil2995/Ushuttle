@@ -270,7 +270,8 @@ class _QrScannerState extends State<SellTicketScanner> {
             builder: (context) => AlertDialog(
                   title: const Text('Success'),
                   content: result!.code != null
-                      ? Text('1 ticket added to user ${result!.code}')
+                      ? Text(
+                          '1 ticket added to ${result!.code}. User now has ${userTicketCount + 1} tickets')
                       : const Text('No user found'),
                   actions: [
                     TextButton(
