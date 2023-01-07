@@ -71,8 +71,7 @@ class _QrScannerState extends State<ScanTicket> {
                         margin: const EdgeInsets.all(8),
                         child: ElevatedButton(
                             onPressed: () async {
-                              await controller?.toggleFlash();
-                              setState(() {});
+                              fetchBusData();
                             },
                             child: FutureBuilder(
                               future: fetchBusData(),
