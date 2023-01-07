@@ -10,9 +10,11 @@ import 'package:qr_code_scanner/qr_code_scanner.dart';
 List<String> docIds = [];
 final User? user = Auth().currentUser;
 List<dynamic> items = [];
-int userTicketCount = 0;
+int userCredit = 30;
+int ticketPrice = 0;
 String instituteId = '';
 bool isLoaded = false;
+
 void main() => runApp(const MaterialApp(home: SellQrScanner()));
 
 class SellQrScanner extends StatefulWidget {
@@ -23,35 +25,22 @@ class SellQrScanner extends StatefulWidget {
 }
 
 class _SellQrScannerState extends State<SellQrScanner> {
-  // void fetchUserData() async {
-  //   getDocIds() async {
-  //     await FirebaseFirestore.instance
-  //         .collection('users')
-  //         .where('email', isEqualTo: user?.email)
-  //         .get()
-  //         .then((snapshot) {
-  //       snapshot.docs.forEach((document) {
-  //         // Access the data in the document
-  //         var data = document.data();
-  //         // print(data);
-  //         instituteId = data['institute'];
-  //         int ticket = data['ticket'];
-  //         if (mounted) {
-  //           setState(() {
-  //             userTicketCount = ticket;
-  //             isLoaded = true;
-  //           });
-  //         }
-  //       });
-  //     });
-  //   }
+  final _controllerEmail = TextEditingController();
 
-  //   getDocIds();
-  // }
+  @override
+  void dispose() {
+    _controllerEmail.dispose();
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    fetchBusData();
+  }
 
   @override
   Widget build(BuildContext context) {
-    // fetchUserData();
     return Scaffold(
       appBar: AppBar(title: const Text('Qr home page')),
       body: Center(
@@ -65,6 +54,36 @@ class _SellQrScannerState extends State<SellQrScanner> {
         ),
       ),
     );
+  }
+
+  void fetchBusData() async {
+    getDocIds() async {
+      try {
+        await FirebaseFirestore.instance
+            .collection('admin')
+            .where('email', isEqualTo: user?.email)
+            .get()
+            .then((snapshot) {
+          snapshot.docs.forEach((document) {
+            // Access the data in the document
+            var data = document.data();
+
+            print(document);
+            instituteId = data['institute'];
+            int price = data['price'];
+            print(price);
+            if (mounted) {
+              setState(() {
+                ticketPrice = price;
+                isLoaded = true;
+              });
+            }
+          });
+        });
+      } catch (e) {}
+    }
+
+    getDocIds();
   }
 }
 
@@ -95,7 +114,7 @@ class _QrScannerState extends State<SellTicketScanner> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Sell Tickets'),
+        title: Text('Add Credits'),
         automaticallyImplyLeading: true,
       ),
       body: Column(
@@ -137,7 +156,7 @@ class _QrScannerState extends State<SellTicketScanner> {
                             onPressed: () async {
                               // await controller?.flipCamera();
                               result != null ? fetchUserData() : null;
-                              print('userTicketCount: $userTicketCount');
+                              print('userCredit: $userCredit');
                               setState(() {});
                             },
                             child: FutureBuilder(
@@ -146,7 +165,7 @@ class _QrScannerState extends State<SellTicketScanner> {
                                 if (snapshot.data != null) {
                                   return Text(
                                       // 'Add tickets to user ${describeEnum(snapshot.data!)}');
-                                      'Add tickets to user');
+                                      'Add credit to user');
                                 } else {
                                   return const Text('loading');
                                 }
@@ -251,7 +270,7 @@ class _QrScannerState extends State<SellTicketScanner> {
             final docUser =
                 FirebaseFirestore.instance.collection('users').doc(document.id);
             docUser.update({
-              'ticket': FieldValue.increment(1),
+              'credit': FieldValue.increment(30),
             });
 
             print(document);
@@ -259,7 +278,7 @@ class _QrScannerState extends State<SellTicketScanner> {
             int ticket = data['ticket'];
             if (mounted) {
               setState(() {
-                userTicketCount = ticket;
+                userCredit = ticket;
                 isLoaded = true;
               });
             }
@@ -271,7 +290,7 @@ class _QrScannerState extends State<SellTicketScanner> {
                   title: const Text('Success'),
                   content: result!.code != null
                       ? Text(
-                          '1 ticket added to ${result!.code}. User now has ${userTicketCount + 1} tickets')
+                          '1 ticket added to ${result!.code}. User now has ${userCredit + 1} tickets')
                       : const Text('No user found'),
                   actions: [
                     TextButton(

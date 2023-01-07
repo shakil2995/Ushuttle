@@ -32,7 +32,7 @@ class _TicketPageState extends State<TicketPage> {
           var data = document.data();
           // print(data);
           instituteId = data['institute'];
-          int ticket = data['ticket'];
+          int ticket = data['credit'];
           if (mounted) {
             setState(() {
               userTicketCount = ticket;
@@ -53,7 +53,7 @@ class _TicketPageState extends State<TicketPage> {
     return Scaffold(
       appBar: AppBar(
         // automaticallyImplyLeading: true,
-        title: const Text('Tickets'),
+        title: const Text('My Credits'),
         actions: [
           IconButton(
               onPressed: () {
@@ -176,8 +176,8 @@ class MyCardWidget extends StatelessWidget {
                       )),
                   subtitle: Text(
                       userTicketCount > 0
-                          ? 'You have ${userTicketCount} tickets left.'
-                          : 'You have ${userTicketCount} tickets left.Please click Buy More.',
+                          ? 'You have ${userTicketCount} credits left.'
+                          : 'You have ${userTicketCount} credits left.Please click Buy More.',
                       style: TextStyle(fontSize: 18.0)),
                 ),
                 userTicketCount > 0
@@ -190,12 +190,12 @@ class MyCardWidget extends StatelessWidget {
                           disabledForegroundColor:
                               Colors.grey.withOpacity(0.38),
                         ),
-                        child: const Text('Use Ticket'),
+                        child: const Text('Use Credit'),
                         onPressed: () {
                           Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (BuildContext context) {
-                                return QrGenerator('Scan to use ticket');
+                                return QrGenerator('Scan to use Credit');
                               },
                             ),
                           );
@@ -213,7 +213,7 @@ class MyCardWidget extends StatelessWidget {
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (BuildContext context) {
-                          return QrGenerator('Scan to buy Ticket');
+                          return QrGenerator('Scan to buy Credit');
                         },
                       ),
                     );

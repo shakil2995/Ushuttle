@@ -12,7 +12,7 @@ import 'package:ushuttlev1/provider/theme_provider.dart';
 List<String> docIds = [];
 final User? user = Auth().currentUser;
 List<dynamic> items = [];
-int userTicketCount = 0;
+int userCredit = 0;
 String userEmail = '';
 String pageName = '';
 
@@ -39,10 +39,10 @@ class _QrGeneratorState extends State<QrGenerator> {
           var data = document.data();
           // print(data);
           userEmail = data['email'];
-          int ticket = data['ticket'];
+          int credit = data['credit'];
           if (mounted) {
             setState(() {
-              userTicketCount = ticket;
+              userCredit = credit;
             });
           }
         });

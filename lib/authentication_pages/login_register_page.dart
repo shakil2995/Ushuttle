@@ -89,6 +89,7 @@ class _LoginPageState extends State<LoginPage> {
         'institute': _controllerInstitute.text.trim(),
         'email': _controllerEmail.text.trim(),
         'ticket': 0,
+        'credit': 0,
       });
       // Navigator.of(context).pop();
     } on FirebaseAuthException catch (e) {

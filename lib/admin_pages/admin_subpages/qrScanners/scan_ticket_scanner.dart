@@ -11,6 +11,7 @@ List<String> docIds = [];
 final User? user = Auth().currentUser;
 List<dynamic> items = [];
 int userTicketCount = 0;
+int ticketPrice = 0;
 String instituteId = '';
 bool isLoaded = false;
 bool hasTicket = false;
