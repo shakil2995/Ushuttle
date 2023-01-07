@@ -10,7 +10,7 @@ import 'package:qr_code_scanner/qr_code_scanner.dart';
 List<String> docIds = [];
 final User? user = Auth().currentUser;
 List<dynamic> items = [];
-int userCredit = 30;
+int userCredit = 0;
 int ticketPrice = 0;
 String instituteId = '';
 bool isLoaded = false;
@@ -25,11 +25,11 @@ class SellQrScanner extends StatefulWidget {
 }
 
 class _SellQrScannerState extends State<SellQrScanner> {
-  final _controllerEmail = TextEditingController();
+  final _ticketAmount = TextEditingController();
 
   @override
   void dispose() {
-    _controllerEmail.dispose();
+    _ticketAmount.dispose();
     super.dispose();
   }
 
@@ -99,6 +99,32 @@ class _QrScannerState extends State<SellTicketScanner> {
   QRViewController? controller;
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
 
+  void fetchBusData() async {
+    getDocIds() async {
+      await FirebaseFirestore.instance
+          .collection('admin')
+          .where('email', isEqualTo: user?.email)
+          .get()
+          .then((snapshot) {
+        snapshot.docs.forEach((document) {
+          // Access the data in the document
+          var data = document.data();
+          // print(data);
+          instituteId = data['institute'];
+          int price = data['price'];
+          if (mounted) {
+            setState(() {
+              ticketPrice = price;
+              isLoaded = true;
+            });
+          }
+        });
+      });
+    }
+
+    getDocIds();
+  }
+
   // In order to get hot reload to work we need to pause the camera if the platform
   // is android, or resume the camera if the platform is iOS.
   @override
@@ -112,6 +138,7 @@ class _QrScannerState extends State<SellTicketScanner> {
 
   @override
   Widget build(BuildContext context) {
+    fetchBusData();
     return Scaffold(
       appBar: AppBar(
         title: Text('Add Credits'),
@@ -146,7 +173,7 @@ class _QrScannerState extends State<SellTicketScanner> {
                             child: FutureBuilder(
                               future: controller?.getFlashStatus(),
                               builder: (context, snapshot) {
-                                return Text('Flash: ${snapshot.data}');
+                                return Text('Price: ${ticketPrice} tk');
                               },
                             )),
                       ),
@@ -270,7 +297,7 @@ class _QrScannerState extends State<SellTicketScanner> {
             final docUser =
                 FirebaseFirestore.instance.collection('users').doc(document.id);
             docUser.update({
-              'credit': FieldValue.increment(30),
+              'credit': FieldValue.increment(ticketPrice),
             });
 
             print(document);
@@ -290,7 +317,7 @@ class _QrScannerState extends State<SellTicketScanner> {
                   title: const Text('Success'),
                   content: result!.code != null
                       ? Text(
-                          '1 ticket added to ${result!.code}. User now has ${userCredit + 1} tickets')
+                          '${ticketPrice} credits added to ${result!.code}. User now has ${userCredit + ticketPrice} credits')
                       : const Text('No user found'),
                   actions: [
                     TextButton(

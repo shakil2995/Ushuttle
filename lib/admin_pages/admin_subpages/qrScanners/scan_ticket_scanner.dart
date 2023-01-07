@@ -10,11 +10,10 @@ import 'package:qr_code_scanner/qr_code_scanner.dart';
 List<String> docIds = [];
 final User? user = Auth().currentUser;
 List<dynamic> items = [];
-int userTicketCount = 0;
-int ticketPrice = 0;
+int userCredit = 0;
+int ticketPrice = 30;
 String instituteId = '';
 bool isLoaded = false;
-bool hasTicket = false;
 void main() => runApp(const MaterialApp(home: ScanQrScanner()));
 
 class ScanQrScanner extends StatefulWidget {
@@ -25,35 +24,35 @@ class ScanQrScanner extends StatefulWidget {
 }
 
 class _ScanQrScannerState extends State<ScanQrScanner> {
-  // void fetchUserData() async {
-  //   getDocIds() async {
-  //     await FirebaseFirestore.instance
-  //         .collection('users')
-  //         .where('email', isEqualTo: user?.email)
-  //         .get()
-  //         .then((snapshot) {
-  //       snapshot.docs.forEach((document) {
-  //         // Access the data in the document
-  //         var data = document.data();
-  //         // print(data);
-  //         instituteId = data['institute'];
-  //         int ticket = data['ticket'];
-  //         if (mounted) {
-  //           setState(() {
-  //             userTicketCount = ticket;
-  //             isLoaded = true;
-  //           });
-  //         }
-  //       });
-  //     });
-  //   }
+  void fetchBusData() async {
+    getDocIds() async {
+      await FirebaseFirestore.instance
+          .collection('admin')
+          .where('email', isEqualTo: user?.email)
+          .get()
+          .then((snapshot) {
+        snapshot.docs.forEach((document) {
+          // Access the data in the document
+          var data = document.data();
+          // print(data);
+          instituteId = data['institute'];
+          int price = data['price'];
+          if (mounted) {
+            setState(() {
+              ticketPrice = price;
+              isLoaded = true;
+            });
+          }
+        });
+      });
+    }
 
-  //   getDocIds();
-  // }
+    getDocIds();
+  }
 
   @override
   Widget build(BuildContext context) {
-    // fetchUserData();
+    fetchBusData();
     return Scaffold(
       appBar: AppBar(title: const Text('Qr home page')),
       body: Center(
@@ -129,7 +128,7 @@ class _QrScannerState extends State<ScanTicket> {
                             child: FutureBuilder(
                               future: controller?.getFlashStatus(),
                               builder: (context, snapshot) {
-                                return Text('Flash: ${snapshot.data}');
+                                return Text('Price: ${ticketPrice} tk');
                               },
                             )),
                       ),
@@ -139,7 +138,7 @@ class _QrScannerState extends State<ScanTicket> {
                             onPressed: () async {
                               // await controller?.flipCamera();
                               result != null ? fetchUserData() : null;
-                              print('userTicketCount: $userTicketCount');
+                              print('userCredit: $userCredit');
                               setState(() {});
                             },
                             child: FutureBuilder(
@@ -148,7 +147,7 @@ class _QrScannerState extends State<ScanTicket> {
                                 if (snapshot.data != null) {
                                   return Text(
                                       // 'Add tickets to user ${describeEnum(snapshot.data!)}');
-                                      'Deduct ticket from user');
+                                      'Deduct credit');
                                 } else {
                                   return const Text('loading');
                                 }
@@ -250,12 +249,12 @@ class _QrScannerState extends State<ScanTicket> {
           snapshot.docs.forEach((document) {
             // Access the data in the document
             var data = document.data();
-            if (data['ticket'] > 0) {
+            if (data['credit'] >= ticketPrice) {
               final docUser = FirebaseFirestore.instance
                   .collection('users')
                   .doc(document.id);
               docUser.update({
-                'ticket': FieldValue.increment(-1),
+                'credit': FieldValue.increment(-ticketPrice),
               });
               showDialog(
                   context: context,
@@ -263,7 +262,7 @@ class _QrScannerState extends State<ScanTicket> {
                         title: const Text('Success'),
                         content: result!.code != null
                             ? Text(
-                                '1 ticket deducted from ${result!.code}. User has ${data['ticket'] - 1} tickets left')
+                                '${ticketPrice} credits deducted from ${result!.code}. User has ${data['credit'] - ticketPrice} cedits left')
                             : const Text('No user found'),
                         actions: [
                           TextButton(
@@ -279,9 +278,9 @@ class _QrScannerState extends State<ScanTicket> {
               showDialog(
                   context: context,
                   builder: (context) => AlertDialog(
-                        title: const Text('Not enough tickets'),
-                        content:
-                            Text('Operation failed. User has no tickets left'),
+                        title: const Text('Not enough credit'),
+                        content: Text(
+                            'Operation failed. User does not have enough credit'),
                         actions: [
                           TextButton(
                             onPressed: () {
@@ -295,10 +294,10 @@ class _QrScannerState extends State<ScanTicket> {
 
             print(document);
             instituteId = data['institute'];
-            int ticket = data['ticket'];
+            int credit = data['credit'];
             if (mounted) {
               setState(() {
-                userTicketCount = ticket;
+                userCredit = credit;
                 isLoaded = true;
               });
             }
@@ -309,7 +308,8 @@ class _QrScannerState extends State<ScanTicket> {
             context: context,
             builder: (context) => AlertDialog(
                   title: const Text('Error'),
-                  content: Text('Operation failed. Please try again later'),
+                  content: Text(
+                      'Operation failed. Please try again later .Make sure you have internet connection'),
                   actions: [
                     TextButton(
                       onPressed: () {
