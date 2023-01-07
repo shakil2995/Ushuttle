@@ -54,7 +54,7 @@ class _HomePageState extends State<HomePage> {
             ),
             buttonWidget(
               title: 'Fare',
-              icon: Icons.currency_exchange,
+              icon: Icons.monetization_on,
               onPress: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
@@ -98,8 +98,8 @@ class _HomePageState extends State<HomePage> {
               isDark: themeProvider.isDark,
             ),
             buttonWidget(
-              title: 'Ticket',
-              icon: Icons.local_movies,
+              title: 'Credits',
+              icon: Icons.money,
               onPress: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(

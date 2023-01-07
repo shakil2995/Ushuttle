@@ -79,7 +79,7 @@ class _AdminTicketPageState extends State<AdminTicketPage> {
             //   ),
             // ),
             buttonWidget(
-              title: 'Sell Tickets',
+              title: 'Sell Credits',
               icon: Icons.sell,
               onPress: () {
                 Navigator.of(context).push(
@@ -94,7 +94,7 @@ class _AdminTicketPageState extends State<AdminTicketPage> {
               isDark: themeProvider.isDark,
             ),
             buttonWidget(
-              title: 'Scan Tickets',
+              title: 'Scan Credits',
               icon: Icons.qr_code_scanner,
               onPress: () {
                 Navigator.of(context).push(

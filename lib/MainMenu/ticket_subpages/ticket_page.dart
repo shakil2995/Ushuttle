@@ -166,19 +166,23 @@ class MyCardWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Icon(Icons.local_movies,
+                Icon(Icons.money,
                     size: 100.0, color: !isDark ? Colors.blue : Colors.white),
                 ListTile(
-                  leading: Icon(Icons.local_movies, size: 0),
-                  title: Text('${instituteId} Bus Service',
-                      style: TextStyle(
-                        fontSize: 30.0,
-                      )),
-                  subtitle: Text(
-                      userTicketCount > 0
-                          ? 'You have ${userTicketCount} credits left.'
-                          : 'You have ${userTicketCount} credits left.Please click Buy More.',
-                      style: TextStyle(fontSize: 18.0)),
+                  // leading: Icon(Icons.money, size: 0),
+                  title: Center(
+                    child: Text('${instituteId} Bus Service',
+                        style: TextStyle(
+                          fontSize: 30.0,
+                        )),
+                  ),
+                  subtitle: Center(
+                    child: Text(
+                        userTicketCount > 0
+                            ? 'You have ${userTicketCount} credits left.'
+                            : 'You have ${userTicketCount} credits left.Please click Buy More.',
+                        style: TextStyle(fontSize: 18.0)),
+                  ),
                 ),
                 userTicketCount > 0
                     ? TextButton(
