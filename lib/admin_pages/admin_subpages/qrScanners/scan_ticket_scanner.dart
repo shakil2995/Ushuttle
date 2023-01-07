@@ -11,63 +11,12 @@ List<String> docIds = [];
 final User? user = Auth().currentUser;
 List<dynamic> items = [];
 int userCredit = 0;
-int ticketPrice = 30;
+int ticketPrice = 0;
 String instituteId = '';
 bool isLoaded = false;
-void main() => runApp(const MaterialApp(home: ScanQrScanner()));
-
-class ScanQrScanner extends StatefulWidget {
-  const ScanQrScanner({Key? key}) : super(key: key);
-
-  @override
-  State<ScanQrScanner> createState() => _ScanQrScannerState();
-}
-
-class _ScanQrScannerState extends State<ScanQrScanner> {
-  void fetchBusData() async {
-    getDocIds() async {
-      await FirebaseFirestore.instance
-          .collection('admin')
-          .where('email', isEqualTo: user?.email)
-          .get()
-          .then((snapshot) {
-        snapshot.docs.forEach((document) {
-          // Access the data in the document
-          var data = document.data();
-          // print(data);
-          instituteId = data['institute'];
-          int price = data['price'];
-          if (mounted) {
-            setState(() {
-              ticketPrice = price;
-              isLoaded = true;
-            });
-          }
-        });
-      });
-    }
-
-    getDocIds();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    fetchBusData();
-    return Scaffold(
-      appBar: AppBar(title: const Text('Qr home page')),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => const ScanTicket(),
-            ));
-          },
-          child: const Text('qrView'),
-        ),
-      ),
-    );
-  }
-}
+bool isTicketValid = false;
+bool isTicketAlreadyUsed = false;
+bool isTicketExpired = false;
 
 class ScanTicket extends StatefulWidget {
   const ScanTicket({Key? key}) : super(key: key);
@@ -126,7 +75,7 @@ class _QrScannerState extends State<ScanTicket> {
                               setState(() {});
                             },
                             child: FutureBuilder(
-                              future: controller?.getFlashStatus(),
+                              future: fetchBusData(),
                               builder: (context, snapshot) {
                                 return Text('Price: ${ticketPrice} tk');
                               },
@@ -324,4 +273,26 @@ class _QrScannerState extends State<ScanTicket> {
 
     getDocIds();
   }
+}
+
+fetchBusData() async {
+  getDocIds() async {
+    await FirebaseFirestore.instance
+        .collection('admin')
+        .where('email', isEqualTo: user?.email)
+        .get()
+        .then((snapshot) {
+      snapshot.docs.forEach((document) {
+        // Access the data in the document
+        var data = document.data();
+        // print(data);
+        instituteId = data['institute'];
+        int price = data['price'];
+        ticketPrice = price;
+        isLoaded = true;
+      });
+    });
+  }
+
+  getDocIds();
 }

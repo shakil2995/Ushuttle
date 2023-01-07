@@ -15,78 +15,6 @@ int ticketPrice = 0;
 String instituteId = '';
 bool isLoaded = false;
 
-void main() => runApp(const MaterialApp(home: SellQrScanner()));
-
-class SellQrScanner extends StatefulWidget {
-  const SellQrScanner({Key? key}) : super(key: key);
-
-  @override
-  State<SellQrScanner> createState() => _SellQrScannerState();
-}
-
-class _SellQrScannerState extends State<SellQrScanner> {
-  final _ticketAmount = TextEditingController();
-
-  @override
-  void dispose() {
-    _ticketAmount.dispose();
-    super.dispose();
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    fetchBusData();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Qr home page')),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => const SellTicketScanner(),
-            ));
-          },
-          child: const Text('qrView'),
-        ),
-      ),
-    );
-  }
-
-  void fetchBusData() async {
-    getDocIds() async {
-      try {
-        await FirebaseFirestore.instance
-            .collection('admin')
-            .where('email', isEqualTo: user?.email)
-            .get()
-            .then((snapshot) {
-          snapshot.docs.forEach((document) {
-            // Access the data in the document
-            var data = document.data();
-
-            print(document);
-            instituteId = data['institute'];
-            int price = data['price'];
-            print(price);
-            if (mounted) {
-              setState(() {
-                ticketPrice = price;
-                isLoaded = true;
-              });
-            }
-          });
-        });
-      } catch (e) {}
-    }
-
-    getDocIds();
-  }
-}
-
 class SellTicketScanner extends StatefulWidget {
   const SellTicketScanner({Key? key}) : super(key: key);
 
@@ -98,32 +26,6 @@ class _QrScannerState extends State<SellTicketScanner> {
   Barcode? result;
   QRViewController? controller;
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
-
-  void fetchBusData() async {
-    getDocIds() async {
-      await FirebaseFirestore.instance
-          .collection('admin')
-          .where('email', isEqualTo: user?.email)
-          .get()
-          .then((snapshot) {
-        snapshot.docs.forEach((document) {
-          // Access the data in the document
-          var data = document.data();
-          // print(data);
-          instituteId = data['institute'];
-          int price = data['price'];
-          if (mounted) {
-            setState(() {
-              ticketPrice = price;
-              isLoaded = true;
-            });
-          }
-        });
-      });
-    }
-
-    getDocIds();
-  }
 
   // In order to get hot reload to work we need to pause the camera if the platform
   // is android, or resume the camera if the platform is iOS.
@@ -138,10 +40,9 @@ class _QrScannerState extends State<SellTicketScanner> {
 
   @override
   Widget build(BuildContext context) {
-    fetchBusData();
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add Credits'),
+        title: Text('Sell Tickets'),
         automaticallyImplyLeading: true,
       ),
       body: Column(
@@ -171,7 +72,7 @@ class _QrScannerState extends State<SellTicketScanner> {
                               setState(() {});
                             },
                             child: FutureBuilder(
-                              future: controller?.getFlashStatus(),
+                              future: fetchBusData(),
                               builder: (context, snapshot) {
                                 return Text('Price: ${ticketPrice} tk');
                               },
@@ -183,16 +84,14 @@ class _QrScannerState extends State<SellTicketScanner> {
                             onPressed: () async {
                               // await controller?.flipCamera();
                               result != null ? fetchUserData() : null;
-                              print('userCredit: $userCredit');
+
                               setState(() {});
                             },
                             child: FutureBuilder(
                               future: controller?.getCameraInfo(),
                               builder: (context, snapshot) {
                                 if (snapshot.data != null) {
-                                  return Text(
-                                      // 'Add tickets to user ${describeEnum(snapshot.data!)}');
-                                      'Add credit to user');
+                                  return Text('Add credit');
                                 } else {
                                   return const Text('loading');
                                 }
@@ -283,7 +182,7 @@ class _QrScannerState extends State<SellTicketScanner> {
     super.dispose();
   }
 
-  void fetchUserData() async {
+  fetchUserData() async {
     getDocIds() async {
       try {
         await FirebaseFirestore.instance
@@ -294,46 +193,49 @@ class _QrScannerState extends State<SellTicketScanner> {
           snapshot.docs.forEach((document) {
             // Access the data in the document
             var data = document.data();
+
             final docUser =
                 FirebaseFirestore.instance.collection('users').doc(document.id);
             docUser.update({
               'credit': FieldValue.increment(ticketPrice),
             });
+            showDialog(
+                context: context,
+                builder: (context) => AlertDialog(
+                      title: const Text('Success'),
+                      content: result!.code != null
+                          ? Text(
+                              '${ticketPrice} credits added to ${result!.code}. User has ${data['credit'] + ticketPrice} cedits left')
+                          : const Text('No user found'),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: const Text('OK'),
+                        )
+                      ],
+                    ));
+            // hasTicket = true;
 
             print(document);
             instituteId = data['institute'];
-            int ticket = data['ticket'];
+            int credit = data['credit'];
             if (mounted) {
               setState(() {
-                userCredit = ticket;
+                userCredit = credit;
                 isLoaded = true;
               });
             }
           });
         });
-        showDialog(
-            context: context,
-            builder: (context) => AlertDialog(
-                  title: const Text('Success'),
-                  content: result!.code != null
-                      ? Text(
-                          '${ticketPrice} credits added to ${result!.code}. User now has ${userCredit + ticketPrice} credits')
-                      : const Text('No user found'),
-                  actions: [
-                    TextButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      child: const Text('OK'),
-                    )
-                  ],
-                ));
       } catch (e) {
         showDialog(
             context: context,
             builder: (context) => AlertDialog(
                   title: const Text('Error'),
-                  content: Text('Operation failed. Please try again later'),
+                  content: Text(
+                      'Operation failed. Please try again later .Make sure you have internet connection'),
                   actions: [
                     TextButton(
                       onPressed: () {
@@ -348,4 +250,26 @@ class _QrScannerState extends State<SellTicketScanner> {
 
     getDocIds();
   }
+}
+
+fetchBusData() async {
+  getDocIds() async {
+    await FirebaseFirestore.instance
+        .collection('admin')
+        .where('email', isEqualTo: user?.email)
+        .get()
+        .then((snapshot) {
+      snapshot.docs.forEach((document) {
+        // Access the data in the document
+        var data = document.data();
+        // print(data);
+        instituteId = data['institute'];
+        int price = data['price'];
+        ticketPrice = price;
+        isLoaded = true;
+      });
+    });
+  }
+
+  getDocIds();
 }
