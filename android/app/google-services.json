@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "415414697651",
+    "firebase_url": "https://ushuttle-backend-v2-default-rtdb.firebaseio.com",
     "project_id": "ushuttle-backend-v2",
     "storage_bucket": "ushuttle-backend-v2.appspot.com"
   },
