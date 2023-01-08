@@ -1,7 +1,7 @@
 {
   "file_generated_by": "FlutterFire CLI",
   "purpose": "FirebaseAppID & ProjectID for this Firebase app in this directory",
-  "GOOGLE_APP_ID": "1:1011375431235:ios:1f8b2445c77fcd35e2fef6",
-  "FIREBASE_PROJECT_ID": "ushuttle-backend",
-  "GCM_SENDER_ID": "1011375431235"
+  "GOOGLE_APP_ID": "1:415414697651:ios:e19f6348298bad65cbbac6",
+  "FIREBASE_PROJECT_ID": "ushuttle-backend-v2",
+  "GCM_SENDER_ID": "415414697651"
 }

@@ -1,34 +1,41 @@
 {
   "project_info": {
-    "project_number": "1011375431235",
-    "project_id": "ushuttle-backend",
-    "storage_bucket": "ushuttle-backend.appspot.com"
+    "project_number": "415414697651",
+    "project_id": "ushuttle-backend-v2",
+    "storage_bucket": "ushuttle-backend-v2.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1011375431235:android:f17bb42f3ac0433be2fef6",
+        "mobilesdk_app_id": "1:415414697651:android:231b2a92601f14f9cbbac6",
         "android_client_info": {
           "package_name": "com.example.ushuttlev1"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1011375431235-gvekn802an7joljnrc6446c7e0fqv9l1.apps.googleusercontent.com",
+          "client_id": "415414697651-fm0ld6c661rilhukfbm07bnoke7nqon9.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCnjlBt9qfM2vlQt9wRytDOSg67eSjOWfQ"
+          "current_key": "AIzaSyD23QbHuidydnvSLEHMPAHlzXoGr414F3k"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1011375431235-gvekn802an7joljnrc6446c7e0fqv9l1.apps.googleusercontent.com",
+              "client_id": "415414697651-fm0ld6c661rilhukfbm07bnoke7nqon9.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "415414697651-01kmkui4unt6gag4b5eunuch2cinl7cg.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.ushuttlev1"
+              }
             }
           ]
         }
