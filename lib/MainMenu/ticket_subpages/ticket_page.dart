@@ -13,6 +13,7 @@ List<dynamic> items = [];
 int userTicketCount = 0;
 String instituteId = '';
 bool isLoaded = false;
+Map<String, dynamic>? userData;
 
 class TicketPage extends StatefulWidget {
   const TicketPage({super.key});
@@ -60,7 +61,11 @@ class _TicketPageState extends State<TicketPage> {
       querySnapshot.docs.forEach((document) {
         document.reference.snapshots().listen((snapshot) {
           if (mounted) {
+            // print(snapshot.data());
+
             setState(() {
+              userData = snapshot.data();
+              // print(userData);
               userTicketCount = snapshot.data()!['credit'];
               isLoaded = true;
             });
@@ -178,15 +183,33 @@ class MyCardWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
-          'You have $userTicketCount credits',
+          // 'You have $userTicketCount credits',
+          'Upcoming Rides',
+          textAlign: TextAlign.start,
           style: TextStyle(
-              color: !isDark ? Colors.black : Colors.white, fontSize: 20),
+              color: !isDark ? Colors.black : Colors.white,
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              fontFamily: 'Montserrat'),
         ),
         Padding(
           padding: const EdgeInsets.only(top: 8.0),
-          child: TicketView(
-              // isDark: isDark,
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Padding(
+              padding: const EdgeInsets.only(left: 20),
+              child: Row(
+                children: [
+                  TicketView(userData
+                      // isDark: isDark,
+                      ),
+                  // TicketView(userData
+                  //     // isDark: isDark,
+                  //     ),
+                ],
               ),
+            ),
+          ),
         ),
         Container(
           padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 8.0),
