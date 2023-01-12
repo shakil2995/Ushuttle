@@ -184,7 +184,7 @@ class MyCardWidget extends StatelessWidget {
       children: [
         Text(
           // 'You have $userTicketCount credits',
-          'Upcoming Rides',
+          'Available Rides',
           textAlign: TextAlign.start,
           style: TextStyle(
               color: !isDark ? Colors.black : Colors.white,
@@ -200,9 +200,11 @@ class MyCardWidget extends StatelessWidget {
               padding: const EdgeInsets.only(left: 20),
               child: Row(
                 children: [
-                  TicketView(userData
-                      // isDark: isDark,
-                      ),
+                  userTicketCount > 0
+                      ? TicketView(userData
+                          // isDark: isDark,
+                          )
+                      : Text('No Rides Available')
                   // TicketView(userData
                   //     // isDark: isDark,
                   //     ),

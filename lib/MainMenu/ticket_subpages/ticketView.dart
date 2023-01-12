@@ -2,6 +2,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:ushuttlev1/MainMenu/ticket_subpages/ticket_page.dart';
+import 'package:intl/intl.dart';
 
 class TicketView extends StatefulWidget {
   TicketView(Map<String, dynamic>? userData, {super.key});
@@ -16,15 +17,15 @@ class _TicketViewState extends State<TicketView> {
     // print(userData!['ticketDetails']['from']);
     final credit = userData!['credit'];
     final institute = userData!['institute'];
-    final buyDate = userData!['ticketDetails']['buyDate'];
+    // final buyDate = userData!['ticketDetails']['buyDate'];
     final busName = userData!['ticketDetails']['busName'];
     final from = userData!['ticketDetails']['from'];
     final endPoint = userData!['ticketDetails']['endPoint'];
     final startPoint = userData!['ticketDetails']['startPoint'];
     final to = userData!['ticketDetails']['to'];
-    final expireDate = userData!['ticketDetails']['expireDate'];
+    // final expireDate = userData!['ticketDetails']['expireDate'];
     bool isTwoWay = userData!['ticketDetails']['isTwoWay'];
-    int daysRemain = userData!['ticketDetails']['daysRemain'];
+    int rideRemain = userData!['ticketDetails']['rideRemain'];
     final startTime = userData!['ticketDetails']['startTime'];
     final fare = userData!['ticketDetails']['fare'];
     final returnTime = userData!['ticketDetails']['returnTime'];
@@ -32,9 +33,21 @@ class _TicketViewState extends State<TicketView> {
     final ticket = userData!['ticket'];
     final lastName = userData!['lastName'];
     final firstName = userData!['firstName'];
+    var seatNo = userData!['ticketDetails']['seatNo'];
+    final buyDate = DateTime.fromMillisecondsSinceEpoch(
+        userData!['ticketDetails']['buyDate'].seconds * 1000 +
+            userData!['ticketDetails']['buyDate'].nanoseconds ~/ 1000000);
+    final expireDate = DateTime.fromMillisecondsSinceEpoch(
+        userData!['ticketDetails']['expireDate'].seconds * 1000 +
+            userData!['ticketDetails']['expireDate'].nanoseconds ~/ 1000000);
+
+//Format DateTime
+    final buyDateString = DateFormat("dd-MM-yy").format(buyDate);
+    final expireDateString = DateFormat("dd-MM-yy").format(expireDate);
+
     return SizedBox(
       width: MediaQuery.of(context).size.width * .8,
-      height: 200,
+      height: 220,
       child: Container(
         margin: const EdgeInsets.only(right: 16),
         child: Column(
@@ -50,6 +63,14 @@ class _TicketViewState extends State<TicketView> {
               padding: const EdgeInsets.all(16),
               child: Column(
                 children: [
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 8),
+                    child: Text(busName,
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500)),
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -201,7 +222,7 @@ class _TicketViewState extends State<TicketView> {
                     Column(
                       children: [
                         Text(
-                          busName,
+                          "Buy Date",
                           style: TextStyle(
                               fontSize: 16, fontWeight: FontWeight.w500),
                         ),
@@ -209,7 +230,16 @@ class _TicketViewState extends State<TicketView> {
                           height: 8,
                         ),
                         Text(
-                          fare,
+                          buyDateString,
+                          style: TextStyle(
+                              fontSize: 12, fontWeight: FontWeight.w500),
+                          textAlign: TextAlign.start,
+                        ),
+                        const SizedBox(
+                          height: 8,
+                        ),
+                        Text(
+                          isTwoWay ? "Two Way" : "One Way",
                           style: TextStyle(
                               fontSize: 12, fontWeight: FontWeight.w500),
                           textAlign: TextAlign.start,
@@ -219,7 +249,7 @@ class _TicketViewState extends State<TicketView> {
                     Column(
                       children: [
                         Text(
-                          returnTime,
+                          startTime,
                           style: TextStyle(
                               fontSize: 16, fontWeight: FontWeight.w500),
                           textAlign: TextAlign.center,
@@ -228,7 +258,16 @@ class _TicketViewState extends State<TicketView> {
                           height: 8,
                         ),
                         Text(
-                          startTime,
+                          returnTime,
+                          style: TextStyle(
+                              fontSize: 12, fontWeight: FontWeight.w500),
+                          textAlign: TextAlign.start,
+                        ),
+                        const SizedBox(
+                          height: 8,
+                        ),
+                        Text(
+                          "Seat no $seatNo",
                           style: TextStyle(
                               fontSize: 12, fontWeight: FontWeight.w500),
                           textAlign: TextAlign.start,
@@ -238,7 +277,7 @@ class _TicketViewState extends State<TicketView> {
                     Column(
                       children: [
                         Text(
-                          buyDate.toString().substring(0, 10),
+                          "Expire Date",
                           style: TextStyle(
                               fontSize: 16, fontWeight: FontWeight.w500),
                         ),
@@ -246,7 +285,15 @@ class _TicketViewState extends State<TicketView> {
                           height: 8,
                         ),
                         Text(
-                          expireDate.toString().substring(0, 10),
+                          expireDateString,
+                          style: TextStyle(
+                              fontSize: 12, fontWeight: FontWeight.w500),
+                        ),
+                        const SizedBox(
+                          height: 8,
+                        ),
+                        Text(
+                          "$rideRemain rides left",
                           style: TextStyle(
                               fontSize: 12, fontWeight: FontWeight.w500),
                         ),
