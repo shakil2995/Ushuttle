@@ -13,7 +13,7 @@ class TicketView extends StatefulWidget {
 class _TicketViewState extends State<TicketView> {
   @override
   Widget build(BuildContext context) {
-    print(userData);
+    // print(userData);
     final credit = userData!['credit'];
     final lastName = userData!['lastName'];
     final ticketArray = userData!['ticketArray'];
@@ -86,7 +86,7 @@ class _TicketViewState extends State<TicketView> {
                           child: LayoutBuilder(
                             builder: (BuildContext context,
                                 BoxConstraints constraints) {
-                              print(constraints.constrainWidth());
+                              // print(constraints.constrainWidth());
                               return Flex(
                                   direction: Axis.horizontal,
                                   mainAxisAlignment: MainAxisAlignment.center,
