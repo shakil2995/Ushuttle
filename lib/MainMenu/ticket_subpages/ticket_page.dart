@@ -26,32 +26,7 @@ class _TicketPageState extends State<TicketPage> {
     super.initState();
     fetchUserData();
   }
-  // void fetchUserData() async {
-  //   getDocIds() async {
-  //     await FirebaseFirestore.instance
-  //         .collection('users')
-  //         .where('email', isEqualTo: user?.email)
-  //         .get()
-  //         .then((snapshot) {
-  //       snapshot.docs.forEach((document) {
-  //         // Access the data in the document
-  //         var data = document.data();
-  //         // print(data);
-  //         instituteId = data['institute'];
-  //         int ticket = data['credit'];
-  //         if (mounted) {
-  //           setState(() {
-  //             userTicketCount = ticket;
-  //             isLoaded = true;
-  //           });
-  //         }
-  //       });
-  //     });
-  //   }
 
-  //   await Future.delayed(Duration(seconds: 2));
-  //   getDocIds();
-  // }
   void fetchUserData() {
     FirebaseFirestore.instance
         .collection('users')
@@ -65,8 +40,9 @@ class _TicketPageState extends State<TicketPage> {
 
             setState(() {
               userData = snapshot.data();
-              // print(userData);
-              userTicketCount = snapshot.data()!['credit'];
+              // print(userData!["ticketArray"][0]);
+              // userTicketCount = snapshot.data()!['credit'];
+              userTicketCount = (userData!["ticketArray"]).length;
               isLoaded = true;
             });
           }
@@ -192,101 +168,127 @@ class MyCardWidget extends StatelessWidget {
               fontWeight: FontWeight.bold,
               fontFamily: 'Montserrat'),
         ),
-        Padding(
-          padding: const EdgeInsets.only(top: 8.0),
-          child: SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Padding(
-              padding: const EdgeInsets.only(left: 20),
-              child: Row(
-                children: [
-                  userTicketCount > 0
-                      ? TicketView(userData
-                          // isDark: isDark,
-                          )
-                      : Text('No Rides Available')
-                  // TicketView(userData
-                  //     // isDark: isDark,
-                  //     ),
-                ],
+        Center(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 8.0),
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 20),
+                child: Row(
+                  children: [
+                    userTicketCount > 0
+                        ? TicketView(userData!["ticketArray"][0]
+                            // isDark: isDark,
+                            )
+                        : Text('No Rides Available')
+                    // TicketView(userData
+                    //     // isDark: isDark,
+                    //     ),
+                  ],
+                ),
               ),
             ),
           ),
         ),
-        Container(
-          padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 8.0),
-          height: 400,
-          child: Card(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15.0),
-            ),
-            // color: !isDark ? Colors.white : Colors.blueGrey.shade900,
-            elevation: 10,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Icon(Icons.money,
-                    size: 100.0, color: !isDark ? Colors.blue : Colors.white),
-                ListTile(
-                  // leading: Icon(Icons.money, size: 0),
-                  title: Center(
-                    child: Text('${instituteId} Bus Service',
-                        style: TextStyle(
-                          fontSize: 30.0,
-                        )),
-                  ),
-                  subtitle: Center(
-                    child: Text(
-                        userTicketCount > 0
-                            ? 'You have ${userTicketCount} credits left.'
-                            : 'You have ${userTicketCount} credits left.Please click Buy More.',
-                        style: TextStyle(fontSize: 18.0)),
-                  ),
+        Center(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 8.0),
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 20),
+                child: Row(
+                  children: [
+                    userTicketCount > 0
+                        ? TicketView(userData!["ticketArray"][0]
+                            // isDark: isDark,
+                            )
+                        : Text('No Rides Available')
+                    // TicketView(userData
+                    //     // isDark: isDark,
+                    //     ),
+                  ],
                 ),
-                userTicketCount > 0
-                    ? TextButton(
-                        style: TextButton.styleFrom(
-                          foregroundColor: Colors.white,
-                          backgroundColor: isDark
-                              ? Color.fromARGB(255, 197, 75, 75)
-                              : Colors.red,
-                          disabledForegroundColor:
-                              Colors.grey.withOpacity(0.38),
-                        ),
-                        child: const Text('Use Credit'),
-                        onPressed: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (BuildContext context) {
-                                return QrGenerator('Scan to use Credit');
-                              },
-                            ),
-                          );
-                        },
-                      )
-                    : Text(''),
-                TextButton(
-                  style: TextButton.styleFrom(
-                    foregroundColor: Colors.white,
-                    backgroundColor: isDark ? Colors.blueGrey : Colors.blue,
-                    disabledForegroundColor: Colors.grey.withOpacity(0.38),
-                  ),
-                  child: const Text('Buy More'),
-                  onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (BuildContext context) {
-                          return QrGenerator('Scan to buy Credit');
-                        },
-                      ),
-                    );
-                  },
-                ),
-              ],
+              ),
             ),
           ),
         ),
+
+        // Container(
+        //   padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 8.0),
+        //   height: 400,
+        //   child: Card(
+        //     shape: RoundedRectangleBorder(
+        //       borderRadius: BorderRadius.circular(15.0),
+        //     ),
+        //     // color: !isDark ? Colors.white : Colors.blueGrey.shade900,
+        //     elevation: 10,
+        //     child: Column(
+        //       crossAxisAlignment: CrossAxisAlignment.center,
+        //       mainAxisAlignment: MainAxisAlignment.center,
+        //       children: <Widget>[
+        //         Icon(Icons.money,
+        //             size: 100.0, color: !isDark ? Colors.blue : Colors.white),
+        //         ListTile(
+        //           // leading: Icon(Icons.money, size: 0),
+        //           title: Center(
+        //             child: Text('${instituteId} Bus Service',
+        //                 style: TextStyle(
+        //                   fontSize: 30.0,
+        //                 )),
+        //           ),
+        //           subtitle: Center(
+        //             child: Text(
+        //                 userTicketCount > 0
+        //                     ? 'You have ${userTicketCount} credits left.'
+        //                     : 'You have ${userTicketCount} credits left.Please click Buy More.',
+        //                 style: TextStyle(fontSize: 18.0)),
+        //           ),
+        //         ),
+        //         userTicketCount > 0
+        //             ? TextButton(
+        //                 style: TextButton.styleFrom(
+        //                   foregroundColor: Colors.white,
+        //                   backgroundColor: isDark
+        //                       ? Color.fromARGB(255, 197, 75, 75)
+        //                       : Colors.red,
+        //                   disabledForegroundColor:
+        //                       Colors.grey.withOpacity(0.38),
+        //                 ),
+        //                 child: const Text('Use Credit'),
+        //                 onPressed: () {
+        //                   Navigator.of(context).push(
+        //                     MaterialPageRoute(
+        //                       builder: (BuildContext context) {
+        //                         return QrGenerator('Scan to use Credit');
+        //                       },
+        //                     ),
+        //                   );
+        //                 },
+        //               )
+        //             : Text(''),
+        //         TextButton(
+        //           style: TextButton.styleFrom(
+        //             foregroundColor: Colors.white,
+        //             backgroundColor: isDark ? Colors.blueGrey : Colors.blue,
+        //             disabledForegroundColor: Colors.grey.withOpacity(0.38),
+        //           ),
+        //           child: const Text('Buy More'),
+        //           onPressed: () {
+        //             Navigator.of(context).push(
+        //               MaterialPageRoute(
+        //                 builder: (BuildContext context) {
+        //                   return QrGenerator('Scan to buy Credit');
+        //                 },
+        //               ),
+        //             );
+        //           },
+        //         ),
+        //       ],
+        //     ),
+        //   ),
+        // ),
       ],
     );
   }

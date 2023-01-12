@@ -1,5 +1,4 @@
 // import 'package:flutter/cupertino.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:ushuttlev1/MainMenu/ticket_subpages/ticket_page.dart';
 import 'package:intl/intl.dart';
@@ -14,34 +13,33 @@ class TicketView extends StatefulWidget {
 class _TicketViewState extends State<TicketView> {
   @override
   Widget build(BuildContext context) {
-    // print(userData!['ticketDetails']['from']);
+    print(userData);
     final credit = userData!['credit'];
-    final institute = userData!['institute'];
-    // final buyDate = userData!['ticketDetails']['buyDate'];
-    final busName = userData!['ticketDetails']['busName'];
-    final from = userData!['ticketDetails']['from'];
-    final endPoint = userData!['ticketDetails']['endPoint'];
-    final startPoint = userData!['ticketDetails']['startPoint'];
-    final to = userData!['ticketDetails']['to'];
-    // final expireDate = userData!['ticketDetails']['expireDate'];
-    bool isTwoWay = userData!['ticketDetails']['isTwoWay'];
-    int rideRemain = userData!['ticketDetails']['rideRemain'];
-    final startTime = userData!['ticketDetails']['startTime'];
-    final fare = userData!['ticketDetails']['fare'];
-    final returnTime = userData!['ticketDetails']['returnTime'];
-    final email = userData!['email'];
-    final ticket = userData!['ticket'];
     final lastName = userData!['lastName'];
-    final firstName = userData!['firstName'];
-    var seatNo = userData!['ticketDetails']['seatNo'];
-    final buyDate = DateTime.fromMillisecondsSinceEpoch(
-        userData!['ticketDetails']['buyDate'].seconds * 1000 +
-            userData!['ticketDetails']['buyDate'].nanoseconds ~/ 1000000);
-    final expireDate = DateTime.fromMillisecondsSinceEpoch(
-        userData!['ticketDetails']['expireDate'].seconds * 1000 +
-            userData!['ticketDetails']['expireDate'].nanoseconds ~/ 1000000);
+    final ticketArray = userData!['ticketArray'];
+    final firstTicket = ticketArray[0];
+    final startPoint = firstTicket['startPoint'];
+    final fare = firstTicket['fare'];
+    final to = firstTicket['to'];
+    final rideRemain = firstTicket['rideRemain'];
+    final seatNo = firstTicket['seatNo'];
+    final isTwoWay = firstTicket['isTwoWay'];
+    final returnTime = firstTicket['returnTime'];
+    final endPoint = firstTicket['endPoint'];
+    final from = firstTicket['from'];
+    final startTime = firstTicket['startTime'];
+    final busName = firstTicket['busName'];
+    // final ticket = userData!['ticket'];
+    // final institute = userData!['institute'];
+    // final email = userData!['email'];
+    // final firstName = userData!['firstName'];
 
-//Format DateTime
+    final buyDate = DateTime.fromMillisecondsSinceEpoch(
+        firstTicket['buyDate'].seconds * 1000 +
+            firstTicket['buyDate'].nanoseconds ~/ 1000000);
+    final expireDate = DateTime.fromMillisecondsSinceEpoch(
+        firstTicket['expireDate'].seconds * 1000 +
+            firstTicket['expireDate'].nanoseconds ~/ 1000000);
     final buyDateString = DateFormat("dd-MM-yy").format(buyDate);
     final expireDateString = DateFormat("dd-MM-yy").format(expireDate);
 
@@ -130,7 +128,7 @@ class _TicketViewState extends State<TicketView> {
                           ),
                         ),
                         Text(
-                          startTime,
+                          "Fare $fare",
                           style: TextStyle(
                               fontSize: 12, fontWeight: FontWeight.w500),
                           textAlign: TextAlign.end,
