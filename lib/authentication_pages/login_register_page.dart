@@ -93,7 +93,7 @@ class _LoginPageState extends State<LoginPage> {
       });
       // Navigator.of(context).pop();
     } on FirebaseAuthException catch (e) {
-      debugPrint(e.message);
+      // debugPrint(e.message);
       setState(() {
         errorMesssage = e.message;
       });

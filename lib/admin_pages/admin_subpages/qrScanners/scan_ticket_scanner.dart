@@ -240,7 +240,7 @@ class _QrScannerState extends State<ScanTicket> {
                       ));
             }
 
-            print(document);
+            // print(document);
             instituteId = data['institute'];
             int credit = data['credit'];
             if (mounted) {

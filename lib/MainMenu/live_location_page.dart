@@ -104,7 +104,7 @@ class _LiveLocationPageState extends State<LiveLocationPage>
               );
             });
           } else {
-            debugPrint('no data');
+            debugPrint('no coordicates data');
           }
         });
       }

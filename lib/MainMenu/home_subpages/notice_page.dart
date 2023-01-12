@@ -34,7 +34,7 @@ class _NoticePageState extends State<NoticePage> {
       );
       final body = response.body;
       final json = jsonDecode(body);
-      print(json);
+      // print(json);
       setState(() {
         _controllerNotice.text = json['results'][0]['notice'];
       });

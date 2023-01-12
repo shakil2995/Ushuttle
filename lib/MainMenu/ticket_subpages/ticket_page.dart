@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:ushuttlev1/MainMenu/ticket_subpages/ticketView.dart';
 import 'package:ushuttlev1/authentication_pages/auth.dart';
 import 'package:ushuttlev1/MainMenu/ticket_subpages/qrGenerator.dart';
 import 'package:provider/provider.dart';
@@ -20,35 +21,58 @@ class TicketPage extends StatefulWidget {
 }
 
 class _TicketPageState extends State<TicketPage> {
-  void fetchUserData() async {
-    getDocIds() async {
-      await FirebaseFirestore.instance
-          .collection('users')
-          .where('email', isEqualTo: user?.email)
-          .get()
-          .then((snapshot) {
-        snapshot.docs.forEach((document) {
-          // Access the data in the document
-          var data = document.data();
-          // print(data);
-          instituteId = data['institute'];
-          int ticket = data['credit'];
+  void initState() {
+    super.initState();
+    fetchUserData();
+  }
+  // void fetchUserData() async {
+  //   getDocIds() async {
+  //     await FirebaseFirestore.instance
+  //         .collection('users')
+  //         .where('email', isEqualTo: user?.email)
+  //         .get()
+  //         .then((snapshot) {
+  //       snapshot.docs.forEach((document) {
+  //         // Access the data in the document
+  //         var data = document.data();
+  //         // print(data);
+  //         instituteId = data['institute'];
+  //         int ticket = data['credit'];
+  //         if (mounted) {
+  //           setState(() {
+  //             userTicketCount = ticket;
+  //             isLoaded = true;
+  //           });
+  //         }
+  //       });
+  //     });
+  //   }
+
+  //   await Future.delayed(Duration(seconds: 2));
+  //   getDocIds();
+  // }
+  void fetchUserData() {
+    FirebaseFirestore.instance
+        .collection('users')
+        .where('email', isEqualTo: user?.email)
+        .get()
+        .then((querySnapshot) {
+      querySnapshot.docs.forEach((document) {
+        document.reference.snapshots().listen((snapshot) {
           if (mounted) {
             setState(() {
-              userTicketCount = ticket;
+              userTicketCount = snapshot.data()!['credit'];
               isLoaded = true;
             });
           }
         });
       });
-    }
-
-    getDocIds();
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    fetchUserData();
+    // mounted ? fetchUserData() : null;
     final themeProvider = Provider.of<ThemeProvider>(context);
     return Scaffold(
       appBar: AppBar(
@@ -153,6 +177,17 @@ class MyCardWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
+        Text(
+          'You have $userTicketCount credits',
+          style: TextStyle(
+              color: !isDark ? Colors.black : Colors.white, fontSize: 20),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 8.0),
+          child: TicketView(
+              // isDark: isDark,
+              ),
+        ),
         Container(
           padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 8.0),
           height: 400,
