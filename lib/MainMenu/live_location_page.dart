@@ -21,35 +21,12 @@ var lat = 23.874191;
 var lng = 90.381035;
 
 List<dynamic> items = [];
-var busMarkers = <Marker>[
-  // Marker(
-  //   rotate: true,
-  //   width: 80,
-  //   height: 80,
-  //   point: LatLng(23.874191, 90.381035),
-  //   builder: (ctx) => const Icon(
-  //     Icons.directions_bus,
-  //     size: 50,
-  //     color: Color.fromARGB(255, 4, 4, 4),
-  //   ),
-  // ),
-];
-// final item = items[0];
-// var busNo = item['busNo'];
-// var latitude = item['location']['coordinates']['latitude'];
-// var longitude = item['location']['coordinates']['longitude'];
-// LatLng buslocation = LatLng(lat, lng);
-// latitude = double.parse(latitude);
-// longitude = double.parse(longitude);
+var busMarkers = <Marker>[];
 
 class LiveLocationPage extends StatefulWidget {
-  // static const String route = '/live_location';
-
   const LiveLocationPage({Key? key}) : super(key: key);
 
   @override
-
-  // ignore: library_private_types_in_public_api
   _LiveLocationPageState createState() => _LiveLocationPageState();
 }
 
@@ -129,7 +106,6 @@ class _LiveLocationPageState extends State<LiveLocationPage>
           } else {
             debugPrint('no data');
           }
-          // buslocation = LatLng(latitude, longitude);
         });
       }
     });
@@ -226,7 +202,7 @@ class _LiveLocationPageState extends State<LiveLocationPage>
   Widget build(BuildContext context) {
     LatLng currentLatLng;
     // LatLng currentBusLatLng = LatLng(lat, lng);
-// add 2 second delay
+    // add 2 second delay
     // Future.delayed(const Duration(seconds: 2), () {});
     // Until currentLocation is initially updated, Widget can locate to 23.809320, 90.397847
     // by default or store previous location value to show.
