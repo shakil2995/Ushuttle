@@ -77,20 +77,20 @@ class GetUserDetails extends StatelessWidget {
                     icon: Icons.wallet,
                     // textColor: Colors.white,
                   ),
-                  menuWidget(
-                    title: 'My Tickets',
-                    onPress: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (BuildContext context) {
-                            return TicketPage();
-                          },
-                        ),
-                      );
-                    },
-                    icon: Icons.local_movies,
-                    // textColor: Colors.white,
-                  ),
+                  // menuWidget(
+                  //   title: 'My Tickets',
+                  //   onPress: () {
+                  //     Navigator.of(context).push(
+                  //       MaterialPageRoute(
+                  //         builder: (BuildContext context) {
+                  //           return TicketPage();
+                  //         },
+                  //       ),
+                  //     );
+                  //   },
+                  //   icon: Icons.local_movies,
+                  //   // textColor: Colors.white,
+                  // ),
                   Divider(),
                   menuWidget(
                     title: 'About Us',

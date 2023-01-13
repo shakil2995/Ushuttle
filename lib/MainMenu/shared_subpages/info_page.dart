@@ -38,7 +38,7 @@ class InfoPage extends StatelessWidget {
             width: double.infinity,
             child: const Center(
               child: Text(
-                  'This app is created by Ushuttle Team.\nFor any queries, please contact us.',
+                  'Created by Ushuttle Team.\nFor any queries, please contact us.',
                   style: TextStyle(color: Colors.white)),
             ),
           ),
@@ -48,7 +48,7 @@ class InfoPage extends StatelessWidget {
             color: Colors.blueGrey,
             width: double.infinity,
             child: const Center(
-              child: Text('App version : 0.7.9 (Beta release))',
+              child: Text('App version : 0.8.9 (Beta release))',
                   style: TextStyle(color: Colors.white)),
             ),
           ),

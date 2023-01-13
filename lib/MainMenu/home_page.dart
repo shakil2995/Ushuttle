@@ -6,6 +6,7 @@ import 'package:ushuttlev1/MainMenu/home_subpages/safety_security_page.dart';
 import 'package:ushuttlev1/MainMenu/home_subpages/schedule_page.dart';
 import 'package:ushuttlev1/MainMenu/home_subpages/stoppage_page.dart';
 import 'package:provider/provider.dart';
+import 'package:ushuttlev1/MainMenu/shared_subpages/info_page.dart';
 import 'package:ushuttlev1/provider/theme_provider.dart';
 import 'package:ushuttlev1/MainMenu/ticket_subpages/ticket_page.dart';
 
@@ -53,21 +54,21 @@ class _HomePageState extends State<HomePage> {
               backgroundColor: scheduleColor,
               isDark: themeProvider.isDark,
             ),
-            buttonWidget(
-              title: 'Fare',
-              icon: Icons.monetization_on,
-              onPress: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (BuildContext context) {
-                      return const FarePage();
-                    },
-                  ),
-                );
-              },
-              backgroundColor: fareColor,
-              isDark: themeProvider.isDark,
-            ),
+            // buttonWidget(
+            //   title: 'Fare',
+            //   icon: Icons.monetization_on,
+            //   onPress: () {
+            //     Navigator.of(context).push(
+            //       MaterialPageRoute(
+            //         builder: (BuildContext context) {
+            //           return const FarePage();
+            //         },
+            //       ),
+            //     );
+            //   },
+            //   backgroundColor: fareColor,
+            //   isDark: themeProvider.isDark,
+            // ),
             buttonWidget(
               title: 'Stoppage',
               icon: Icons.bus_alert,
@@ -98,21 +99,21 @@ class _HomePageState extends State<HomePage> {
               backgroundColor: noticeColor,
               isDark: themeProvider.isDark,
             ),
-            buttonWidget(
-              title: 'Ticket',
-              icon: Icons.local_movies,
-              onPress: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (BuildContext context) {
-                      return TicketPage();
-                    },
-                  ),
-                );
-              },
-              backgroundColor: ticketColor,
-              isDark: themeProvider.isDark,
-            ),
+            // buttonWidget(
+            //   title: 'Ticket',
+            //   icon: Icons.local_movies,
+            //   onPress: () {
+            //     Navigator.of(context).push(
+            //       MaterialPageRoute(
+            //         builder: (BuildContext context) {
+            //           return TicketPage();
+            //         },
+            //       ),
+            //     );
+            //   },
+            //   backgroundColor: ticketColor,
+            //   isDark: themeProvider.isDark,
+            // ),
             buttonWidget(
               title: 'Safety',
               icon: Icons.safety_check,
@@ -121,6 +122,21 @@ class _HomePageState extends State<HomePage> {
                   MaterialPageRoute(
                     builder: (BuildContext context) {
                       return SafetyAndSecurityPage();
+                    },
+                  ),
+                );
+              },
+              backgroundColor: ticketColor,
+              isDark: themeProvider.isDark,
+            ),
+            buttonWidget(
+              title: 'About Us',
+              icon: Icons.info,
+              onPress: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (BuildContext context) {
+                      return InfoPage();
                     },
                   ),
                 );
