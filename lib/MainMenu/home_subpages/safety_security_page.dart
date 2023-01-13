@@ -3,9 +3,11 @@ import 'package:expandable/expandable.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:ushuttlev1/MainMenu/home_subpages/emergencies/LiveSafe.dart';
 import 'package:ushuttlev1/MainMenu/home_subpages/emergencies/ambulance_emergency.dart';
 import 'package:ushuttlev1/MainMenu/home_subpages/emergencies/firefighter_emergency.dart';
 import 'package:ushuttlev1/MainMenu/home_subpages/emergencies/police_emergency.dart';
+import 'package:ushuttlev1/MainMenu/home_subpages/emergencies/ushuttle_helpdesk.dart';
 import 'package:ushuttlev1/provider/theme_provider.dart';
 
 class SafetyAndSecurityPage extends StatefulWidget {
@@ -40,13 +42,14 @@ class _SafetyAndSecurityPageState extends State<SafetyAndSecurityPage> {
         body: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text('Emergency contacts',
                     textAlign: TextAlign.start,
                     style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 25,
                       fontWeight: FontWeight.bold,
                       color: themeProvider.isDark
                           ? Color.fromARGB(255, 255, 255, 255)
@@ -63,9 +66,26 @@ class _SafetyAndSecurityPageState extends State<SafetyAndSecurityPage> {
                     PoliceEmergency(),
                     FirefighterEmergency(),
                     AmbulanceEmergency(),
+                    UshuttleHelpDesk()
                   ],
                 ),
               ),
+              Divider(),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text('Explore LiveSafe',
+                    textAlign: TextAlign.start,
+                    style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                      color: themeProvider.isDark
+                          ? Color.fromARGB(255, 255, 255, 255)
+                          : Color.fromARGB(255, 35, 35, 35),
+                    )),
+              ),
+              LiveSafe(),
+              SizedBox(height: 5),
+              Divider(),
             ],
           ),
         ));

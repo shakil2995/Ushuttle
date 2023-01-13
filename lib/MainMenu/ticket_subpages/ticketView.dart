@@ -1,7 +1,9 @@
 // import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:ushuttlev1/MainMenu/ticket_subpages/ticket_page.dart';
 import 'package:intl/intl.dart';
+import 'package:ushuttlev1/provider/theme_provider.dart';
 
 class TicketView extends StatefulWidget {
   TicketView(Map<String, dynamic>? userData, {super.key});
@@ -13,6 +15,7 @@ class TicketView extends StatefulWidget {
 class _TicketViewState extends State<TicketView> {
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
     // print(userData);
     final credit = userData!['credit'];
     final lastName = userData!['lastName'];
@@ -53,7 +56,9 @@ class _TicketViewState extends State<TicketView> {
           children: [
             Container(
               decoration: BoxDecoration(
-                color: Color(0xFF526799),
+                color: themeProvider.isDark
+                    ? Color.fromARGB(255, 49, 89, 183)
+                    : Color.fromARGB(255, 85, 119, 198),
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(21),
                     topRight: Radius.circular(21)),
@@ -75,7 +80,9 @@ class _TicketViewState extends State<TicketView> {
                       Text(
                         from,
                         style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.w500),
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500),
                       ),
                       Expanded(child: Container()),
                       ticketThickBorder(),
@@ -91,15 +98,22 @@ class _TicketViewState extends State<TicketView> {
                                   direction: Axis.horizontal,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: List.generate((54 / 6).floor(),
-                                      (index) => Text(" - ")));
+                                  children: List.generate(
+                                      (54 / 6).floor(),
+                                      (index) => Text(" - ",
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                          ))));
                             },
                           ),
                         ),
                         Center(
                           child: Transform.rotate(
                             angle: 0,
-                            child: Icon(Icons.directions_bus),
+                            child: Icon(
+                              Icons.directions_bus,
+                              color: Colors.white,
+                            ),
                           ),
                         )
                       ]),
@@ -108,7 +122,9 @@ class _TicketViewState extends State<TicketView> {
                       Text(
                         to,
                         style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.w500),
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500),
                       ),
                     ],
                   ),
@@ -123,14 +139,18 @@ class _TicketViewState extends State<TicketView> {
                           child: Text(
                             startPoint,
                             style: TextStyle(
-                                fontSize: 12, fontWeight: FontWeight.w500),
+                                color: Colors.white,
+                                fontSize: 12,
+                                fontWeight: FontWeight.w500),
                             // textAlign: TextAlign.center,
                           ),
                         ),
                         Text(
                           "Fare $fare",
                           style: TextStyle(
-                              fontSize: 12, fontWeight: FontWeight.w500),
+                              color: Colors.white,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w500),
                           textAlign: TextAlign.end,
                         ),
                         SizedBox(
@@ -138,7 +158,9 @@ class _TicketViewState extends State<TicketView> {
                           child: Text(
                             endPoint,
                             style: TextStyle(
-                                fontSize: 12, fontWeight: FontWeight.w500),
+                                color: Colors.white,
+                                fontSize: 12,
+                                fontWeight: FontWeight.w500),
                             textAlign: TextAlign.end,
                           ),
                         ),
@@ -147,7 +169,7 @@ class _TicketViewState extends State<TicketView> {
               ),
             ),
             Container(
-              color: Color(0xFFF37B67),
+              color: Color.fromARGB(255, 234, 109, 87),
               child: Row(
                 children: [
                   SizedBox(
@@ -222,7 +244,9 @@ class _TicketViewState extends State<TicketView> {
                         Text(
                           "Buy Date",
                           style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.w500),
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500),
                         ),
                         const SizedBox(
                           height: 8,
@@ -230,7 +254,9 @@ class _TicketViewState extends State<TicketView> {
                         Text(
                           buyDateString,
                           style: TextStyle(
-                              fontSize: 12, fontWeight: FontWeight.w500),
+                              color: Colors.white,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w500),
                           textAlign: TextAlign.start,
                         ),
                         const SizedBox(
@@ -239,7 +265,9 @@ class _TicketViewState extends State<TicketView> {
                         Text(
                           isTwoWay ? "Two Way" : "One Way",
                           style: TextStyle(
-                              fontSize: 12, fontWeight: FontWeight.w500),
+                              color: Colors.white,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w500),
                           textAlign: TextAlign.start,
                         ),
                       ],
@@ -249,7 +277,9 @@ class _TicketViewState extends State<TicketView> {
                         Text(
                           startTime,
                           style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.w500),
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500),
                           textAlign: TextAlign.center,
                         ),
                         const SizedBox(
@@ -258,7 +288,9 @@ class _TicketViewState extends State<TicketView> {
                         Text(
                           returnTime,
                           style: TextStyle(
-                              fontSize: 12, fontWeight: FontWeight.w500),
+                              color: Colors.white,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w500),
                           textAlign: TextAlign.start,
                         ),
                         const SizedBox(
@@ -267,7 +299,9 @@ class _TicketViewState extends State<TicketView> {
                         Text(
                           "Seat no $seatNo",
                           style: TextStyle(
-                              fontSize: 12, fontWeight: FontWeight.w500),
+                              color: Colors.white,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w500),
                           textAlign: TextAlign.start,
                         ),
                       ],
@@ -277,7 +311,9 @@ class _TicketViewState extends State<TicketView> {
                         Text(
                           "Expire Date",
                           style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.w500),
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500),
                         ),
                         const SizedBox(
                           height: 8,
@@ -285,7 +321,9 @@ class _TicketViewState extends State<TicketView> {
                         Text(
                           expireDateString,
                           style: TextStyle(
-                              fontSize: 12, fontWeight: FontWeight.w500),
+                              color: Colors.white,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w500),
                         ),
                         const SizedBox(
                           height: 8,
@@ -293,7 +331,9 @@ class _TicketViewState extends State<TicketView> {
                         Text(
                           "$rideRemain rides left",
                           style: TextStyle(
-                              fontSize: 12, fontWeight: FontWeight.w500),
+                              color: Colors.white,
+                              fontSize: 12,
+                              fontWeight: FontWeight.w500),
                         ),
                       ],
                     )
