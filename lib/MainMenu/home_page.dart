@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 // import 'package:ushuttlev1/live_map_page_old.dart';
 import 'package:ushuttlev1/MainMenu/home_subpages/fare_page.dart';
 import 'package:ushuttlev1/MainMenu/home_subpages/notice_page.dart';
+import 'package:ushuttlev1/MainMenu/home_subpages/safety_security_page.dart';
 import 'package:ushuttlev1/MainMenu/home_subpages/schedule_page.dart';
 import 'package:ushuttlev1/MainMenu/home_subpages/stoppage_page.dart';
 import 'package:provider/provider.dart';
@@ -98,13 +99,28 @@ class _HomePageState extends State<HomePage> {
               isDark: themeProvider.isDark,
             ),
             buttonWidget(
-              title: 'Credits',
-              icon: Icons.money,
+              title: 'Ticket',
+              icon: Icons.local_movies,
               onPress: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
                     builder: (BuildContext context) {
                       return TicketPage();
+                    },
+                  ),
+                );
+              },
+              backgroundColor: ticketColor,
+              isDark: themeProvider.isDark,
+            ),
+            buttonWidget(
+              title: 'Safety',
+              icon: Icons.safety_check,
+              onPress: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (BuildContext context) {
+                      return SafetyAndSecurityPage();
                     },
                   ),
                 );

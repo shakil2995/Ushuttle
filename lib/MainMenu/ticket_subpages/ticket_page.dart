@@ -56,21 +56,21 @@ class _TicketPageState extends State<TicketPage> {
     // mounted ? fetchUserData() : null;
     final themeProvider = Provider.of<ThemeProvider>(context);
     return Scaffold(
-      appBar: AppBar(
-        // automaticallyImplyLeading: true,
-        title: const Text('My Credits'),
-        actions: [
-          IconButton(
-              onPressed: () {
-                setState(() {
-                  themeProvider.toggleTheme();
-                });
-              },
-              icon: Icon(!themeProvider.isDark
-                  ? Icons.sunny
-                  : Icons.nightlight_round_outlined))
-        ],
-      ),
+      // appBar: AppBar(
+      //   // automaticallyImplyLeading: true,
+      //   title: const Text('My Credits'),
+      //   actions: [
+      //     IconButton(
+      //         onPressed: () {
+      //           setState(() {
+      //             themeProvider.toggleTheme();
+      //           });
+      //         },
+      //         icon: Icon(!themeProvider.isDark
+      //             ? Icons.sunny
+      //             : Icons.nightlight_round_outlined))
+      //   ],
+      // ),
       body: bodyWidget(themeProvider),
     );
   }
@@ -187,6 +187,7 @@ class ticketCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(top: 8.0),
       child: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
         scrollDirection: Axis.horizontal,
         child: Padding(
           padding: const EdgeInsets.only(left: 20),

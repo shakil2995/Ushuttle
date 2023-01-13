@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:ushuttlev1/MainMenu/ticket_subpages/ticket_page.dart';
 import 'package:ushuttlev1/provider/theme_provider.dart';
 import 'package:ushuttlev1/MainMenu/home_page.dart';
 import 'package:ushuttlev1/MainMenu/profile_page.dart';
@@ -19,7 +20,8 @@ class _RootPageState extends State<RootPage> {
     // const LiveMapPage(),
     const LiveLocationPage(),
     const HomePage(),
-    const ProfilePage()
+    const TicketPage(),
+    const ProfilePage(),
   ];
   @override
   Widget build(BuildContext context) {
@@ -51,9 +53,11 @@ class _RootPageState extends State<RootPage> {
           ),
           NavigationDestination(
               icon: Icon(
-                Icons.home,
+                Icons.menu,
               ),
-              label: 'Home'),
+              label: 'Menu'),
+          NavigationDestination(
+              icon: Icon(Icons.local_movies), label: 'Ticket'),
           NavigationDestination(icon: Icon(Icons.person), label: 'Profile'),
         ],
         onDestinationSelected: (int index) {
