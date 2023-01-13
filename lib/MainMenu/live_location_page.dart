@@ -364,7 +364,6 @@ class _LiveLocationPageState extends State<LiveLocationPage>
           onPressed: () {
             setState(() {
               _liveUpdate = !_liveUpdate;
-
               if (_liveUpdate) {
                 if (_currentLocation != null) {
                   _mapController.move(
