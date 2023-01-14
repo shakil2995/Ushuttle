@@ -20,7 +20,7 @@ class PoliceStationCard extends StatelessWidget {
             child: Card(
               elevation: 3,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(50),
+                borderRadius: BorderRadius.circular(20),
               ),
               child: Center(
                 child: Padding(

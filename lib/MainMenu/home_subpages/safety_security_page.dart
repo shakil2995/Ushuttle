@@ -89,6 +89,19 @@ class _SafetyAndSecurityPageState extends State<SafetyAndSecurityPage> {
                 SizedBox(height: 5),
                 Divider(),
                 SizedBox(height: 5),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text('Stay Connected',
+                      textAlign: TextAlign.start,
+                      style: TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
+                        color: themeProvider.isDark
+                            ? Color.fromARGB(255, 255, 255, 255)
+                            : Color.fromARGB(255, 35, 35, 35),
+                      )),
+                ),
+                SizedBox(height: 5),
                 SafeHome()
               ],
             ),

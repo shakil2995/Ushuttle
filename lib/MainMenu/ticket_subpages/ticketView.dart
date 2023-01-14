@@ -336,7 +336,7 @@ class _TicketViewState extends State<TicketView> {
                               fontWeight: FontWeight.w500),
                         ),
                       ],
-                    )
+                    ),
                   ],
                 )
               ]),

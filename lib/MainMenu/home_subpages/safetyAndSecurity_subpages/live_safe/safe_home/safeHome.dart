@@ -13,9 +13,9 @@ class SafeHome extends StatelessWidget {
             decoration: BoxDecoration(
               color: Colors.amber,
               borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(20),
-                topRight: Radius.circular(20),
-              ),
+                  // topLeft: Radius.circular(20),
+                  // topRight: Radius.circular(20),
+                  ),
             ),
             child: Center(
               child: Text('This feature is under  development',
@@ -49,15 +49,15 @@ class SafeHome extends StatelessWidget {
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                   colors: [
-                    themeProvider.isDark
-                        ? Color.fromARGB(255, 67, 128, 159)
-                        : Color(0xFFFD8080),
-                    themeProvider.isDark
-                        ? Color.fromARGB(255, 91, 146, 178)
-                        : Color(0xFFFB8580),
-                    themeProvider.isDark
-                        ? Color.fromARGB(255, 125, 179, 209)
-                        : Color(0xFFFBD079)
+                    !themeProvider.isDark
+                        ? Color.fromARGB(255, 15, 126, 236)
+                        : Color.fromARGB(255, 15, 126, 236),
+                    !themeProvider.isDark
+                        ? Color.fromARGB(255, 40, 157, 224)
+                        : Color.fromARGB(255, 73, 149, 225),
+                    !themeProvider.isDark
+                        ? Color.fromARGB(255, 117, 200, 245)
+                        : Color.fromARGB(255, 118, 171, 224)
                   ])
               // color: themeProvider.isDark ? Color(0xFFFB8580) : Color(0xFFFB8580),
               ),
