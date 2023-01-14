@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:ushuttlev1/provider/theme_provider.dart';
 import 'package:provider/provider.dart';
 
-class BusStationCard extends StatelessWidget {
+class PharmacyCard extends StatelessWidget {
   final Function? onMapFunction;
-  const BusStationCard({Key? key, this.onMapFunction}) : super(key: key);
+  const PharmacyCard({Key? key, this.onMapFunction}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,28 +15,28 @@ class BusStationCard extends StatelessWidget {
         children: [
           InkWell(
             onTap: () {
-              onMapFunction!('Bus stops near me');
+              onMapFunction!('Pharmacies near me');
             },
             child: Card(
               elevation: 3,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
+                borderRadius: BorderRadius.circular(50),
               ),
               child: Center(
                 child: Padding(
                   padding: const EdgeInsets.all(4.0),
                   child: Icon(
-                    Icons.directions_bus,
+                    Icons.local_pharmacy,
                     size: 50,
                     color: themeProvider.isDark
-                        ? Color.fromARGB(255, 73, 145, 247)
-                        : Color.fromARGB(255, 27, 122, 43),
+                        ? Color.fromARGB(255, 223, 87, 66)
+                        : Color.fromARGB(255, 237, 90, 49),
                   ),
                 ),
               ),
             ),
           ),
-          Text('Bus Stations'),
+          Text('Pharmacy'),
           // Container(
           //   height: 70,
           //   width: 90,

@@ -3,7 +3,8 @@ import 'package:ushuttlev1/provider/theme_provider.dart';
 import 'package:provider/provider.dart';
 
 class HospitalCard extends StatelessWidget {
-  const HospitalCard({super.key});
+  final Function? onMapFunction;
+  const HospitalCard({Key? key, this.onMapFunction}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -12,20 +13,25 @@ class HospitalCard extends StatelessWidget {
       padding: const EdgeInsets.only(left: 15, right: 15),
       child: Column(
         children: [
-          Card(
-            elevation: 3,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: Center(
-              child: Padding(
-                padding: const EdgeInsets.all(4.0),
-                child: Icon(
-                  Icons.local_hospital,
-                  size: 50,
-                  color: themeProvider.isDark
-                      ? Color.fromARGB(255, 250, 98, 98)
-                      : Color.fromARGB(255, 246, 43, 43),
+          InkWell(
+            onTap: () {
+              onMapFunction!('Hospitals  near me');
+            },
+            child: Card(
+              elevation: 3,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: Icon(
+                    Icons.local_hospital,
+                    size: 50,
+                    color: themeProvider.isDark
+                        ? Color.fromARGB(255, 250, 98, 98)
+                        : Color.fromARGB(255, 246, 43, 43),
+                  ),
                 ),
               ),
             ),

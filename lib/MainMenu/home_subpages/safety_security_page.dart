@@ -3,10 +3,11 @@ import 'package:expandable/expandable.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:ushuttlev1/MainMenu/home_subpages/emergencies/LiveSafe.dart';
+import 'package:ushuttlev1/MainMenu/home_subpages/emergencies/live_safe/LiveSafe.dart';
 import 'package:ushuttlev1/MainMenu/home_subpages/emergencies/ambulance_emergency.dart';
 import 'package:ushuttlev1/MainMenu/home_subpages/emergencies/firefighter_emergency.dart';
 import 'package:ushuttlev1/MainMenu/home_subpages/emergencies/police_emergency.dart';
+import 'package:ushuttlev1/MainMenu/home_subpages/emergencies/safe_home/safeHome.dart';
 import 'package:ushuttlev1/MainMenu/home_subpages/emergencies/ushuttle_helpdesk.dart';
 import 'package:ushuttlev1/provider/theme_provider.dart';
 
@@ -86,6 +87,7 @@ class _SafetyAndSecurityPageState extends State<SafetyAndSecurityPage> {
               LiveSafe(),
               SizedBox(height: 5),
               Divider(),
+              SafeHome()
             ],
           ),
         ));

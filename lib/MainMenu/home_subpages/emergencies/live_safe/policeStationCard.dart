@@ -3,7 +3,8 @@ import 'package:ushuttlev1/provider/theme_provider.dart';
 import 'package:provider/provider.dart';
 
 class PoliceStationCard extends StatelessWidget {
-  const PoliceStationCard({super.key});
+  final Function? onMapFunction;
+  const PoliceStationCard({Key? key, this.onMapFunction}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -12,20 +13,25 @@ class PoliceStationCard extends StatelessWidget {
       padding: const EdgeInsets.only(left: 15, right: 15),
       child: Column(
         children: [
-          Card(
-            elevation: 3,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(50),
-            ),
-            child: Center(
-              child: Padding(
-                padding: const EdgeInsets.all(4.0),
-                child: Icon(
-                  Icons.local_police,
-                  size: 50,
-                  color: themeProvider.isDark
-                      ? Color.fromARGB(255, 24, 180, 45)
-                      : Color.fromARGB(255, 8, 122, 214),
+          InkWell(
+            onTap: () {
+              onMapFunction!('Police Stations near me');
+            },
+            child: Card(
+              elevation: 3,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(50),
+              ),
+              child: Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: Icon(
+                    Icons.local_police,
+                    size: 50,
+                    color: themeProvider.isDark
+                        ? Color.fromARGB(255, 24, 180, 45)
+                        : Color.fromARGB(255, 8, 122, 214),
+                  ),
                 ),
               ),
             ),
