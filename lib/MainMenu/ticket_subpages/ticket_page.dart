@@ -191,22 +191,26 @@ class ticketCard extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         child: Padding(
           padding: const EdgeInsets.only(left: 20),
+          // child: Row(
+          //   children: [
+          //     userTicketCount > 0
+          //         ? TicketView(userData!["ticketArray"][0]
+          //             // isDark: isDark,
+          //             )
+          //         : Text('No Rides Available'),
+          //     userTicketCount > 0
+          //         ? TicketView(userData!["ticketArray"][1]
+          //             // isDark: isDark,
+          //             )
+          //         : Text('No Rides Available'),
+          //     // TicketView(userData
+          //     //     // isDark: isDark,
+          //     //     ),
+          //   ],
+          // ),
+
           child: Row(
-            children: [
-              userTicketCount > 0
-                  ? TicketView(userData!["ticketArray"][0]
-                      // isDark: isDark,
-                      )
-                  : Text('No Rides Available'),
-              userTicketCount > 0
-                  ? TicketView(userData!["ticketArray"][0]
-                      // isDark: isDark,
-                      )
-                  : Text('No Rides Available'),
-              // TicketView(userData
-              //     // isDark: isDark,
-              //     ),
-            ],
+            children: [TicketView(userData!['ticketArray'])],
           ),
         ),
       ),

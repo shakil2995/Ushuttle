@@ -6,21 +6,26 @@ import 'package:intl/intl.dart';
 import 'package:ushuttlev1/provider/theme_provider.dart';
 
 class TicketView extends StatefulWidget {
-  TicketView(Map<String, dynamic>? userData, {super.key});
+  TicketView(List<dynamic>? userData, {super.key});
 
   @override
   State<TicketView> createState() => _TicketViewState();
 }
 
 class _TicketViewState extends State<TicketView> {
+  // get ticketNo => null;
+
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
     // print(userData);
-    final credit = userData!['credit'];
-    final lastName = userData!['lastName'];
-    final ticketArray = userData!['ticketArray'];
-    final firstTicket = ticketArray[0];
+    // final credit = userData!['credit'];
+    // final lastName = userData!['lastName'];
+    // final ticketArray = userData!['ticketArray'];
+    final allTickets = userData!['ticketArray'];
+    // final allTickets = [...userData!['ticketArray']];
+
+    final firstTicket = userData!['ticketArray'][0];
     final startPoint = firstTicket['startPoint'];
     final fare = firstTicket['fare'];
     final to = firstTicket['to'];
@@ -45,7 +50,94 @@ class _TicketViewState extends State<TicketView> {
             firstTicket['expireDate'].nanoseconds ~/ 1000000);
     final buyDateString = DateFormat("dd-MM-yy").format(buyDate);
     final expireDateString = DateFormat("dd-MM-yy").format(expireDate);
+    // print(userData!['ticketArray']);
 
+    // print(ticketNo);
+    // return ticketWidget(
+    //     themeProvider: themeProvider,
+    //     busName: busName,
+    //     from: from,
+    //     to: to,
+    //     startPoint: startPoint,
+    //     fare: fare,
+    //     endPoint: endPoint,
+    //     buyDateString: buyDateString,
+    //     isTwoWay: isTwoWay,
+    //     startTime: startTime,
+    //     returnTime: returnTime,
+    //     seatNo: seatNo,
+    //     expireDateString: expireDateString,
+    //     rideRemain: rideRemain);
+
+    return Row(
+      children: [
+        ...allTickets.map((ticket) {
+          print(ticket);
+          // final ticketNo = ticket["ticketNo"];
+          return ticketWidget(
+            themeProvider: themeProvider,
+            busName: ticket['busName'],
+            from: ticket['from'],
+            to: ticket['to'],
+            startPoint: ticket['startPoint'],
+            fare: ticket['fare'],
+            endPoint: ticket['endPoint'],
+            rideRemain: ticket['rideRemain'],
+            isTwoWay: ticket['isTwoWay'],
+            startTime: ticket['startTime'],
+            returnTime: ticket['returnTime'],
+            seatNo: ticket['seatNo'],
+            buyDateString: DateFormat("dd-MM-yy").format(
+                DateTime.fromMillisecondsSinceEpoch(
+                    ticket['buyDate'].seconds * 1000 +
+                        ticket['buyDate'].nanoseconds ~/ 1000000)),
+            expireDateString: DateFormat("dd-MM-yy").format(
+                DateTime.fromMillisecondsSinceEpoch(
+                    ticket['expireDate'].seconds * 1000 +
+                        ticket['expireDate'].nanoseconds ~/ 1000000)),
+          );
+        }),
+      ],
+    );
+  }
+}
+
+class ticketWidget extends StatelessWidget {
+  const ticketWidget({
+    Key? key,
+    required this.themeProvider,
+    required this.busName,
+    required this.from,
+    required this.to,
+    required this.startPoint,
+    required this.fare,
+    required this.endPoint,
+    required this.buyDateString,
+    required this.isTwoWay,
+    required this.startTime,
+    required this.returnTime,
+    required this.seatNo,
+    required this.expireDateString,
+    required this.rideRemain,
+  }) : super(key: key);
+
+  final ThemeProvider themeProvider;
+  final busName;
+  final from;
+  final to;
+  final startPoint;
+  final fare;
+  final endPoint;
+  final String buyDateString;
+  final isTwoWay;
+  final startTime;
+  final returnTime;
+  final seatNo;
+  final String expireDateString;
+  final rideRemain;
+
+  @override
+  Widget build(BuildContext context) {
     return SizedBox(
       width: MediaQuery.of(context).size.width * .8,
       height: 220,
