@@ -18,7 +18,7 @@ class SafeHome extends StatelessWidget {
               ),
             ),
             child: Center(
-              child: Text('This feature is under development',
+              child: Text('This feature is under  development',
                   style: TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
@@ -44,11 +44,23 @@ class SafeHome extends StatelessWidget {
           height: 180,
           width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            color: themeProvider.isDark
-                ? Color.fromARGB(255, 253, 253, 253)
-                : Color.fromARGB(255, 248, 248, 248),
-          ),
+              borderRadius: BorderRadius.circular(20),
+              gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    themeProvider.isDark
+                        ? Color.fromARGB(255, 67, 128, 159)
+                        : Color(0xFFFD8080),
+                    themeProvider.isDark
+                        ? Color.fromARGB(255, 91, 146, 178)
+                        : Color(0xFFFB8580),
+                    themeProvider.isDark
+                        ? Color.fromARGB(255, 125, 179, 209)
+                        : Color(0xFFFBD079)
+                  ])
+              // color: themeProvider.isDark ? Color(0xFFFB8580) : Color(0xFFFB8580),
+              ),
           child: Row(
             children: [
               Expanded(
@@ -59,12 +71,12 @@ class SafeHome extends StatelessWidget {
                           style: TextStyle(
                               fontSize: 22,
                               fontWeight: FontWeight.bold,
-                              color: Color.fromARGB(255, 0, 0, 0))),
+                              color: Color.fromARGB(255, 255, 255, 255))),
                       subtitle: Text('Share Location',
                           style: TextStyle(
                               fontSize: 15,
                               // fontWeight: FontWeight.bold,
-                              color: Color.fromARGB(255, 0, 0, 0))),
+                              color: Color.fromARGB(255, 255, 255, 255))),
                     )
                   ],
                 ),
@@ -72,7 +84,7 @@ class SafeHome extends StatelessWidget {
               ClipRRect(
                 borderRadius: BorderRadius.circular(20),
                 child: Image.asset(
-                  'assets/images/trackMe.jpg',
+                  'assets/images/trackMe.png',
                 ),
               ),
             ],

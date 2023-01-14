@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:ushuttlev1/MainMenu/home_subpages/emergencies/live_safe/pharmacyCard.dart';
-import 'package:ushuttlev1/MainMenu/home_subpages/emergencies/live_safe/policeStationCard.dart';
+import 'package:ushuttlev1/MainMenu/home_subpages/safetyAndSecurity_subpages/live_safe/pharmacyCard.dart';
+import 'package:ushuttlev1/MainMenu/home_subpages/safetyAndSecurity_subpages/live_safe/policeStationCard.dart';
 
 import 'BusStationCard.dart';
 import 'HospitalCard.dart';
