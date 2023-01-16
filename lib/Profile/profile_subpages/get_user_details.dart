@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:ushuttlev1/shared_subpages/about_ushuttle.dart';
 import 'package:ushuttlev1/Ticket/ticket_page.dart';
 
-import '../../Profile/auth_sub_pages/auth.dart';
+import '../auth_sub_pages/auth.dart';
 
 class GetUserDetails extends StatelessWidget {
   // const UserDetails({super.key});

@@ -60,7 +60,7 @@ class InfoPage extends StatelessWidget {
             ),
             width: double.infinity,
             child: const Center(
-              child: Text('App version : 0.8.9 (Beta release))',
+              child: Text('App version : 0.9.0 (Beta release))',
                   style: TextStyle(color: Colors.white)),
             ),
           ),
