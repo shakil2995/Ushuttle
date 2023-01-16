@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:ushuttlev1/provider/theme_provider.dart';
-import 'package:ushuttlev1/authentication_pages/widget_tree.dart';
-import 'firebase_connect/firebase_options.dart';
+import 'package:ushuttlev1/shared_subpages/provider/theme_provider.dart';
+import 'package:ushuttlev1/Profile/auth_sub_pages/widget_tree.dart';
+import 'Profile/firebase_connect/firebase_options.dart';
 import 'package:provider/provider.dart';
 
 Future<void> main() async {

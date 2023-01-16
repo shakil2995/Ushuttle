@@ -1,18 +1,20 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:ushuttlev1/shared_subpages/about_ushuttle.dart';
+import 'package:ushuttlev1/Ticket/ticket_page.dart';
+
 import '../../Profile/auth_sub_pages/auth.dart';
 
-class GetAdminDetails extends StatelessWidget {
+class GetUserDetails extends StatelessWidget {
   // const UserDetails({super.key});
   final String documentId;
-  const GetAdminDetails({super.key, required this.documentId});
+  const GetUserDetails({super.key, required this.documentId});
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<DocumentSnapshot>(
         future: FirebaseFirestore.instance
-            .collection('admin')
+            .collection('users')
             .doc(documentId)
             .get(),
         builder: ((context, snapshot) {
@@ -70,11 +72,25 @@ class GetAdminDetails extends StatelessWidget {
                     // textColor: Colors.white,
                   ),
                   menuWidget(
-                    title: 'Ticket History',
+                    title: 'Billing Details',
                     onPress: () {},
-                    icon: Icons.history,
+                    icon: Icons.wallet,
                     // textColor: Colors.white,
                   ),
+                  // menuWidget(
+                  //   title: 'My Tickets',
+                  //   onPress: () {
+                  //     Navigator.of(context).push(
+                  //       MaterialPageRoute(
+                  //         builder: (BuildContext context) {
+                  //           return TicketPage();
+                  //         },
+                  //       ),
+                  //     );
+                  //   },
+                  //   icon: Icons.local_movies,
+                  //   // textColor: Colors.white,
+                  // ),
                   Divider(),
                   menuWidget(
                     title: 'About Us',
@@ -94,7 +110,6 @@ class GetAdminDetails extends StatelessWidget {
                     title: 'Logout',
                     onPress: () async {
                       await Auth().signOut();
-                      Navigator.pop(context);
                     },
                     icon: Icons.logout,
                     textColor: Colors.red,

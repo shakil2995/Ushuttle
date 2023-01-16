@@ -1,22 +1,25 @@
 import 'package:flutter/material.dart';
+// import 'package:ushuttlev1/live_map_page_old.dart';
 import 'package:ushuttlev1/Menu/home_subpages/fare_page.dart';
+import 'package:ushuttlev1/Menu/home_subpages/notice_page.dart';
+import 'package:ushuttlev1/Menu/home_subpages/safety_security_page.dart';
 import 'package:ushuttlev1/Menu/home_subpages/schedule_page.dart';
 import 'package:ushuttlev1/Menu/home_subpages/stoppage_page.dart';
 import 'package:provider/provider.dart';
-import 'package:ushuttlev1/admin_pages/admin_subpages/admin_notice_page.dart';
-import 'package:ushuttlev1/admin_pages/admin_subpages/admin_profile_page.dart';
 import 'package:ushuttlev1/shared_subpages/about_ushuttle.dart';
-import 'package:ushuttlev1/shared_subpages/contactUs.dart';
 import 'package:ushuttlev1/shared_subpages/provider/theme_provider.dart';
+import 'package:ushuttlev1/Ticket/ticket_page.dart';
 
-class AdminHomePage extends StatefulWidget {
-  const AdminHomePage({super.key});
+import '../shared_subpages/contactUs.dart';
+
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
 
   @override
-  State<AdminHomePage> createState() => _AdminHomePageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _AdminHomePageState extends State<AdminHomePage> {
+class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
@@ -55,7 +58,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
             ),
             // buttonWidget(
             //   title: 'Fare',
-            //   icon: Icons.currency_exchange,
+            //   icon: Icons.monetization_on,
             //   onPress: () {
             //     Navigator.of(context).push(
             //       MaterialPageRoute(
@@ -68,21 +71,21 @@ class _AdminHomePageState extends State<AdminHomePage> {
             //   backgroundColor: fareColor,
             //   isDark: themeProvider.isDark,
             // ),
-            // buttonWidget(
-            //   title: 'Stoppage',
-            //   icon: Icons.bus_alert,
-            //   onPress: () {
-            //     Navigator.of(context).push(
-            //       MaterialPageRoute(
-            //         builder: (BuildContext context) {
-            //           return const StoppagePage();
-            //         },
-            //       ),
-            //     );
-            //   },
-            //   backgroundColor: stoppageColor,
-            //   isDark: themeProvider.isDark,
-            // ),
+            buttonWidget(
+              title: 'Stoppage',
+              icon: Icons.bus_alert,
+              onPress: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (BuildContext context) {
+                      return const StoppagePage();
+                    },
+                  ),
+                );
+              },
+              backgroundColor: stoppageColor,
+              isDark: themeProvider.isDark,
+            ),
             buttonWidget(
               title: 'Notice',
               icon: Icons.notifications,
@@ -90,12 +93,28 @@ class _AdminHomePageState extends State<AdminHomePage> {
                 Navigator.of(context).push(
                   MaterialPageRoute(
                     builder: (BuildContext context) {
-                      return const AdminNoticePage();
+                      return const NoticePage();
                     },
                   ),
                 );
               },
               backgroundColor: noticeColor,
+              isDark: themeProvider.isDark,
+            ),
+
+            buttonWidget(
+              title: 'Safety',
+              icon: Icons.safety_check,
+              onPress: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (BuildContext context) {
+                      return SafetyAndSecurityPage();
+                    },
+                  ),
+                );
+              },
+              backgroundColor: ticketColor,
               isDark: themeProvider.isDark,
             ),
             buttonWidget(

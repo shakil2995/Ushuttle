@@ -1,22 +1,21 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:ushuttlev1/Menu/profile_subpages/get_user_details.dart';
+import 'auth_sub_pages/auth.dart';
 
-import 'package:ushuttlev1/admin_pages/admin_subpages/get_admin_details.dart';
-import 'package:ushuttlev1/Profile/auth_sub_pages/auth.dart';
-
-class AdminProfilePage extends StatefulWidget {
-  const AdminProfilePage({super.key});
+class ProfilePage extends StatefulWidget {
+  const ProfilePage({super.key});
   @override
-  State<AdminProfilePage> createState() => _AdminProfilePageState();
+  State<ProfilePage> createState() => _ProfilePageState();
 }
 
-class _AdminProfilePageState extends State<AdminProfilePage> {
+class _ProfilePageState extends State<ProfilePage> {
   final User? user = Auth().currentUser;
   List<String> docIds = [];
   Future getDocIds() async {
     await FirebaseFirestore.instance
-        .collection('admin')
+        .collection('users')
         .where('email', isEqualTo: user?.email)
         .get()
         .then(
@@ -40,7 +39,7 @@ class _AdminProfilePageState extends State<AdminProfilePage> {
               itemCount: docIds.length,
               itemBuilder: (context, index) {
                 return ListTile(
-                  title: GetAdminDetails(documentId: docIds[index]),
+                  title: GetUserDetails(documentId: docIds[index]),
                 );
               },
             ),
@@ -52,13 +51,20 @@ class _AdminProfilePageState extends State<AdminProfilePage> {
     );
   }
 
-  Widget _userUid() {
-    return Text(user?.email ?? 'user email');
-  }
+  // Widget _userUid() {
+  //   return Text(user?.email ?? 'user email');
+  // }
+
+  // Widget _signOutButton() {
+  //   return ElevatedButton(
+  //       onPressed: () async {
+  //         await Auth().signOut();
+  //       },
+  //       child: const Text('Sign Out'));
+  // }
 
   @override
   Widget build(BuildContext context) {
-    // final themeProvider = Provider.of<ThemeProvider>(context);
     return Scaffold(
         body: Container(
       height: double.infinity,
@@ -68,7 +74,7 @@ class _AdminProfilePageState extends State<AdminProfilePage> {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          const SizedBox(height: 32),
+          // const SizedBox(height: 16),
           _listview(),
           // _userUid(),
           // const SizedBox(height: 16),

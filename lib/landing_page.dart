@@ -1,27 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:ushuttlev1/admin_pages/admin_subpages/admin_profile_page.dart';
-import 'package:ushuttlev1/admin_pages/admin_subpages/admin_ticket_page.dart';
-import 'package:ushuttlev1/admin_pages/admin_subpages/live_location_server.dart';
+import 'package:ushuttlev1/Ticket/ticket_page.dart';
 import 'package:ushuttlev1/shared_subpages/provider/theme_provider.dart';
+import 'package:ushuttlev1/Menu/home_page.dart';
+import 'package:ushuttlev1/Profile/profile_page.dart';
 
-import 'admin_subpages/admin_home_page.dart';
+import 'Map/live_location_page.dart';
 
-class AdminLandingPage extends StatefulWidget {
-  const AdminLandingPage({super.key});
+class RootPage extends StatefulWidget {
+  const RootPage({super.key});
 
   @override
-  State<AdminLandingPage> createState() => _AdminLandingPageState();
+  State<RootPage> createState() => _RootPageState();
 }
 
-class _AdminLandingPageState extends State<AdminLandingPage> {
+class _RootPageState extends State<RootPage> {
   int currentPage = 0;
   List<Widget> pages = [
     // const LiveMapPage(),
-    const LiveLocationServer(),
-    const AdminHomePage(),
-    const AdminTicketPage(),
-    const AdminProfilePage(),
+    const LiveLocationPage(),
+    const HomePage(),
+    const TicketPage(),
+    const ProfilePage(),
   ];
   @override
   Widget build(BuildContext context) {
@@ -30,7 +30,7 @@ class _AdminLandingPageState extends State<AdminLandingPage> {
     return Scaffold(
       appBar: AppBar(
         // automaticallyImplyLeading: true,
-        title: const Text('Ushuttle Admin'),
+        title: const Text('Ushuttle'),
         actions: [
           IconButton(
               onPressed: () {
@@ -57,8 +57,8 @@ class _AdminLandingPageState extends State<AdminLandingPage> {
               ),
               label: 'Menu'),
           NavigationDestination(
-              icon: Icon(Icons.qr_code_scanner), label: 'Scanner'),
-          NavigationDestination(icon: Icon(Icons.person), label: 'profile'),
+              icon: Icon(Icons.local_movies), label: 'Ticket'),
+          NavigationDestination(icon: Icon(Icons.person), label: 'Profile'),
         ],
         onDestinationSelected: (int index) {
           setState(() {

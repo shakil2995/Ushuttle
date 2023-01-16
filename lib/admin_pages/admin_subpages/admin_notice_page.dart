@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:ushuttlev1/provider/theme_provider.dart';
+import 'package:ushuttlev1/shared_subpages/provider/theme_provider.dart';
 
 class AdminNoticePage extends StatefulWidget {
   const AdminNoticePage({super.key});
