@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ushuttlev1/landing_page.dart';
-import 'package:ushuttlev1/admin_pages/admin_landing.dart';
+import 'package:ushuttlev1/client_home.dart';
+import 'package:ushuttlev1/admin_pages/admin_home_page.dart';
 import 'auth.dart';
 import 'login_register_page.dart';
 

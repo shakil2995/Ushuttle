@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:ushuttlev1/admin_pages/admin_subpages/admin_profile_page.dart';
-import 'package:ushuttlev1/admin_pages/admin_subpages/admin_ticket_page.dart';
-import 'package:ushuttlev1/admin_pages/admin_subpages/live_location_server.dart';
+import 'package:ushuttlev1/admin_pages/Admin_Profile/admin_profile_page.dart';
+import 'package:ushuttlev1/admin_pages/Admin_Ticket/admin_ticket_page.dart';
+import 'package:ushuttlev1/admin_pages/Admin_Map/live_location_server.dart';
 import 'package:ushuttlev1/shared_subpages/provider/theme_provider.dart';
 
-import 'admin_subpages/admin_home_page.dart';
+import 'Admin_Menu/admin_home_page.dart';
 
 class AdminLandingPage extends StatefulWidget {
   const AdminLandingPage({super.key});

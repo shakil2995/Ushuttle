@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:ushuttlev1/admin_pages/admin_subpages/qrScanners/scan_ticket_scanner.dart';
-import 'package:ushuttlev1/admin_pages/admin_subpages/qrScanners/sell_ticket_scanner.dart';
+import 'package:ushuttlev1/admin_pages/Admin_Ticket/qrScanners/scan_ticket_scanner.dart';
+import 'package:ushuttlev1/admin_pages/Admin_Ticket/qrScanners/sell_ticket_scanner.dart';
 import 'package:ushuttlev1/shared_subpages/provider/theme_provider.dart';
 
 class AdminTicketPage extends StatefulWidget {

@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import 'package:ushuttlev1/admin_pages/admin_subpages/get_admin_details.dart';
+import 'package:ushuttlev1/admin_pages/Admin_Profile/get_admin_details.dart';
 import 'package:ushuttlev1/Profile/auth_sub_pages/auth.dart';
 
 class AdminProfilePage extends StatefulWidget {
