@@ -6,9 +6,11 @@ import 'package:ushuttlev1/MainMenu/home_subpages/safety_security_page.dart';
 import 'package:ushuttlev1/MainMenu/home_subpages/schedule_page.dart';
 import 'package:ushuttlev1/MainMenu/home_subpages/stoppage_page.dart';
 import 'package:provider/provider.dart';
-import 'package:ushuttlev1/MainMenu/shared_subpages/info_page.dart';
+import 'package:ushuttlev1/MainMenu/shared_subpages/about_ushuttle.dart';
 import 'package:ushuttlev1/provider/theme_provider.dart';
 import 'package:ushuttlev1/MainMenu/ticket_subpages/ticket_page.dart';
+
+import 'shared_subpages/contactUs.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -99,21 +101,7 @@ class _HomePageState extends State<HomePage> {
               backgroundColor: noticeColor,
               isDark: themeProvider.isDark,
             ),
-            // buttonWidget(
-            //   title: 'Ticket',
-            //   icon: Icons.local_movies,
-            //   onPress: () {
-            //     Navigator.of(context).push(
-            //       MaterialPageRoute(
-            //         builder: (BuildContext context) {
-            //           return TicketPage();
-            //         },
-            //       ),
-            //     );
-            //   },
-            //   backgroundColor: ticketColor,
-            //   isDark: themeProvider.isDark,
-            // ),
+
             buttonWidget(
               title: 'Safety',
               icon: Icons.safety_check,
@@ -137,6 +125,21 @@ class _HomePageState extends State<HomePage> {
                   MaterialPageRoute(
                     builder: (BuildContext context) {
                       return InfoPage();
+                    },
+                  ),
+                );
+              },
+              backgroundColor: ticketColor,
+              isDark: themeProvider.isDark,
+            ),
+            buttonWidget(
+              title: 'Contact us',
+              icon: Icons.mail,
+              onPress: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (BuildContext context) {
+                      return ContactUs();
                     },
                   ),
                 );

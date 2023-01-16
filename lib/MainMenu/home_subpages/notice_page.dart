@@ -94,10 +94,10 @@ class _NoticePageState extends State<NoticePage> {
           });
           await updateNotice();
           setState(() {
-            isLoading = false;
+            isLoading = !isLoading;
           });
         },
-        child: Text(isLoading ? 'Updating' : 'See updates '),
+        child: Text(isLoading ? 'See updates' : 'Updating '),
       );
     }
 
@@ -109,7 +109,7 @@ class _NoticePageState extends State<NoticePage> {
           });
           await updateNotice();
           setState(() {
-            isLoading = false;
+            isLoading = !isLoading;
           });
         },
         child: Icon(isLoading ? Icons.update : Icons.refresh),
@@ -137,41 +137,53 @@ class _NoticePageState extends State<NoticePage> {
           mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            const SizedBox(height: 20),
-            Container(
-              height: 200,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12.0),
-                color: themeProvider.isDark
-                    ? Color.fromARGB(255, 77, 77, 77)
-                    : Color.fromARGB(159, 163, 170, 184),
-              ),
-              margin: const EdgeInsets.all(10.0),
-              padding: const EdgeInsets.all(10.0),
-              // color: Color.fromARGB(255, 255, 106, 106),
-              width: double.infinity,
-              child: Center(
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Text(isLoading ? 'Updating' : 'Notice',
-                          style: TextStyle(
-                            fontSize: 30,
-                            color: themeProvider.isDark
-                                ? Colors.white
-                                : Color.fromARGB(255, 5, 5, 5),
-                          )),
-                    ),
-                    Text(_controllerNotice.text,
-                        style: TextStyle(
-                          fontSize: 20,
-                          color: themeProvider.isDark
-                              ? Colors.white
-                              : Color.fromARGB(255, 5, 5, 5),
-                        )),
-                  ],
+            Center(
+              child: Container(
+                width: MediaQuery.of(context).size.width * 0.9,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12.0),
+                  color: themeProvider.isDark
+                      ? Color.fromARGB(255, 77, 77, 77)
+                      : Color.fromARGB(255, 85, 147, 255),
                 ),
+                padding: const EdgeInsets.all(8.0),
+                child: Center(
+                  child: Text(isLoading ? 'Updating' : 'Notice',
+                      style: TextStyle(
+                        fontSize: 30,
+                        color: themeProvider.isDark
+                            ? Colors.white
+                            : Color.fromARGB(255, 255, 255, 255),
+                      )),
+                ),
+              ),
+            ),
+            const SizedBox(height: 20),
+            Center(
+              child: Column(
+                children: [
+                  Center(
+                    child: Container(
+                      // height: MediaQuery.of(context).size.height * 0.5,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12.0),
+                        color: themeProvider.isDark
+                            ? Color.fromARGB(255, 35, 35, 35)
+                            : Color.fromARGB(255, 39, 100, 205),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Text(_controllerNotice.text,
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: themeProvider.isDark
+                                  ? Colors.white
+                                  : Color.fromARGB(255, 246, 246, 246),
+                            )),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
 

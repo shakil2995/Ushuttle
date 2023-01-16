@@ -7,7 +7,7 @@ class InfoPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('About Us'),
+        title: const Text('About ushuttle'),
         automaticallyImplyLeading: true,
         // actions: [
         //   IconButton(
@@ -23,18 +23,26 @@ class InfoPage extends StatelessWidget {
           Container(
             margin: const EdgeInsets.all(10.0),
             padding: const EdgeInsets.all(10.0),
-            color: Color.fromARGB(255, 255, 106, 106),
+            decoration: BoxDecoration(
+              color: Colors.red,
+              shape: BoxShape.rectangle,
+              borderRadius: BorderRadius.circular(10.0),
+            ),
             width: double.infinity,
             child: const Center(
               child: Text(
                   'This app is still in development and is not ready for production use.',
-                  style: TextStyle(color: Color.fromARGB(255, 53, 53, 53))),
+                  style: TextStyle(color: Color.fromARGB(255, 255, 255, 255))),
             ),
           ),
           Container(
             margin: const EdgeInsets.all(10.0),
             padding: const EdgeInsets.all(10.0),
-            color: Colors.blueGrey,
+            decoration: BoxDecoration(
+              color: Colors.blueGrey,
+              shape: BoxShape.rectangle,
+              borderRadius: BorderRadius.circular(10.0),
+            ),
             width: double.infinity,
             child: const Center(
               child: Text(
@@ -45,7 +53,11 @@ class InfoPage extends StatelessWidget {
           Container(
             margin: const EdgeInsets.all(10.0),
             padding: const EdgeInsets.all(10.0),
-            color: Colors.blueGrey,
+            decoration: BoxDecoration(
+              color: Colors.blueGrey,
+              shape: BoxShape.rectangle,
+              borderRadius: BorderRadius.circular(10.0),
+            ),
             width: double.infinity,
             child: const Center(
               child: Text('App version : 0.8.9 (Beta release))',

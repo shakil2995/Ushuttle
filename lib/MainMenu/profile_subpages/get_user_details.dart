@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:ushuttlev1/MainMenu/shared_subpages/info_page.dart';
+import 'package:ushuttlev1/MainMenu/shared_subpages/about_ushuttle.dart';
 import 'package:ushuttlev1/MainMenu/ticket_subpages/ticket_page.dart';
 
 import '../../authentication_pages/auth.dart';
