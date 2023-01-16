@@ -16,7 +16,7 @@ class _StoppagePageState extends State<StoppagePage> {
     final themeProvider = Provider.of<ThemeProvider>(context);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Schedule'),
+        title: const Text('Stoppage'),
         automaticallyImplyLeading: true,
         actions: [
           IconButton(

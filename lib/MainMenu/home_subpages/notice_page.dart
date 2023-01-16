@@ -151,13 +151,27 @@ class _NoticePageState extends State<NoticePage> {
               // color: Color.fromARGB(255, 255, 106, 106),
               width: double.infinity,
               child: Center(
-                child: Text(_controllerNotice.text,
-                    style: TextStyle(
-                      fontSize: 20,
-                      color: themeProvider.isDark
-                          ? Colors.white
-                          : Color.fromARGB(255, 5, 5, 5),
-                    )),
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Text(isLoading ? 'Updating' : 'Notice',
+                          style: TextStyle(
+                            fontSize: 30,
+                            color: themeProvider.isDark
+                                ? Colors.white
+                                : Color.fromARGB(255, 5, 5, 5),
+                          )),
+                    ),
+                    Text(_controllerNotice.text,
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: themeProvider.isDark
+                              ? Colors.white
+                              : Color.fromARGB(255, 5, 5, 5),
+                        )),
+                  ],
+                ),
               ),
             ),
 

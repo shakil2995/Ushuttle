@@ -72,7 +72,7 @@ class _TicketViewState extends State<TicketView> {
     return Row(
       children: [
         ...allTickets.map((ticket) {
-          print(ticket);
+          // print(ticket);
           // final ticketNo = ticket["ticketNo"];
           return ticketWidget(
             themeProvider: themeProvider,

@@ -210,7 +210,20 @@ class ticketCard extends StatelessWidget {
           // ),
 
           child: Row(
-            children: [TicketView(userData!['ticketArray'])],
+            children: [
+              InkWell(
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (BuildContext context) {
+                        return QrGenerator('Scan to use Card');
+                      },
+                    ),
+                  );
+                },
+                child: TicketView(userData!['ticketArray']),
+              )
+            ],
           ),
         ),
       ),
@@ -241,7 +254,7 @@ class bottomPanel extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Icon(Icons.money,
+            Icon(Icons.card_travel,
                 size: 100.0, color: !isDark ? Colors.blue : Colors.white),
             ListTile(
               // leading: Icon(Icons.money, size: 0),
@@ -254,32 +267,32 @@ class bottomPanel extends StatelessWidget {
               subtitle: Center(
                 child: Text(
                     userTicketCount > 0
-                        ? 'You have ${userTicketCount} credits left.'
-                        : 'You have ${userTicketCount} credits left.Please click Buy More.',
+                        ? 'You have ${userTicketCount} cards.'
+                        : 'You have no subscription. Please Buy More.',
                     style: TextStyle(fontSize: 18.0)),
               ),
             ),
-            userTicketCount > 0
-                ? TextButton(
-                    style: TextButton.styleFrom(
-                      foregroundColor: Colors.white,
-                      backgroundColor: isDark
-                          ? Color.fromARGB(255, 197, 75, 75)
-                          : Colors.red,
-                      disabledForegroundColor: Colors.grey.withOpacity(0.38),
-                    ),
-                    child: const Text('Use Credit'),
-                    onPressed: () {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (BuildContext context) {
-                            return QrGenerator('Scan to use Credit');
-                          },
-                        ),
-                      );
-                    },
-                  )
-                : Text(''),
+            // userTicketCount > 0
+            //     ? TextButton(
+            //         style: TextButton.styleFrom(
+            //           foregroundColor: Colors.white,
+            //           backgroundColor: isDark
+            //               ? Color.fromARGB(255, 197, 75, 75)
+            //               : Colors.red,
+            //           disabledForegroundColor: Colors.grey.withOpacity(0.38),
+            //         ),
+            //         child: const Text('Use Credit'),
+            //         onPressed: () {
+            //           Navigator.of(context).push(
+            //             MaterialPageRoute(
+            //               builder: (BuildContext context) {
+            //                 return QrGenerator('Scan to use Credit');
+            //               },
+            //             ),
+            //           );
+            //         },
+            //       )
+            //     : Text(''),
             TextButton(
               style: TextButton.styleFrom(
                 foregroundColor: Colors.white,
@@ -291,7 +304,7 @@ class bottomPanel extends StatelessWidget {
                 Navigator.of(context).push(
                   MaterialPageRoute(
                     builder: (BuildContext context) {
-                      return QrGenerator('Scan to buy Credit');
+                      return QrGenerator('Scan to Subscribe');
                     },
                   ),
                 );
