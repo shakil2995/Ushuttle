@@ -96,7 +96,7 @@ Container mirpurTobashundhara(bool isDark) {
                         child: Padding(
                       padding: EdgeInsets.all(8.0),
                       child: Text(
-                        "From",
+                        "Start",
                         textAlign: TextAlign.center,
                         textScaleFactor: 1.5,
                         style: TextStyle(
@@ -109,7 +109,7 @@ Container mirpurTobashundhara(bool isDark) {
                         child: Padding(
                       padding: EdgeInsets.all(8.0),
                       child: Text(
-                        "Time",
+                        "Stop 1",
                         textAlign: TextAlign.center,
                         textScaleFactor: 1.5,
                         style: TextStyle(
@@ -122,7 +122,7 @@ Container mirpurTobashundhara(bool isDark) {
                         child: Padding(
                       padding: EdgeInsets.all(8.0),
                       child: Text(
-                        "Day",
+                        "Stop 2",
                         textAlign: TextAlign.center,
                         textScaleFactor: 1.5,
                         style: TextStyle(
@@ -135,7 +135,7 @@ Container mirpurTobashundhara(bool isDark) {
                         child: Padding(
                       padding: EdgeInsets.all(8.0),
                       child: Text(
-                        "Fare",
+                        "End",
                         textAlign: TextAlign.center,
                         textScaleFactor: 1.5,
                         style: TextStyle(
@@ -163,7 +163,7 @@ Container mirpurTobashundhara(bool isDark) {
                           child: Padding(
                         padding: EdgeInsets.all(8.0),
                         child: Text(
-                          "08.00 AM", textAlign: TextAlign.center,
+                          "Mirpur 10", textAlign: TextAlign.center,
                           // textScaleFactor: 1.5,
                           style: TextStyle(
                               // fontWeight: FontWeight.bold,
@@ -175,7 +175,7 @@ Container mirpurTobashundhara(bool isDark) {
                           child: Padding(
                         padding: EdgeInsets.all(8.0),
                         child: Text(
-                          "Daily", textAlign: TextAlign.center,
+                          "Kalshi", textAlign: TextAlign.center,
                           // textScaleFactor: 1.5,
                           style: TextStyle(
                               // fontWeight: FontWeight.bold,
@@ -187,7 +187,7 @@ Container mirpurTobashundhara(bool isDark) {
                           child: Padding(
                         padding: EdgeInsets.all(8.0),
                         child: Text(
-                          "50 Tk", textAlign: TextAlign.center,
+                          "IUB", textAlign: TextAlign.center,
                           // textScaleFactor: 1.5,
                           style: TextStyle(
                               // fontWeight: FontWeight.bold,
@@ -262,7 +262,7 @@ Container bashundharaToMirpur(bool isDark) {
                         child: Padding(
                       padding: EdgeInsets.all(8.0),
                       child: Text(
-                        "From",
+                        "Start",
                         textAlign: TextAlign.center,
                         textScaleFactor: 1.5,
                         style: TextStyle(
@@ -275,7 +275,7 @@ Container bashundharaToMirpur(bool isDark) {
                         child: Padding(
                       padding: EdgeInsets.all(8.0),
                       child: Text(
-                        "Time",
+                        "Stop 1",
                         textAlign: TextAlign.center,
                         textScaleFactor: 1.5,
                         style: TextStyle(
@@ -288,7 +288,7 @@ Container bashundharaToMirpur(bool isDark) {
                         child: Padding(
                       padding: EdgeInsets.all(8.0),
                       child: Text(
-                        "Day",
+                        "Stop 2",
                         textAlign: TextAlign.center,
                         textScaleFactor: 1.5,
                         style: TextStyle(
@@ -301,7 +301,7 @@ Container bashundharaToMirpur(bool isDark) {
                         child: Padding(
                       padding: EdgeInsets.all(8.0),
                       child: Text(
-                        "Fare",
+                        "End",
                         textAlign: TextAlign.center,
                         textScaleFactor: 1.5,
                         style: TextStyle(
@@ -317,43 +317,43 @@ Container bashundharaToMirpur(bool isDark) {
                           child: Padding(
                         padding: EdgeInsets.all(8.0),
                         child: Text(
+                          "IUB", textAlign: TextAlign.center,
+                          // textScaleFactor: 1.5,
+                          style: TextStyle(
+                              // fontWeight: FontWeight.bold,
+                              // color: Colors.white,
+                              ),
+                        ),
+                      )),
+                      TableCell(
+                          child: Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text(
+                          "Kalshi", textAlign: TextAlign.center,
+                          // textScaleFactor: 1.5,
+                          style: TextStyle(
+                              // fontWeight: FontWeight.bold,
+                              // color: Colors.white,
+                              ),
+                        ),
+                      )),
+                      TableCell(
+                          child: Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text(
+                          "Mirpur 10", textAlign: TextAlign.center,
+                          // textScaleFactor: 1.5,
+                          style: TextStyle(
+                              // fontWeight: FontWeight.bold,
+                              // color: Colors.white,
+                              ),
+                        ),
+                      )),
+                      TableCell(
+                          child: Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text(
                           "Mirpur 1", textAlign: TextAlign.center,
-                          // textScaleFactor: 1.5,
-                          style: TextStyle(
-                              // fontWeight: FontWeight.bold,
-                              // color: Colors.white,
-                              ),
-                        ),
-                      )),
-                      TableCell(
-                          child: Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Text(
-                          "08.00 AM", textAlign: TextAlign.center,
-                          // textScaleFactor: 1.5,
-                          style: TextStyle(
-                              // fontWeight: FontWeight.bold,
-                              // color: Colors.white,
-                              ),
-                        ),
-                      )),
-                      TableCell(
-                          child: Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Text(
-                          "Daily", textAlign: TextAlign.center,
-                          // textScaleFactor: 1.5,
-                          style: TextStyle(
-                              // fontWeight: FontWeight.bold,
-                              // color: Colors.white,
-                              ),
-                        ),
-                      )),
-                      TableCell(
-                          child: Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Text(
-                          "50 Tk", textAlign: TextAlign.center,
                           // textScaleFactor: 1.5,
                           style: TextStyle(
                               // fontWeight: FontWeight.bold,

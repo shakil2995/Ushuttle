@@ -175,7 +175,7 @@ class MyCardWidget extends StatelessWidget {
               );
             },
             child: Text(
-              'Buy Cards',
+              'Buy Package',
               style: TextStyle(color: Colors.white),
             ),
             style: TextButton.styleFrom(

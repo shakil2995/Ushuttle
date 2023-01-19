@@ -102,7 +102,11 @@ class _SafetyAndSecurityPageState extends State<SafetyAndSecurityPage> {
                       )),
                 ),
                 SizedBox(height: 5),
-                SafeHome()
+                Center(
+                  child: Container(
+                      width: MediaQuery.of(context).size.width * .9,
+                      child: SafeHome()),
+                )
               ],
             ),
           ),
