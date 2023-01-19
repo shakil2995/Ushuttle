@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:ushuttlev1/admin_pages/Admin_Ticket/qrScanners/scan_card_scanner.dart';
 import 'package:ushuttlev1/admin_pages/Admin_Ticket/qrScanners/scan_ticket_scanner.dart';
+import 'package:ushuttlev1/admin_pages/Admin_Ticket/qrScanners/sell_card_scanner.dart';
 import 'package:ushuttlev1/admin_pages/Admin_Ticket/qrScanners/sell_ticket_scanner.dart';
 import 'package:ushuttlev1/shared_subpages/provider/theme_provider.dart';
 
@@ -29,11 +31,11 @@ class _AdminTicketPageState extends State<AdminTicketPage> {
         child: GridView(
           shrinkWrap: true,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 1,
+            crossAxisCount: 2,
             // crossAxisSpacing: 10,
             // mainAxisSpacing: 10,
 
-            childAspectRatio: 1.3,
+            // childAspectRatio: 1.3,
           ),
           children: [
             buttonWidget(
@@ -59,6 +61,36 @@ class _AdminTicketPageState extends State<AdminTicketPage> {
                   MaterialPageRoute(
                     builder: (BuildContext context) {
                       return ScanTicket();
+                    },
+                  ),
+                );
+              },
+              backgroundColor: fareColor,
+              isDark: themeProvider.isDark,
+            ),
+            buttonWidget(
+              title: 'Sell Card',
+              icon: Icons.card_giftcard,
+              onPress: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (BuildContext context) {
+                      return SellCardScanner();
+                    },
+                  ),
+                );
+              },
+              backgroundColor: fareColor,
+              isDark: themeProvider.isDark,
+            ),
+            buttonWidget(
+              title: 'Scan Card',
+              icon: Icons.qr_code_scanner,
+              onPress: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (BuildContext context) {
+                      return ScanCard();
                     },
                   ),
                 );

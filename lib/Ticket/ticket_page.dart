@@ -56,21 +56,6 @@ class _TicketPageState extends State<TicketPage> {
     // mounted ? fetchUserData() : null;
     final themeProvider = Provider.of<ThemeProvider>(context);
     return Scaffold(
-      // appBar: AppBar(
-      //   // automaticallyImplyLeading: true,
-      //   title: const Text('My Credits'),
-      //   actions: [
-      //     IconButton(
-      //         onPressed: () {
-      //           setState(() {
-      //             themeProvider.toggleTheme();
-      //           });
-      //         },
-      //         icon: Icon(!themeProvider.isDark
-      //             ? Icons.sunny
-      //             : Icons.nightlight_round_outlined))
-      //   ],
-      // ),
       body: bodyWidget(themeProvider),
     );
   }
@@ -79,14 +64,16 @@ class _TicketPageState extends State<TicketPage> {
     if (isLoaded) {
       return Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            MyCardWidget(
-              isDark: themeProvider.isDark,
-            ),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              MyCardWidget(
+                isDark: themeProvider.isDark,
+              ),
+            ],
+          ),
         ),
       );
     } else {
@@ -168,8 +155,33 @@ class MyCardWidget extends StatelessWidget {
               fontWeight: FontWeight.bold,
               fontFamily: 'Montserrat'),
         ),
-        Center(
-          child: ticketCard(),
+        Padding(
+          padding: const EdgeInsets.only(bottom: 10),
+          child: Center(
+            child: ticketCard(),
+          ),
+        ),
+        Container(
+          height: 50,
+          width: MediaQuery.of(context).size.width * 0.85,
+          child: TextButton(
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (BuildContext context) {
+                    return QrGenerator('Scan to buy Card');
+                  },
+                ),
+              );
+            },
+            child: Text(
+              'Buy Cards',
+              style: TextStyle(color: Colors.white),
+            ),
+            style: TextButton.styleFrom(
+              backgroundColor: isDark ? Colors.blueGrey : Colors.blue,
+            ),
+          ),
         ),
         bottomPanel(isDark: isDark),
       ],
@@ -243,7 +255,8 @@ class bottomPanel extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 8.0),
-      height: 400,
+      height: 350,
+      // width: MediaQuery.of(context).size.width * 0.9,
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15.0),
@@ -254,7 +267,7 @@ class bottomPanel extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Icon(Icons.card_travel,
+            Icon(Icons.credit_card,
                 size: 100.0, color: !isDark ? Colors.blue : Colors.white),
             ListTile(
               // leading: Icon(Icons.money, size: 0),
@@ -266,33 +279,33 @@ class bottomPanel extends StatelessWidget {
               ),
               subtitle: Center(
                 child: Text(
-                    userTicketCount > 0
-                        ? 'You have ${userTicketCount} cards.'
+                    userCredit > 0
+                        ? 'You have ${userCredit} credits.'
                         : 'You have no subscription. Please Buy More.',
                     style: TextStyle(fontSize: 18.0)),
               ),
             ),
-            // userTicketCount > 0
-            //     ? TextButton(
-            //         style: TextButton.styleFrom(
-            //           foregroundColor: Colors.white,
-            //           backgroundColor: isDark
-            //               ? Color.fromARGB(255, 197, 75, 75)
-            //               : Colors.red,
-            //           disabledForegroundColor: Colors.grey.withOpacity(0.38),
-            //         ),
-            //         child: const Text('Use Credit'),
-            //         onPressed: () {
-            //           Navigator.of(context).push(
-            //             MaterialPageRoute(
-            //               builder: (BuildContext context) {
-            //                 return QrGenerator('Scan to use Credit');
-            //               },
-            //             ),
-            //           );
-            //         },
-            //       )
-            //     : Text(''),
+            userCredit > 0
+                ? TextButton(
+                    style: TextButton.styleFrom(
+                      foregroundColor: Colors.white,
+                      backgroundColor: isDark
+                          ? Color.fromARGB(255, 197, 75, 75)
+                          : Colors.red,
+                      disabledForegroundColor: Colors.grey.withOpacity(0.38),
+                    ),
+                    child: const Text('Use Credit'),
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (BuildContext context) {
+                            return QrGenerator('Scan to use Credit');
+                          },
+                        ),
+                      );
+                    },
+                  )
+                : Text(''),
             TextButton(
               style: TextButton.styleFrom(
                 foregroundColor: Colors.white,
@@ -304,7 +317,7 @@ class bottomPanel extends StatelessWidget {
                 Navigator.of(context).push(
                   MaterialPageRoute(
                     builder: (BuildContext context) {
-                      return QrGenerator('Scan to Subscribe');
+                      return QrGenerator('Scan to buy credits');
                     },
                   ),
                 );

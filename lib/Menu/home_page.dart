@@ -72,8 +72,8 @@ class _HomePageState extends State<HomePage> {
             //   isDark: themeProvider.isDark,
             // ),
             buttonWidget(
-              title: 'Stoppage',
-              icon: Icons.bus_alert,
+              title: 'Route',
+              icon: Icons.route,
               onPress: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(

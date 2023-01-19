@@ -138,6 +138,16 @@ class ticketWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Color topColor = themeProvider.isDark
+        ? Color.fromARGB(255, 74, 116, 215)
+        : Color.fromARGB(255, 85, 119, 198);
+    Color midColor = themeProvider.isDark
+        ? Color.fromARGB(255, 243, 99, 99)
+        : Color.fromARGB(255, 255, 95, 95);
+    Color bottomColor = themeProvider.isDark
+        ? Color.fromARGB(255, 243, 99, 99)
+        : Color.fromARGB(255, 255, 95, 95);
+
     return SizedBox(
       width: MediaQuery.of(context).size.width * .8,
       height: 220,
@@ -148,9 +158,7 @@ class ticketWidget extends StatelessWidget {
           children: [
             Container(
               decoration: BoxDecoration(
-                color: themeProvider.isDark
-                    ? Color.fromARGB(255, 49, 89, 183)
-                    : Color.fromARGB(255, 85, 119, 198),
+                color: topColor,
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(21),
                     topRight: Radius.circular(21)),
@@ -261,7 +269,7 @@ class ticketWidget extends StatelessWidget {
               ),
             ),
             Container(
-              color: Color.fromARGB(255, 234, 109, 87),
+              color: midColor,
               child: Row(
                 children: [
                   SizedBox(
@@ -319,7 +327,7 @@ class ticketWidget extends StatelessWidget {
             ),
             Container(
               decoration: BoxDecoration(
-                color: Color(0xFFF37B67),
+                color: bottomColor,
                 borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(21),
                     bottomRight: Radius.circular(21)),

@@ -53,9 +53,9 @@ class _RootPageState extends State<RootPage> {
           ),
           NavigationDestination(
               icon: Icon(
-                Icons.menu,
+                Icons.home,
               ),
-              label: 'Menu'),
+              label: 'Home'),
           NavigationDestination(
               icon: Icon(Icons.local_movies), label: 'Ticket'),
           NavigationDestination(icon: Icon(Icons.person), label: 'Profile'),
