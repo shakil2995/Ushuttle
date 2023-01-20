@@ -11,6 +11,7 @@ List<String> docIds = [];
 final User? user = Auth().currentUser;
 List<dynamic> items = [];
 int userTicketCount = 0;
+int userCredit = 0;
 String instituteId = '';
 bool isLoaded = false;
 Map<String, dynamic>? userData;
@@ -40,7 +41,8 @@ class _TicketPageState extends State<TicketPage> {
 
             setState(() {
               userData = snapshot.data();
-              // print(userData!["ticketArray"][0]);
+              print(userData!["credit"]);
+              userCredit = snapshot.data()!['credit'];
               // userTicketCount = snapshot.data()!['credit'];
               userTicketCount = (userData!["ticketArray"]).length;
               isLoaded = true;
