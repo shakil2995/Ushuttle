@@ -24,7 +24,7 @@ class _LoginPageState extends State<LoginPage> {
   final _controllerFirstName = TextEditingController();
   final _controllerLastName = TextEditingController();
   final _controllerInstitute = TextEditingController();
-  bool _passwordVisible = false;
+  bool _passwordVisible = true;
   @override
   void dispose() {
     _controllerEmail.dispose();
@@ -156,14 +156,14 @@ class _LoginPageState extends State<LoginPage> {
 
     Widget _entryField(
         String title, TextEditingController controller, bool password) {
-      _passwordVisible = password;
+      // _passwordVisible = password;
       return TextField(
-        obscureText: _passwordVisible,
+        obscureText: password ? _passwordVisible : false,
         // enableSuggestions: false,
         autocorrect: false,
         controller: controller,
         decoration: InputDecoration(
-          suffixIcon: _passwordVisible
+          suffixIcon: password
               ? IconButton(
                   icon: Icon(_passwordVisible
                       ? Icons.visibility
