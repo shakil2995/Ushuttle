@@ -75,43 +75,47 @@ class _TicketPageState extends State<TicketPage> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text(
-                    // 'You have $userTicketCount credits',
-                    'Available Rides',
-                    textAlign: TextAlign.start,
-                    style: TextStyle(
-                        color:
-                            !themeProvider.isDark ? Colors.black : Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: 'Montserrat'),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      // 'You have $userTicketCount credits',
+                      'Available Rides',
+                      textAlign: TextAlign.start,
+                      style: TextStyle(
+                          color: !themeProvider.isDark
+                              ? Colors.black
+                              : Colors.white,
+                          fontSize: 26,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Montserrat'),
+                    ),
                   ),
 
                   subscriptionCards(context: context),
-                  Container(
-                    height: 50,
-                    width: MediaQuery.of(context).size.width * 0.85,
-                    child: TextButton(
-                      onPressed: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (BuildContext context) {
-                              return QrGenerator('Scan to buy Card');
-                            },
-                          ),
-                        );
-                      },
-                      child: Text(
-                        'Buy Package',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      style: TextButton.styleFrom(
-                        backgroundColor: themeProvider.isDark
-                            ? Colors.blueGrey
-                            : Colors.blue,
-                      ),
-                    ),
-                  ),
+                  // Container(
+                  //   height: 50,
+                  //   width: MediaQuery.of(context).size.width * 0.85,
+                  //   child: TextButton(
+                  //     onPressed: () {
+                  //       Navigator.of(context).push(
+                  //         MaterialPageRoute(
+                  //           builder: (BuildContext context) {
+                  //             return QrGenerator('Scan to buy Card');
+                  //           },
+                  //         ),
+                  //       );
+                  //     },
+                  //     child: Text(
+                  //       'Buy Package',
+                  //       style: TextStyle(color: Colors.white),
+                  //     ),
+                  //     style: TextButton.styleFrom(
+                  //       backgroundColor: themeProvider.isDark
+                  //           ? Colors.blueGrey
+                  //           : Colors.blue,
+                  //     ),
+                  //   ),
+                  // ),
 
 // bottom container card
 

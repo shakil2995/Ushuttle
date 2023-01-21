@@ -220,21 +220,22 @@ class _NoticePageState extends State<NoticePage> {
                           end: Alignment.bottomRight,
                           colors: [
                             themeProvider.isDark
-                                ? Color.fromARGB(255, 38, 50, 63)
+                                ? Color.fromARGB(255, 7, 15, 35)
                                 : Color.fromARGB(255, 12, 108, 203),
                             themeProvider.isDark
-                                ? Color.fromARGB(255, 24, 62, 85)
+                                ? Color.fromARGB(255, 14, 44, 81)
                                 : Color.fromARGB(255, 64, 133, 201),
                             themeProvider.isDark
-                                ? Color.fromARGB(255, 4, 83, 125)
-                                : Color.fromARGB(255, 101, 145, 190)
+                                ? Color.fromARGB(255, 11, 64, 130)
+                                : Color.fromARGB(255, 78, 134, 190)
                           ])
                       // color: themeProvider.isDark ? Color(0xFFFB8580) : Color(0xFFFB8580),
                       ),
                   child: Center(
                     child: ListTile(
                       title: Center(
-                        child: Text(_controllerNotice.text,
+                        child: Text(
+                            !isLoading ? _controllerNotice.text : "Updating",
                             style: TextStyle(
                                 fontSize: 22,
                                 fontWeight: FontWeight.bold,

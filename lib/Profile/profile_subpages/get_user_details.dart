@@ -50,12 +50,23 @@ class GetUserDetails extends StatelessWidget {
                   Text('Email: ${data['email']}'),
                   const SizedBox(height: 4),
                   Text('Institution: ${data['institute']}'),
+                  const SizedBox(height: 4),
+                  Text('Available Credits: ${data['credit']}'),
+
                   SizedBox(height: 16),
                   SizedBox(
                     // height: 4,
                     width: 200,
                     child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (BuildContext context) {
+                                return const TicketPage();
+                              },
+                            ),
+                          );
+                        },
                         style: ElevatedButton.styleFrom(
                             // backgroundColor: Colors.amber,
                             side: BorderSide.none,
