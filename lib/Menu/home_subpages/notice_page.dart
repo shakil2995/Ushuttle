@@ -1,9 +1,22 @@
 import 'dart:convert';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:expandable/expandable.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:ushuttlev1/Profile/auth_sub_pages/auth.dart';
 import 'package:ushuttlev1/shared_subpages/provider/theme_provider.dart';
+
+List<String> docIds = [];
+final User? user = Auth().currentUser;
+List<dynamic> items = [];
+int userTicketCount = 0;
+int userCredit = 0;
+String instituteId = '';
+String notice = '';
+bool isLoaded = false;
+Map<String, dynamic>? userData;
 
 class NoticePage extends StatefulWidget {
   const NoticePage({super.key});
@@ -28,34 +41,66 @@ class _NoticePageState extends State<NoticePage> {
   }
 
   updateNotice() async {
-    try {
-      final response = await http.get(
-        Uri.parse("https://busy-jay-earrings.cyclic.app/notice"),
-      );
-      final body = response.body;
-      final json = jsonDecode(body);
-      // print(json);
-      setState(() {
-        _controllerNotice.text = json['results'][0]['notice'];
+    getDocIds() async {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .where('email', isEqualTo: user?.email)
+          .get()
+          .then((snapshot) {
+        snapshot.docs.forEach((document) {
+          // Access the data in the document
+          var data = document.data();
+          instituteId = data['institute'];
+          debugPrint('${instituteId}');
+          // getBusNotice(instituteId);
+          // Do something with the data
+        });
       });
-    } catch (e) {
-      showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-                title: const Text('Network Error'),
-                content:
-                    Text('Could not conect to server, Please try again later'),
-                actions: [
-                  TextButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: const Text('OK'),
-                  )
-                ],
-              ));
-      print(e);
+      try {
+        // final response = await http.get(
+        //   Uri.parse(
+        //       "https://busy-jay-earrings.cyclic.app/notice/${instituteId}"),
+        // );
+        // final body = response.body;
+        // final json = jsonDecode(body);
+        // print(json);
+        // debugPrint(_controllerNotice.text);
+
+        setState(() {
+          isLoading = true;
+        });
+
+        final response = await http.get(
+          Uri.parse(
+              "https://busy-jay-earrings.cyclic.app/notice/${instituteId}"),
+        );
+        final body = response.body;
+        final json = jsonDecode(body);
+        setState(() {
+          _controllerNotice.text = json['results'][0]['notice'];
+          isLoading = false;
+        });
+      } catch (e) {
+        showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+                  title: const Text('Network Error'),
+                  content: Text(
+                      'Could not conect to server, Please try again later'),
+                  actions: [
+                    TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: const Text('OK'),
+                    )
+                  ],
+                ));
+        print(e);
+      }
     }
+
+    getDocIds();
   }
 
   Widget build(BuildContext context) {
@@ -97,7 +142,7 @@ class _NoticePageState extends State<NoticePage> {
             isLoading = !isLoading;
           });
         },
-        child: Text(isLoading ? 'See updates' : 'Updating '),
+        child: Text(!isLoading ? 'Get updates' : 'Updating '),
       );
     }
 
@@ -112,7 +157,7 @@ class _NoticePageState extends State<NoticePage> {
             isLoading = !isLoading;
           });
         },
-        child: Icon(isLoading ? Icons.update : Icons.refresh),
+        child: Icon(!isLoading ? Icons.update : Icons.refresh),
       ),
       appBar: AppBar(
         title: const Text('Notice'),
@@ -148,7 +193,7 @@ class _NoticePageState extends State<NoticePage> {
                 ),
                 padding: const EdgeInsets.all(8.0),
                 child: Center(
-                  child: Text(isLoading ? 'Updating' : 'Notice',
+                  child: Text('Notice',
                       style: TextStyle(
                         fontSize: 30,
                         color: themeProvider.isDark
@@ -186,8 +231,10 @@ class _NoticePageState extends State<NoticePage> {
                 ],
               ),
             ),
-
-            // _submitButton(),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              // child: _submitButton(),
+            ),
           ],
         ),
       )),

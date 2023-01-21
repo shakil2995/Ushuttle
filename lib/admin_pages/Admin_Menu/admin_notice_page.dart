@@ -1,8 +1,14 @@
 import 'dart:convert';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:ushuttlev1/Profile/auth_sub_pages/auth.dart';
 import 'package:ushuttlev1/shared_subpages/provider/theme_provider.dart';
+
+final User? user = Auth().currentUser;
+String instituteId = '';
 
 class AdminNoticePage extends StatefulWidget {
   const AdminNoticePage({super.key});
@@ -12,6 +18,11 @@ class AdminNoticePage extends StatefulWidget {
 }
 
 class _AdminNoticePageState extends State<AdminNoticePage> {
+  // void initState() {
+  //   super.initState();
+  //   getDocIds();
+  // }
+
   final _controllerNotice = TextEditingController();
   bool isLoading = false;
   bool isLogin = true;
@@ -42,47 +53,71 @@ class _AdminNoticePageState extends State<AdminNoticePage> {
     }
 
     updateNotice() async {
-      try {
-        final response = await http.post(
-          Uri.parse(
-              "https://busy-jay-earrings.cyclic.app/notice?notice=${_controllerNotice.text}"),
-        );
-        final body = response.body;
-        final json = jsonDecode(body);
-        print(json);
-        debugPrint(_controllerNotice.text);
-        showDialog(
-            context: context,
-            builder: (context) => AlertDialog(
-                  title: const Text('Success'),
-                  content: Text('Notice Updated'),
-                  actions: [
-                    TextButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      child: const Text('OK'),
-                    )
-                  ],
-                ));
-      } catch (e) {
-        showDialog(
-            context: context,
-            builder: (context) => AlertDialog(
-                  title: const Text('Network Error'),
-                  content: Text(
-                      'Could not conect to server, Please try again later'),
-                  actions: [
-                    TextButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      child: const Text('OK'),
-                    )
-                  ],
-                ));
-        print(e);
+      setData() async {
+        try {
+          print("i id " + instituteId);
+          final response = await http.post(
+            Uri.parse(
+                "https://busy-jay-earrings.cyclic.app/notice/${instituteId}?notice=${_controllerNotice.text}"),
+          );
+          final body = response.body;
+          final json = jsonDecode(body);
+          print(json);
+          debugPrint(_controllerNotice.text);
+          showDialog(
+              context: context,
+              builder: (context) => AlertDialog(
+                    title: const Text('Success'),
+                    content: Text('Notice Updated'),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: const Text('OK'),
+                      )
+                    ],
+                  ));
+        } catch (e) {
+          showDialog(
+              context: context,
+              builder: (context) => AlertDialog(
+                    title: const Text('Network Error'),
+                    content: Text(
+                        'Could not conect to server, Please try again later'),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: const Text('OK'),
+                      )
+                    ],
+                  ));
+          print(e);
+        }
       }
+
+      getDocIds() async {
+        await FirebaseFirestore.instance
+            .collection('admin')
+            .where('email', isEqualTo: user?.email)
+            .get()
+            .then((snapshot) {
+          snapshot.docs.forEach((document) {
+            // Access the data in the document
+            var data = document.data();
+
+            setState(() {
+              instituteId = data['institute'];
+              debugPrint("data +" + instituteId);
+            });
+            setData();
+          });
+        });
+      }
+
+      getDocIds();
     }
 
     Widget _submitButton() {

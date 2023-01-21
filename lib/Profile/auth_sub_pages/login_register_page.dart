@@ -36,6 +36,7 @@ class _LoginPageState extends State<LoginPage> {
     super.dispose();
   }
 
+//  Firebase signin
   Future<void> signIn() async {
     showDialog(
         context: context,
@@ -56,6 +57,7 @@ class _LoginPageState extends State<LoginPage> {
     Navigator.of(context).pop();
   }
 
+//  Firebase signup
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   Future signUp() async {
     if (passwordConfirmed()) {

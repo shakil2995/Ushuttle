@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:ushuttlev1/admin_pages/Admin_Menu/admin_notice_page.dart';
 import 'package:ushuttlev1/admin_pages/Admin_Profile/admin_profile_page.dart';
 import 'package:ushuttlev1/shared_subpages/about_ushuttle.dart';
-import 'package:ushuttlev1/shared_subpages/contactUs.dart';
+import 'package:ushuttlev1/Menu/home_subpages/contactUs.dart';
 import 'package:ushuttlev1/shared_subpages/provider/theme_provider.dart';
 
 class AdminHomePage extends StatefulWidget {

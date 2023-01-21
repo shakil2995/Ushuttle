@@ -10,7 +10,7 @@ import 'package:ushuttlev1/shared_subpages/about_ushuttle.dart';
 import 'package:ushuttlev1/shared_subpages/provider/theme_provider.dart';
 import 'package:ushuttlev1/Ticket/ticket_page.dart';
 
-import '../shared_subpages/contactUs.dart';
+import 'home_subpages/contactUs.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

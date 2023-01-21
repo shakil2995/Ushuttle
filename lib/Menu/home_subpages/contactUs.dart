@@ -26,7 +26,7 @@ class _ContactUsState extends State<ContactUs> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Contat Us'),
+        title: const Text('Contact Us'),
         automaticallyImplyLeading: true,
         actions: [
           IconButton(
