@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:ushuttlev1/Profile/profile_subpages/editProfile.dart';
 import 'package:ushuttlev1/shared_subpages/about_ushuttle.dart';
 import '../../Profile/auth_sub_pages/auth.dart';
 
@@ -53,7 +54,15 @@ class GetAdminDetails extends StatelessWidget {
                     // height: 4,
                     width: 200,
                     child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (BuildContext context) {
+                                return const EditProfile();
+                              },
+                            ),
+                          );
+                        },
                         style: ElevatedButton.styleFrom(
                             // backgroundColor: Colors.amber,
                             side: BorderSide.none,
