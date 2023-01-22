@@ -25,10 +25,6 @@ class TicketPage extends StatefulWidget {
 class _TicketPageState extends State<TicketPage> {
   void initState() {
     super.initState();
-    fetchUserData();
-  }
-
-  void fetchUserData() {
     FirebaseFirestore.instance
         .collection('users')
         .where('email', isEqualTo: user?.email)
@@ -58,7 +54,9 @@ class _TicketPageState extends State<TicketPage> {
     // mounted ? fetchUserData() : null;
     final themeProvider = Provider.of<ThemeProvider>(context);
     return Scaffold(
-      body: bodyWidget(themeProvider),
+      body: isLoaded
+          ? bodyWidget(themeProvider)
+          : Center(child: CircularProgressIndicator()),
     );
   }
 
@@ -127,7 +125,7 @@ class _TicketPageState extends State<TicketPage> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(15.0),
                       ),
-                      // color: !isDark ? Colors.white : Colors.blueGrey.shade900,
+                      color: Color.fromARGB(255, 243, 99, 99),
                       elevation: 10,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,

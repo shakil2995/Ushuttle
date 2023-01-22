@@ -13,67 +13,14 @@ class TicketView extends StatefulWidget {
 }
 
 class _TicketViewState extends State<TicketView> {
-  // get ticketNo => null;
-
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
-    // print(userData);
-    // final credit = userData!['credit'];
-    // final lastName = userData!['lastName'];
-    // final ticketArray = userData!['ticketArray'];
+
     final allTickets = userData!['ticketArray'];
-    // final allTickets = [...userData!['ticketArray']];
-
-    final firstTicket = userData!['ticketArray'][0];
-    final startPoint = firstTicket['startPoint'];
-    final fare = firstTicket['fare'];
-    final to = firstTicket['to'];
-    final rideRemain = firstTicket['rideRemain'];
-    final seatNo = firstTicket['seatNo'];
-    final isTwoWay = firstTicket['isTwoWay'];
-    final returnTime = firstTicket['returnTime'];
-    final endPoint = firstTicket['endPoint'];
-    final from = firstTicket['from'];
-    final startTime = firstTicket['startTime'];
-    final busName = firstTicket['busName'];
-    // final ticket = userData!['ticket'];
-    // final institute = userData!['institute'];
-    // final email = userData!['email'];
-    // final firstName = userData!['firstName'];
-
-    final buyDate = DateTime.fromMillisecondsSinceEpoch(
-        firstTicket['buyDate'].seconds * 1000 +
-            firstTicket['buyDate'].nanoseconds ~/ 1000000);
-    final expireDate = DateTime.fromMillisecondsSinceEpoch(
-        firstTicket['expireDate'].seconds * 1000 +
-            firstTicket['expireDate'].nanoseconds ~/ 1000000);
-    final buyDateString = DateFormat("dd-MM-yy").format(buyDate);
-    final expireDateString = DateFormat("dd-MM-yy").format(expireDate);
-    // print(userData!['ticketArray']);
-
-    // print(ticketNo);
-    // return ticketWidget(
-    //     themeProvider: themeProvider,
-    //     busName: busName,
-    //     from: from,
-    //     to: to,
-    //     startPoint: startPoint,
-    //     fare: fare,
-    //     endPoint: endPoint,
-    //     buyDateString: buyDateString,
-    //     isTwoWay: isTwoWay,
-    //     startTime: startTime,
-    //     returnTime: returnTime,
-    //     seatNo: seatNo,
-    //     expireDateString: expireDateString,
-    //     rideRemain: rideRemain);
-
     return Row(
       children: [
         ...allTickets.map((ticket) {
-          // print(ticket);
-          // final ticketNo = ticket["ticketNo"];
           return ticketWidget(
             themeProvider: themeProvider,
             busName: ticket['busName'],
@@ -152,7 +99,7 @@ class ticketWidget extends StatelessWidget {
         : Color.fromARGB(255, 255, 95, 95);
 
     return true
-        ? SizedBox(
+        ? Container(
             width: MediaQuery.of(context).size.width * .8,
             height: 220,
             child: Container(
