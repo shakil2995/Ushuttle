@@ -162,7 +162,9 @@ class _TicketPageState extends State<TicketPage> {
                                     disabledForegroundColor:
                                         Colors.grey.withOpacity(0.38),
                                   ),
-                                  child: const Text('Use Credit'),
+                                  child: const Text(
+                                    'Use Credit',
+                                  ),
                                   onPressed: () {
                                     Navigator.of(context).push(
                                       MaterialPageRoute(
