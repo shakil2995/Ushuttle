@@ -41,7 +41,7 @@ class _TicketPageState extends State<TicketPage> {
 
             setState(() {
               userData = snapshot.data();
-              print(userData!["credit"]);
+              // print(userData!["credit"]);
               userCredit = snapshot.data()!['credit'];
               // userTicketCount = snapshot.data()!['credit'];
               userTicketCount = (userData!["ticketArray"]).length;
@@ -150,7 +150,7 @@ class _TicketPageState extends State<TicketPage> {
                               child: Text(
                                   userCredit > 0
                                       ? 'You have ${userCredit} credits.'
-                                      : 'You have no subscription. Please Buy More.',
+                                      : 'You have no Credit. Please Buy More.',
                                   style: TextStyle(fontSize: 18.0)),
                             ),
                           ),
