@@ -100,51 +100,6 @@ class _QrGeneratorState extends State<QrGenerator> {
       },
     );
 
-    // Widget _entryField(
-    //     String title, TextEditingController controller, bool password) {
-    //   return TextField(
-    //     obscureText: password,
-    //     // enableSuggestions: false,
-    //     autocorrect: false,
-    //     controller: controller,
-    //     decoration: InputDecoration(
-    //       labelText: title,
-    //       fillColor: Colors.white,
-    //       border: OutlineInputBorder(
-    //         borderRadius: BorderRadius.circular(12.0),
-    //         borderSide: const BorderSide(),
-    //       ),
-    //     ),
-    //   );
-    // }
-
-    // Widget _submitButton() {
-    //   return ElevatedButton(
-    //     style: ElevatedButton.styleFrom(
-    //       minimumSize: const Size(double.infinity, 60),
-    //       textStyle: const TextStyle(fontSize: 20),
-    //       backgroundColor: themeProvider.isDark ? Colors.blue[700] : null,
-    //       shape: RoundedRectangleBorder(
-    //         borderRadius: BorderRadius.circular(12.0),
-    //       ),
-    //     ),
-    //     onPressed: () async {
-    //       // setState(() {
-    //       //   isLoading = !isLoading;
-    //       // });
-    //       // if (isLogin) {
-    //       //   await signIn();
-    //       // } else {
-    //       //   await signUp();
-    //       // }
-    //       // setState(() {
-    //       //   isLoading = false;
-    //       // });
-    //     },
-    //     child: Text('Generate QR'),
-    //   );
-    // }
-
     String messageDev = ('Show this QR code to the manager.'
         'Please wait for a few seconds.');
     return Scaffold(
