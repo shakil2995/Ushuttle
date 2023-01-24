@@ -13,7 +13,7 @@ List<dynamic> items = [];
 int userTicketCount = 0;
 int userCredit = 0;
 String instituteId = '';
-bool isLoaded = false;
+bool isLoading = false;
 Map<String, dynamic>? userData;
 
 class TicketPage extends StatefulWidget {
@@ -25,6 +25,10 @@ class TicketPage extends StatefulWidget {
 class _TicketPageState extends State<TicketPage> {
   void initState() {
     super.initState();
+    fetchUserData();
+  }
+
+  void fetchUserData() {
     FirebaseFirestore.instance
         .collection('users')
         .where('email', isEqualTo: user?.email)
@@ -41,7 +45,7 @@ class _TicketPageState extends State<TicketPage> {
               userCredit = snapshot.data()!['credit'];
               // userTicketCount = snapshot.data()!['credit'];
               userTicketCount = (userData!["ticketArray"]).length;
-              isLoaded = true;
+              isLoading = true;
             });
           }
         });
@@ -54,14 +58,12 @@ class _TicketPageState extends State<TicketPage> {
     // mounted ? fetchUserData() : null;
     final themeProvider = Provider.of<ThemeProvider>(context);
     return Scaffold(
-      body: isLoaded
-          ? bodyWidget(themeProvider)
-          : Center(child: CircularProgressIndicator()),
+      body: bodyWidget(themeProvider),
     );
   }
 
   Padding bodyWidget(ThemeProvider themeProvider) {
-    if (isLoaded) {
+    if (isLoading) {
       return Padding(
         padding: const EdgeInsets.all(8.0),
         child: SingleChildScrollView(
@@ -70,7 +72,7 @@ class _TicketPageState extends State<TicketPage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Column(
-                mainAxisAlignment: MainAxisAlignment.start,
+                // mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Padding(
@@ -90,33 +92,8 @@ class _TicketPageState extends State<TicketPage> {
                   ),
 
                   subscriptionCards(context: context),
-                  // Container(
-                  //   height: 50,
-                  //   width: MediaQuery.of(context).size.width * 0.85,
-                  //   child: TextButton(
-                  //     onPressed: () {
-                  //       Navigator.of(context).push(
-                  //         MaterialPageRoute(
-                  //           builder: (BuildContext context) {
-                  //             return QrGenerator('Scan to buy Card');
-                  //           },
-                  //         ),
-                  //       );
-                  //     },
-                  //     child: Text(
-                  //       'Buy Package',
-                  //       style: TextStyle(color: Colors.white),
-                  //     ),
-                  //     style: TextButton.styleFrom(
-                  //       backgroundColor: themeProvider.isDark
-                  //           ? Colors.blueGrey
-                  //           : Colors.blue,
-                  //     ),
-                  //   ),
-                  // ),
-
-// bottom container card
-
+                 
+//Bellow ticket card container
                   Container(
                     padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 8.0),
                     height: 350,
@@ -125,7 +102,7 @@ class _TicketPageState extends State<TicketPage> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(15.0),
                       ),
-                      color: Color.fromARGB(255, 243, 99, 99),
+                      // color: !isDark ? Colors.white : Colors.blueGrey.shade900,
                       elevation: 10,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -162,9 +139,7 @@ class _TicketPageState extends State<TicketPage> {
                                     disabledForegroundColor:
                                         Colors.grey.withOpacity(0.38),
                                   ),
-                                  child: const Text(
-                                    'Use Credit',
-                                  ),
+                                  child: const Text('Use Credit'),
                                   onPressed: () {
                                     Navigator.of(context).push(
                                       MaterialPageRoute(
@@ -226,7 +201,7 @@ class subscriptionCards extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Padding(
       padding: const EdgeInsets.only(bottom: 10),
       child: Center(
         child: Padding(

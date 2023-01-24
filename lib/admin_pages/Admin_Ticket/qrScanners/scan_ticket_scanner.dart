@@ -14,6 +14,9 @@ int userCredit = 0;
 int ticketPrice = 0;
 String instituteId = '';
 bool isLoaded = false;
+bool isTicketValid = false;
+bool isTicketAlreadyUsed = false;
+bool isTicketExpired = false;
 
 class ScanTicket extends StatefulWidget {
   const ScanTicket({Key? key}) : super(key: key);

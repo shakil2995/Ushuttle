@@ -52,15 +52,7 @@ class _QrGeneratorState extends State<QrGenerator> {
     getDocIds();
   }
 
-  final _controllerEmail = TextEditingController();
-  final _controllerPassword = TextEditingController();
-
-  @override
-  void dispose() {
-    _controllerEmail.dispose();
-    _controllerPassword.dispose();
-    super.dispose();
-  }
+  
 
   Widget build(BuildContext context) {
     fetchUserData();
@@ -90,15 +82,12 @@ class _QrGeneratorState extends State<QrGenerator> {
                   ? ui.Color.fromARGB(255, 254, 255, 255)
                   : ui.Color.fromARGB(255, 14, 14, 14),
             ),
-            // size: 320.0,
-            // embeddedImage: snapshot.data,
-            // embeddedImageStyle: QrEmbeddedImageStyle(
-            //   size: Size.fromRadius(30),
-            // ),
+            
           ),
         );
       },
     );
+
 
     String messageDev = ('Show this QR code to the manager.'
         'Please wait for a few seconds.');
@@ -175,14 +164,7 @@ class _QrGeneratorState extends State<QrGenerator> {
                       // style: Theme.of(context).textTheme.bodyText1,
                       ),
                 ),
-                // Padding(
-                //   padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
-                //   child: _entryField('Email', _controllerEmail, false),
-                // ),
-                // Padding(
-                //   padding: EdgeInsets.symmetric(vertical: 20, horizontal: 40),
-                //   child: _submitButton(),
-                // ),
+                
               ],
             ),
           ),

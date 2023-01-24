@@ -13,14 +13,26 @@ class TicketView extends StatefulWidget {
 }
 
 class _TicketViewState extends State<TicketView> {
+  // get ticketNo => null;
+
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
-
+    // print(userData);
+    // final credit = userData!['credit'];
+    // final lastName = userData!['lastName'];
+    // final ticketArray = userData!['ticketArray'];
     final allTickets = userData!['ticketArray'];
+    // final allTickets = [...userData!['ticketArray']];
+
+    
+    
+
     return Row(
       children: [
         ...allTickets.map((ticket) {
+          // print(ticket);
+          // final ticketNo = ticket["ticketNo"];
           return ticketWidget(
             themeProvider: themeProvider,
             busName: ticket['busName'],
@@ -99,7 +111,7 @@ class ticketWidget extends StatelessWidget {
         : Color.fromARGB(255, 255, 95, 95);
 
     return true
-        ? Container(
+        ? SizedBox(
             width: MediaQuery.of(context).size.width * .8,
             height: 220,
             child: Container(
@@ -114,6 +126,7 @@ class ticketWidget extends StatelessWidget {
                           topLeft: Radius.circular(21),
                           topRight: Radius.circular(21)),
                     ),
+                    //ticket container
                     padding: const EdgeInsets.all(16),
                     child: Column(
                       children: [
