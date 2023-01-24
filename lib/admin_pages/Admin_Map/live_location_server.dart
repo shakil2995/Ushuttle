@@ -76,7 +76,7 @@ class _LiveLocationServerState extends State<LiveLocationServer>
   }
 
   void startUploadingCoordinates() {
-    Timer.periodic(const Duration(seconds: 5), (timer) {
+    Timer.periodic(const Duration(seconds: 1), (timer) {
       uploadCoordinates();
     });
   }

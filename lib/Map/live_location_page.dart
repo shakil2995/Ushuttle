@@ -77,7 +77,7 @@ class _LiveLocationPageState extends State<LiveLocationPage>
   }
 
   void startFetchingCoordinates() {
-    Timer.periodic(const Duration(seconds: 3), (timer) {
+    Timer.periodic(const Duration(seconds: 1), (timer) {
       if (mounted) {
         fetchCoordinates();
         setState(() {
