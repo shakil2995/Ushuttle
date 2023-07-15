@@ -155,7 +155,7 @@ class menuWidget extends StatelessWidget {
         ),
         title: Text(title,
             style:
-                Theme.of(context).textTheme.bodyText1?.apply(color: textColor)),
+                Theme.of(context).textTheme.bodyLarge?.apply(color: textColor)),
         // subtitle: Text(data['firstName']),
         trailing: endIcon
             ? Container(

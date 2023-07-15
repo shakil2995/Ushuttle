@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+// import 'package:google_fonts/google_fonts.dart';
 import 'package:ushuttlev1/Profile/auth_sub_pages/forgotPasswordPage.dart';
 import 'package:provider/provider.dart';
 import 'package:ushuttlev1/shared_subpages/provider/theme_provider.dart';
@@ -108,16 +108,10 @@ class _LoginPageState extends State<LoginPage> {
     Widget _header() {
       return Text(
         isLogin ? 'Welcome back !!' : 'Hello There !!',
-        // style: const TextStyle(
-        //   // color: Colors.white,
-        //   fontSize: 44,
-        //   fontWeight: FontWeight.bold,
-        // ),
-
-        style: GoogleFonts.bebasNeue(
+        style: const TextStyle(
           // color: Colors.white,
           fontSize: 36,
-          // fontWeight: FontWeight.bold,
+          fontWeight: FontWeight.bold,
         ),
       );
     }

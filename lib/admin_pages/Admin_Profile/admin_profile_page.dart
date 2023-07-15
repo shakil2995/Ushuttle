@@ -52,6 +52,7 @@ class _AdminProfilePageState extends State<AdminProfilePage> {
     );
   }
 
+  // ignore: unused_element
   Widget _userUid() {
     return Text(user?.email ?? 'user email');
   }

@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:ushuttlev1/shared_subpages/about_ushuttle.dart';
-import 'package:ushuttlev1/Ticket/ticket_page.dart';
+// import 'package:ushuttlev1/Ticket/ticket_page.dart';
 
 import '../auth_sub_pages/auth.dart';
 import 'editProfile.dart';
@@ -173,7 +173,7 @@ class menuWidget extends StatelessWidget {
         ),
         title: Text(title,
             style:
-                Theme.of(context).textTheme.bodyText1?.apply(color: textColor)),
+                Theme.of(context).textTheme.bodyLarge?.apply(color: textColor)),
         // subtitle: Text(data['firstName']),
         trailing: endIcon
             ? Container(

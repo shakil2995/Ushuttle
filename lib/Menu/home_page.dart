@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 // import 'package:ushuttlev1/live_map_page_old.dart';
-import 'package:ushuttlev1/Menu/home_subpages/fare_page.dart';
+// import 'package:ushuttlev1/Menu/home_subpages/fare_page.dart';
 import 'package:ushuttlev1/Menu/home_subpages/notice_page.dart';
 import 'package:ushuttlev1/Menu/home_subpages/safety_security_page.dart';
 import 'package:ushuttlev1/Menu/home_subpages/schedule_page.dart';
@@ -8,7 +8,7 @@ import 'package:ushuttlev1/Menu/home_subpages/stoppage_page.dart';
 import 'package:provider/provider.dart';
 import 'package:ushuttlev1/shared_subpages/about_ushuttle.dart';
 import 'package:ushuttlev1/shared_subpages/provider/theme_provider.dart';
-import 'package:ushuttlev1/Ticket/ticket_page.dart';
+// import 'package:ushuttlev1/Ticket/ticket_page.dart';
 
 import 'home_subpages/contactUs.dart';
 
@@ -29,7 +29,7 @@ class _HomePageState extends State<HomePage> {
     Color lightTheme = Colors.blue;
 
     Color scheduleColor = !themeProvider.isDark ? lightTheme : darkTheme;
-    Color fareColor = !themeProvider.isDark ? lightTheme : darkTheme;
+    // Color fareColor = !themeProvider.isDark ? lightTheme : darkTheme;
     Color stoppageColor = !themeProvider.isDark ? lightTheme : darkTheme;
     Color noticeColor = !themeProvider.isDark ? lightTheme : darkTheme;
     Color ticketColor = !themeProvider.isDark ? lightTheme : darkTheme;

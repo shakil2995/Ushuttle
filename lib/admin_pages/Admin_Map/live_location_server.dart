@@ -30,6 +30,7 @@ class _LiveLocationServerState extends State<LiveLocationServer>
   late final MapController _mapController;
   bool _liveUpdate = false;
   bool _permission = false;
+  // ignore: unused_field
   String? _serviceError = '';
   int interActiveFlags = InteractiveFlag.all;
   final Location _locationService = Location();

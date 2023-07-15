@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:expandable/expandable.dart';
+// import 'package:expandable/expandable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
@@ -105,6 +105,7 @@ class _NoticePageState extends State<NoticePage> {
 
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
+    // ignore: unused_element
     Widget _entryField(
         String title, TextEditingController controller, bool password) {
       return TextField(
@@ -123,6 +124,7 @@ class _NoticePageState extends State<NoticePage> {
       );
     }
 
+    // ignore: unused_element
     Widget _submitButton() {
       return ElevatedButton(
         style: ElevatedButton.styleFrom(

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:ushuttlev1/Menu/home_subpages/fare_page.dart';
+// import 'package:ushuttlev1/Menu/home_subpages/fare_page.dart';
 import 'package:ushuttlev1/Menu/home_subpages/schedule_page.dart';
-import 'package:ushuttlev1/Menu/home_subpages/stoppage_page.dart';
+// import 'package:ushuttlev1/Menu/home_subpages/stoppage_page.dart';
 import 'package:provider/provider.dart';
 import 'package:ushuttlev1/admin_pages/Admin_Menu/admin_notice_page.dart';
-import 'package:ushuttlev1/admin_pages/Admin_Profile/admin_profile_page.dart';
+// import 'package:ushuttlev1/admin_pages/Admin_Profile/admin_profile_page.dart';
 import 'package:ushuttlev1/shared_subpages/about_ushuttle.dart';
 import 'package:ushuttlev1/Menu/home_subpages/contactUs.dart';
 import 'package:ushuttlev1/shared_subpages/provider/theme_provider.dart';
@@ -26,8 +26,8 @@ class _AdminHomePageState extends State<AdminHomePage> {
     Color lightTheme = Colors.blue;
 
     Color scheduleColor = !themeProvider.isDark ? lightTheme : darkTheme;
-    Color fareColor = !themeProvider.isDark ? lightTheme : darkTheme;
-    Color stoppageColor = !themeProvider.isDark ? lightTheme : darkTheme;
+    // Color fareColor = !themeProvider.isDark ? lightTheme : darkTheme;
+    // Color stoppageColor = !themeProvider.isDark ? lightTheme : darkTheme;
     Color noticeColor = !themeProvider.isDark ? lightTheme : darkTheme;
     Color ticketColor = !themeProvider.isDark ? lightTheme : darkTheme;
     return Scaffold(

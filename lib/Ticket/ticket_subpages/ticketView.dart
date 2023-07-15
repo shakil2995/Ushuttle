@@ -25,9 +25,6 @@ class _TicketViewState extends State<TicketView> {
     final allTickets = userData!['ticketArray'];
     // final allTickets = [...userData!['ticketArray']];
 
-    
-    
-
     return Row(
       children: [
         ...allTickets.map((ticket) {
@@ -413,6 +410,7 @@ class ticketWidget extends StatelessWidget {
               ),
             ),
           )
+        // ignore: dead_code
         : Text('Date over');
   }
 }
