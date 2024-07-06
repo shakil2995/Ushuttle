@@ -71,6 +71,18 @@ android {
            signingConfig signingConfigs.release
        }
    }
+
+
+//    android {
+//     signingConfigs {
+//         // No signing configuration for release build
+//     }
+//     buildTypes {
+//         release {
+//             // No signingConfig needed if not signing
+//         }
+//     }
+// }
 }
 
 flutter {
