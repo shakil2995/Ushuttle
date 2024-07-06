@@ -63,7 +63,7 @@ class _ContactUsState extends State<ContactUs> {
               ),
               TextButton(
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(Colors.blue),
+                  backgroundColor: WidgetStateProperty.all(Colors.blue),
                 ),
                 child: Text("Submit", style: TextStyle(color: Colors.white)),
                 onPressed: () {

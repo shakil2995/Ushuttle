@@ -66,7 +66,7 @@ Container mirpurTobashundhara(bool isDark) {
             child: Text(
               'Mirpur to Bashundhara',
               textAlign: TextAlign.center,
-              textScaleFactor: 1.5,
+              textScaler: TextScaler.linear(1.5),
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 // color: Colors.white,
@@ -98,7 +98,7 @@ Container mirpurTobashundhara(bool isDark) {
                       child: Text(
                         "Start",
                         textAlign: TextAlign.center,
-                        textScaleFactor: 1.5,
+                        textScaler: TextScaler.linear(1.5),
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           // color: Colors.white,
@@ -111,7 +111,7 @@ Container mirpurTobashundhara(bool isDark) {
                       child: Text(
                         "Stop 1",
                         textAlign: TextAlign.center,
-                        textScaleFactor: 1.5,
+                        textScaler: TextScaler.linear(1.5),
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           // color: Colors.white,
@@ -124,7 +124,7 @@ Container mirpurTobashundhara(bool isDark) {
                       child: Text(
                         "Stop 2",
                         textAlign: TextAlign.center,
-                        textScaleFactor: 1.5,
+                        textScaler: TextScaler.linear(1.5),
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           // color: Colors.white,
@@ -137,7 +137,7 @@ Container mirpurTobashundhara(bool isDark) {
                       child: Text(
                         "End",
                         textAlign: TextAlign.center,
-                        textScaleFactor: 1.5,
+                        textScaler: TextScaler.linear(1.5),
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           // color: Colors.white,
@@ -152,7 +152,7 @@ Container mirpurTobashundhara(bool isDark) {
                         padding: EdgeInsets.all(8.0),
                         child: Text(
                           "Mirpur 1", textAlign: TextAlign.center,
-                          // textScaleFactor: 1.5,
+                          // textScaler : TextScaler.linear(1.5),
                           style: TextStyle(
                               // fontWeight: FontWeight.bold,
                               // color: Colors.white,
@@ -164,7 +164,7 @@ Container mirpurTobashundhara(bool isDark) {
                         padding: EdgeInsets.all(8.0),
                         child: Text(
                           "Mirpur 10", textAlign: TextAlign.center,
-                          // textScaleFactor: 1.5,
+                          // textScaler : TextScaler.linear(1.5),
                           style: TextStyle(
                               // fontWeight: FontWeight.bold,
                               // color: Colors.white,
@@ -176,7 +176,7 @@ Container mirpurTobashundhara(bool isDark) {
                         padding: EdgeInsets.all(8.0),
                         child: Text(
                           "Kalshi", textAlign: TextAlign.center,
-                          // textScaleFactor: 1.5,
+                          // textScaler : TextScaler.linear(1.5),
                           style: TextStyle(
                               // fontWeight: FontWeight.bold,
                               // color: Colors.white,
@@ -188,7 +188,7 @@ Container mirpurTobashundhara(bool isDark) {
                         padding: EdgeInsets.all(8.0),
                         child: Text(
                           "IUB", textAlign: TextAlign.center,
-                          // textScaleFactor: 1.5,
+                          // textScaler : TextScaler.linear(1.5),
                           style: TextStyle(
                               // fontWeight: FontWeight.bold,
                               // color: Colors.white,
@@ -232,7 +232,7 @@ Container bashundharaToMirpur(bool isDark) {
             child: Text(
               'Bashundhara to Mirpur',
               textAlign: TextAlign.center,
-              textScaleFactor: 1.5,
+              textScaler: TextScaler.linear(1.5),
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 // color: Colors.white,
@@ -264,7 +264,7 @@ Container bashundharaToMirpur(bool isDark) {
                       child: Text(
                         "Start",
                         textAlign: TextAlign.center,
-                        textScaleFactor: 1.5,
+                        textScaler: TextScaler.linear(1.5),
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           // color: Colors.white,
@@ -277,7 +277,7 @@ Container bashundharaToMirpur(bool isDark) {
                       child: Text(
                         "Stop 1",
                         textAlign: TextAlign.center,
-                        textScaleFactor: 1.5,
+                        textScaler: TextScaler.linear(1.5),
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           // color: Colors.white,
@@ -290,7 +290,7 @@ Container bashundharaToMirpur(bool isDark) {
                       child: Text(
                         "Stop 2",
                         textAlign: TextAlign.center,
-                        textScaleFactor: 1.5,
+                        textScaler: TextScaler.linear(1.5),
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           // color: Colors.white,
@@ -303,7 +303,7 @@ Container bashundharaToMirpur(bool isDark) {
                       child: Text(
                         "End",
                         textAlign: TextAlign.center,
-                        textScaleFactor: 1.5,
+                        textScaler: TextScaler.linear(1.5),
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           // color: Colors.white,
@@ -318,7 +318,7 @@ Container bashundharaToMirpur(bool isDark) {
                         padding: EdgeInsets.all(8.0),
                         child: Text(
                           "IUB", textAlign: TextAlign.center,
-                          // textScaleFactor: 1.5,
+                          // textScaler : TextScaler.linear(1.5),
                           style: TextStyle(
                               // fontWeight: FontWeight.bold,
                               // color: Colors.white,
@@ -330,7 +330,7 @@ Container bashundharaToMirpur(bool isDark) {
                         padding: EdgeInsets.all(8.0),
                         child: Text(
                           "Kalshi", textAlign: TextAlign.center,
-                          // textScaleFactor: 1.5,
+                          // textScaler : TextScaler.linear(1.5),
                           style: TextStyle(
                               // fontWeight: FontWeight.bold,
                               // color: Colors.white,
@@ -342,7 +342,7 @@ Container bashundharaToMirpur(bool isDark) {
                         padding: EdgeInsets.all(8.0),
                         child: Text(
                           "Mirpur 10", textAlign: TextAlign.center,
-                          // textScaleFactor: 1.5,
+                          // textScaler : TextScaler.linear(1.5),
                           style: TextStyle(
                               // fontWeight: FontWeight.bold,
                               // color: Colors.white,
@@ -354,7 +354,7 @@ Container bashundharaToMirpur(bool isDark) {
                         padding: EdgeInsets.all(8.0),
                         child: Text(
                           "Mirpur 1", textAlign: TextAlign.center,
-                          // textScaleFactor: 1.5,
+                          // textScaler : TextScaler.linear(1.5),
                           style: TextStyle(
                               // fontWeight: FontWeight.bold,
                               // color: Colors.white,

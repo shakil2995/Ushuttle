@@ -59,7 +59,7 @@ class _FarePageState extends State<FarePage> {
               child: Text(
                 'Mirpur to Bashundhara',
                 textAlign: TextAlign.center,
-                textScaleFactor: 1.5,
+                textScaler : TextScaler.linear(1.5),
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   // color: Colors.white,
@@ -91,7 +91,7 @@ class _FarePageState extends State<FarePage> {
                         child: Text(
                           "From",
                           textAlign: TextAlign.center,
-                          textScaleFactor: 1.5,
+                          textScaler : TextScaler.linear(1.5),
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             // color: Colors.white,
@@ -104,7 +104,7 @@ class _FarePageState extends State<FarePage> {
                         child: Text(
                           "Fare",
                           textAlign: TextAlign.center,
-                          textScaleFactor: 1.5,
+                          textScaler : TextScaler.linear(1.5),
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             // color: Colors.white,
@@ -119,7 +119,7 @@ class _FarePageState extends State<FarePage> {
                           padding: EdgeInsets.all(8.0),
                           child: Text(
                             "Mirpur 1", textAlign: TextAlign.center,
-                            // textScaleFactor: 1.5,
+                            // textScaler : TextScaler.linear(1.5),
                             style: TextStyle(
                                 // fontWeight: FontWeight.bold,
                                 // color: Colors.white,
@@ -131,7 +131,7 @@ class _FarePageState extends State<FarePage> {
                           padding: EdgeInsets.all(8.0),
                           child: Text(
                             "50 Tk", textAlign: TextAlign.center,
-                            // textScaleFactor: 1.5,
+                            // textScaler : TextScaler.linear(1.5),
                             style: TextStyle(
                                 // fontWeight: FontWeight.bold,
                                 // color: Colors.white,
@@ -175,7 +175,7 @@ class _FarePageState extends State<FarePage> {
               child: Text(
                 'Bashundhara to Mirpur',
                 textAlign: TextAlign.center,
-                textScaleFactor: 1.5,
+                textScaler : TextScaler.linear(1.5),
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   // color: Colors.white,
@@ -207,7 +207,7 @@ class _FarePageState extends State<FarePage> {
                         child: Text(
                           "From",
                           textAlign: TextAlign.center,
-                          textScaleFactor: 1.5,
+                          textScaler : TextScaler.linear(1.5),
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             // color: Colors.white,
@@ -220,7 +220,7 @@ class _FarePageState extends State<FarePage> {
                         child: Text(
                           "Fare",
                           textAlign: TextAlign.center,
-                          textScaleFactor: 1.5,
+                          textScaler : TextScaler.linear(1.5),
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             // color: Colors.white,
@@ -235,7 +235,7 @@ class _FarePageState extends State<FarePage> {
                           padding: EdgeInsets.all(8.0),
                           child: Text(
                             "Mirpur 1", textAlign: TextAlign.center,
-                            // textScaleFactor: 1.5,
+                            // textScaler : TextScaler.linear(1.5),
                             style: TextStyle(
                                 // fontWeight: FontWeight.bold,
                                 // color: Colors.white,
@@ -247,7 +247,7 @@ class _FarePageState extends State<FarePage> {
                           padding: EdgeInsets.all(8.0),
                           child: Text(
                             "50 Tk", textAlign: TextAlign.center,
-                            // textScaleFactor: 1.5,
+                            // textScaler : TextScaler.linear(1.5),
                             style: TextStyle(
                                 // fontWeight: FontWeight.bold,
                                 // color: Colors.white,

@@ -124,7 +124,7 @@ class _LiveLocationServerState extends State<LiveLocationServer>
                   _mapController.move(
                       LatLng(_currentLocation!.latitude!,
                           _currentLocation!.longitude!),
-                      _mapController.zoom);
+                      _mapController.camera.zoom);
                 }
               });
             }
@@ -175,7 +175,7 @@ class _LiveLocationServerState extends State<LiveLocationServer>
         width: 80,
         height: 80,
         point: currentLatLng,
-        builder: (ctx) => const Icon(
+        child: const Icon(
           Icons.directions_bus,
           size: 50,
           color: Color.fromARGB(255, 4, 4, 4),
@@ -204,13 +204,13 @@ class _LiveLocationServerState extends State<LiveLocationServer>
                   ),
                   TextButton(
                       style: ButtonStyle(
-                        textStyle: MaterialStateProperty.all<TextStyle>(
+                        textStyle: WidgetStateProperty.all<TextStyle>(
                           const TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        backgroundColor: MaterialStateProperty.all<Color>(
+                        backgroundColor: WidgetStateProperty.all<Color>(
                           _currentLocation != null
                               ? Color.fromARGB(255, 60, 255, 106)
                               : Color.fromARGB(255, 255, 68, 68),
@@ -233,17 +233,18 @@ class _LiveLocationServerState extends State<LiveLocationServer>
               child: FlutterMap(
                 mapController: _mapController,
                 options: MapOptions(
-                  center: LatLng(23.819158502556704, 90.3990976172065),
-                  minZoom: 13,
-                  zoom: 16,
-                  maxZoom: 17,
-                  swPanBoundary: LatLng(
-                    23.751602244953595,
-                    90.347598978984,
-                  ),
-                  nePanBoundary: LatLng(23.886714760159808, 90.450596255428991),
-                  interactiveFlags: interActiveFlags,
-                ),
+                    initialCenter: LatLng(23.819158502556704, 90.3990976172065),
+                    minZoom: 13,
+                    initialZoom: 16,
+                    maxZoom: 17,
+                    // swPanBoundary: LatLng(
+                    //   23.751602244953595,
+                    //   90.347598978984,
+                    // ),
+                    // nePanBoundary: LatLng(23.886714760159808, 90.450596255428991),
+                    interactionOptions:
+                        InteractionOptions(flags: interActiveFlags),
+                    keepAlive: true),
                 children: [
                   TileLayer(
                     tileProvider: AssetTileProvider(),
@@ -270,7 +271,7 @@ class _LiveLocationServerState extends State<LiveLocationServer>
                   _mapController.move(
                       LatLng(_currentLocation!.latitude!,
                           _currentLocation!.longitude!),
-                      _mapController.zoom);
+                      _mapController.camera.zoom);
                   startUploadingCoordinates();
                   ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                     content: Text(

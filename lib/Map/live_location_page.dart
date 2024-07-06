@@ -96,7 +96,7 @@ class _LiveLocationPageState extends State<LiveLocationPage>
                     double.parse(
                         element['location']['coordinates']['longitude']),
                   ),
-                  builder: (ctx) => const Icon(
+                  child: const Icon(
                     Icons.directions_bus,
                     size: 50,
                     color: Color.fromARGB(255, 4, 4, 4),
@@ -163,7 +163,7 @@ class _LiveLocationPageState extends State<LiveLocationPage>
                   _mapController.move(
                       LatLng(_currentLocation!.latitude!,
                           _currentLocation!.longitude!),
-                      _mapController.zoom);
+                      _mapController.camera.zoom);
                 }
               });
             }
@@ -287,7 +287,7 @@ class _LiveLocationPageState extends State<LiveLocationPage>
         width: 80,
         height: 80,
         point: currentLatLng,
-        builder: (ctx) => const Icon(
+        child: const Icon(
           Icons.location_on,
           size: 50,
           color: Color.fromARGB(255, 4, 4, 4),
@@ -328,17 +328,18 @@ class _LiveLocationPageState extends State<LiveLocationPage>
               child: FlutterMap(
                 mapController: _mapController,
                 options: MapOptions(
-                  center: LatLng(23.819158502556704, 90.3990976172065),
-                  minZoom: 13,
-                  zoom: 16,
-                  maxZoom: 17,
-                  swPanBoundary: LatLng(
-                    23.751602244953595,
-                    90.347598978984,
-                  ),
-                  nePanBoundary: LatLng(23.886714760159808, 90.450596255428991),
-                  interactiveFlags: interActiveFlags,
-                ),
+                    initialCenter: LatLng(23.819158502556704, 90.3990976172065),
+                    minZoom: 13,
+                    initialZoom: 16,
+                    maxZoom: 17,
+                    // swPanBoundary: LatLng(
+                    //   23.751602244953595,
+                    //   90.347598978984,
+                    // ),
+                    // nePanBoundary: LatLng(23.886714760159808, 90.450596255428991),
+                    interactionOptions:
+                        InteractionOptions(flags: interActiveFlags),
+                    keepAlive: true),
                 children: [
                   TileLayer(
                     tileProvider: AssetTileProvider(),
@@ -370,7 +371,7 @@ class _LiveLocationPageState extends State<LiveLocationPage>
                   _mapController.move(
                       LatLng(_currentLocation!.latitude!,
                           _currentLocation!.longitude!),
-                      _mapController.zoom);
+                      _mapController.camera.zoom);
                   // getRoutes();
                   startFetchingCoordinates();
                   // interActiveFlags = InteractiveFlag.rotate |

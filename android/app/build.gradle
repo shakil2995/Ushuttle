@@ -83,8 +83,8 @@ dependencies {
 
 android() {
       defaultConfig {
-        compileSdkVersion 33
-            minSdkVersion 23
+        compileSdkVersion 34
+            minSdkVersion 24
             targetSdkVersion 28
           }
    }
